@@ -1,3 +1,29 @@
 {
-  "extends": "next/core-web-vitals"
+	"extends": "next/core-web-vitals",
+	"rules": {
+		"no-duplicate-imports": "error",
+		"no-console": [
+			"warn",
+			{
+				"allow": ["error"]
+			}
+		],
+		"no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+		"no-unused-expressions": "warn",
+		"quotes": ["error", "single", { "allowTemplateLiterals": true }],
+		"object-shorthand": "error",
+		"no-multi-spaces": "error",
+		"no-else-return": "error",
+		"no-empty": "error",
+		"import/order": [
+			"error",
+			{
+				"newlines-between": "always",
+				"groups": [
+					["builtin", "external"],
+					["internal", "parent", "sibling", "index"]
+				]
+			}
+		]
+	}
 }
