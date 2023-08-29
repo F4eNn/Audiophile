@@ -15,6 +15,7 @@ const config: Config = {
 			white: '#FFFFFF',
 			lightWhite: '#FAFAFA',
 			rose: '#F1F1F1',
+			lightBrown: '#797979'
 		},
 		extend: {
 			fontSize: {
