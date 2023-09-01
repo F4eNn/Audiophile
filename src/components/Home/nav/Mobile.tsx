@@ -9,6 +9,12 @@ import { MobileNavItem } from './MobileNavItem'
 export const MobileMenu = () => {
 	const [isOpen, toggle] = useState(false)
 
+	const thumbnails = [
+		'/assets/image-category-thumbnail-headphones.png',
+		'/assets/image-category-thumbnail-speakers.png',
+		'/assets/image-category-thumbnail-earphones.png',
+	]
+
 	return (
 		<>
 			<ul className='flex items-center justify-between '>
@@ -25,11 +31,11 @@ export const MobileMenu = () => {
 				</li>
 			</ul>
 			{isOpen && (
-				<div className='fixed inset-0 -z-20  bg-secondaryDark/40'>
-					<div className='flex pb-10 w-full flex-row flex-wrap gap-y-20 rounded-b-lg bg-white px-5 pt-44 text-primaryDark'>
-						<MobileNavItem />
-						<MobileNavItem />
-						<MobileNavItem />
+				<div className='absolute inset-0 -z-20  bg-secondaryDark/40'>
+					<div className='flex w-full flex-row flex-wrap gap-y-20 rounded-b-lg bg-white px-5 pb-10 pt-44 text-primaryDark'>
+						{thumbnails.map((src, index) => (
+							<MobileNavItem key={index} src={src} />
+						))}
 					</div>
 				</div>
 			)}

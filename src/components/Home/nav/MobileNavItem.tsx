@@ -4,11 +4,15 @@ import React from 'react'
 
 import ArrowRight from '../../../../public/assets/icon-arrow-right.svg'
 
-export const MobileNavItem = () => {
+interface MobileProps {
+	src: string
+}
+
+export const MobileNavItem = ({src}:MobileProps) => {
 	return (
 		<div className='relative mx-auto h-40  w-full rounded-lg bg-rose pt-16 max-w-xs '>
 			<Image
-				src='/assets/image-category-thumbnail-headphones.png'
+				src={src}
 				width={150}
 				height={150}
 				alt=''
