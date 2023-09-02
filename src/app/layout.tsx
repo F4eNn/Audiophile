@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 
 import { Nav } from '@/components/Home/nav/Nav'
-
+import { Wrapper } from '@/components/ui/Wrapper'
 const manrope = Manrope({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
