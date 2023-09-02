@@ -1,4 +1,4 @@
-import { Nav } from '@/components/Home/nav/Nav'
+import { Main } from '@/components/Home/main/Main'
 import { fetcher } from '@/helpers/api'
 
 type ImageUrls = {
@@ -49,8 +49,8 @@ export const Home = async () => {
 	const products = await getProducts()
 
 	return (
-		<main className='relative z-0 h-full w-full  '>
-			<Nav />
+		<main className='  h-full w-full  '>
+			<Main />
 		</main>
 	)
 }
