@@ -8,7 +8,7 @@ export const Nav = () => {
 
 	return (
 		<nav
-			className={`border-gray absolute top-0 z-10 w-full border-b-[1px] p-3.5 py-6 text-white transition-colors duration-200
+			className={`border-darkGray absolute top-0 z-10 w-full border-b-[1px] p-3.5 py-6 text-white transition-colors duration-200
 		${isOpen ? 'bg-primaryDark' : 'bg-transparent'}
 		`}
 		>

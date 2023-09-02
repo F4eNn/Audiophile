@@ -12,11 +12,14 @@ const config: Config = {
 			secondary: '#FBAF85',
 			primaryDark: '#000000',
 			secondaryDark: '#101010',
+			lightDark: '#191919',
 			white: '#FFFFFF',
 			lightWhite: '#FAFAFA',
 			rose: '#F1F1F1',
 			lightBrown: '#797979',
-			gray: '#2c2c2c'
+			darkGray: '#2c2c2c',
+			lightGray: '#c5c5c5',
+			gray: '#8b8b8b'
 		},
 		extend: {
 			fontSize: {
@@ -69,7 +72,7 @@ const config: Config = {
 					},
 				],
 				overline: [
-					'0.75',
+					'1rem',
 					{
 						lineHeight: '1.05',
 						letterSpacing: '10px',

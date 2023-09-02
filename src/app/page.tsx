@@ -39,14 +39,14 @@ type DataType = {
 	attributes: ProductsType
 }
 
-const getProducts = async () => {
-	const { data } = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/products`, { cache: 'no-store' })
-	const products = data.map((item: DataType) => item.attributes.products)
-	return products
-}
+// const getProducts = async () => {
+// 	const { data } = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/products`, { cache: 'no-store' })
+// 	const products = data.map((item: DataType) => item.attributes.products)
+// 	return products
+// }
 
 export const Home = async () => {
-	const products = await getProducts()
+	// const products = await getProducts()
 
 	return (
 		<main className='  h-full w-full  '>
