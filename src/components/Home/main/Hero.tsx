@@ -8,9 +8,9 @@ import { Wrapper } from '@/components/ui/Wrapper'
 
 export const Hero = () => {
 	return (
-		<div className='bg-lightDark'>
+		<section className='bg-lightDark'>
 			<Wrapper>
-				<div className='relative  h-[100dvh] w-full '>
+				<div className='relative  h-[100svh] w-full '>
 					<div className='relative aspect-square h-full max-h-[1100px] w-full lg:max-h-[900px]'>
 						<picture className=''>
 							<source media='(min-width:1280px)' srcSet='/assets/home/desktop/image-hero.jpg' />
@@ -42,6 +42,6 @@ export const Hero = () => {
 					</Link>
 				</div>
 			</Wrapper>
-		</div>
+		</section>
 	)
 }

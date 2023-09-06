@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
 
-import Logo from '../../../../public/assets/logo.svg'
-import Cart from '../../../../public/assets/icon-cart.svg'
+
 import { Wrapper } from '@/components/ui/Wrapper'
+import { Logo } from '@/components/ui/Logo'
+import { CartButton } from '@/components/ui/CartButton'
+import { animateDesktopNav } from '@/animations/animation'
 
 export const Desktop = () => {
 	const desktopNav = [
@@ -12,24 +14,32 @@ export const Desktop = () => {
 		['/', 'speakers'],
 		['/', 'earphones'],
 	]
+
+	const desktopNavRef = useRef<HTMLDivElement>(null)
+	
+	useEffect(() => {
+		animateDesktopNav(desktopNavRef)
+	}, [])
+
 	return (
 		<Wrapper>
-			<div className=' border-darkGray mx-5 hidden items-center justify-between border-b-[1px] py-10 md:flex lg:mx-7  '>
+			<div
+				ref={desktopNavRef}
+				className=' mx-5 hidden  scale-0 items-center justify-between border-b-[1px] border-darkGray py-7 opacity-0 md:flex lg:mx-7  '
+			>
 				<span>
 					<Logo />
 				</span>
-				<ul className='-ml-[5%] flex items-center gap-7 font-[500] uppercase tracking-widest lg:-ml-[15%] lg:gap-10'>
+				<ul className='-ml-[5%] flex items-center gap-7 text-sm font-[500] uppercase tracking-widest lg:-ml-[15%] lg:gap-10 lg:text-base'>
 					{desktopNav.map(([url, title]) => (
-						<li className='transition-colors duration-300 hover:text-primary ' key={title}>
+						<li className='desktopLink transition-colors duration-300 hover:text-primary ' key={title}>
 							<Link className='p-2' href={url}>
 								{title}
 							</Link>
 						</li>
 					))}
 				</ul>
-				<button>
-					<Cart />
-				</button>
+				<CartButton />
 			</div>
 		</Wrapper>
 	)

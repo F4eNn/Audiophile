@@ -1,10 +1,11 @@
-import React, { type Dispatch, SetStateAction, useRef, MouseEvent } from 'react'
+import React, { type Dispatch, SetStateAction, useRef, MouseEvent, useEffect, useCallback } from 'react'
 import { Divide as Hamburger } from 'hamburger-react'
 
-import Logo from '../../../../public/assets/logo.svg'
-import Cart from '../../../../public/assets/icon-cart.svg'
 import { CategoryItem } from '../../ui/CategoryItem'
 import { thumbnails } from '@/constants/thumbnails'
+import { Logo } from '@/components/ui/Logo'
+import { CartButton } from '@/components/ui/CartButton'
+import { animateMobileMenu, animateMobileNav } from '@/animations/animation'
 
 interface MobileMenuProps {
 	setIsOpen: Dispatch<SetStateAction<boolean>>
@@ -13,39 +14,55 @@ interface MobileMenuProps {
 
 export const MobileMenu = ({ isOpen, setIsOpen }: MobileMenuProps) => {
 	const overlayRef = useRef<HTMLDivElement>(null)
+	const logoRef = useRef<HTMLLIElement>(null)
+	const hamburgerRef = useRef<HTMLLIElement>(null)
+	const cartRef = useRef<HTMLLIElement>(null)
 
 	const handleOverlayClose = (e: MouseEvent<HTMLDivElement>) => {
 		if (e.target === overlayRef.current) setIsOpen(false)
 	}
+	const showNav = (open: boolean) => {
+		animateMobileMenu(overlayRef, open)
+	}
+
+	useEffect(() => {
+		if (!isOpen) {
+			showNav(false)
+			document.body.classList.remove('overflow-hidden')
+		} else {
+			showNav(true)
+			document.body.classList.add('overflow-hidden')
+		}
+	}, [isOpen])
+
+	useEffect(() => {
+		animateMobileNav(hamburgerRef, logoRef, cartRef)
+	}, [])
 
 	return (
-		<div className='border-darkGray mx-3 border-b-[1px] py-5 md:mx-5 md:hidden md:py-7'>
-			<ul className=' flex items-center justify-between'>
-				<li>
+		<div className='mx-3  overflow-hidden  border-b-[1px] border-darkGray py-5    md:mx-5 md:hidden md:py-7'>
+			<ul className='flex  items-center  justify-between  '>
+				<li ref={hamburgerRef}>
 					<Hamburger toggle={setIsOpen} toggled={isOpen} />
 				</li>
-				<li>
+				<li ref={logoRef}>
 					<Logo />
 				</li>
-				<li>
-					<button>
-						<Cart />
-					</button>
+				<li ref={cartRef}>
+					<CartButton />
 				</li>
 			</ul>
-			{isOpen && (
-				<div
-					ref={overlayRef}
-					onClick={handleOverlayClose}
-					className='fixed bottom-0 left-0 -z-50 h-[calc(100%-89px)] w-full overflow-auto  bg-primaryDark/70'
-				>
-					<div className=' flex  w-full flex-row flex-wrap gap-y-20  rounded-b-lg bg-white px-5 pb-10 pt-24 text-primaryDark'>
-						{thumbnails.map((src, index) => (
-							<CategoryItem key={index} src={src} />
-						))}
-					</div>
-				</div>
-			)}
+			<div
+				ref={overlayRef}
+				onClick={handleOverlayClose}
+				className='fixed bottom-0 left-0 -z-50 h-0 w-full overflow-auto  bg-primaryDark/70'
+			>
+				<ul className=' flex  w-full flex-row flex-wrap gap-y-20  rounded-b-lg bg-white px-5 pb-10 pt-24 text-primaryDark'>
+					{thumbnails.map((src, index) => (
+						<CategoryItem key={index} src={src} />
+					))}
+				</ul>
+			</div>
 		</div>
 	)
 }
