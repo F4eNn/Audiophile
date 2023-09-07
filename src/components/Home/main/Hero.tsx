@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import { BsChevronDoubleDown } from 'react-icons/bs'
-import Link from 'next/link'
 
 import { LinkButton } from '@/components/ui/LinkButton'
 import { Wrapper } from '@/components/ui/Wrapper'
@@ -9,10 +8,10 @@ import { SectionWrapper } from '@/components/ui/SectionWrapper'
 
 export const Hero = () => {
 	return (
-		<section className='bg-lightDark overflow-hidden'>
+		<section className='overflow-hidden bg-lightDark'>
 			<Wrapper>
 				<SectionWrapper>
-					<div className='relative  h-[100svh] md:h-auto md:min-h-[100vh]  w-full'>
+					<div className='relative  h-[100svh] w-full md:h-auto  md:min-h-[100vh]'>
 						<div className='relative aspect-square h-full max-h-[1100px] w-full lg:max-h-[900px]'>
 							<picture className=''>
 								<source media='(min-width:1280px)' srcSet='/assets/home/desktop/image-hero.jpg' />
@@ -38,12 +37,12 @@ export const Hero = () => {
 								<LinkButton url='/' />
 							</div>
 						</div>
-						<Link
-							href='/'
-							className='absolute bottom-0 flex w-full animate-bounce justify-center py-2 text-2xl text-gray md:bottom-5  md:text-4xl  lg:bottom-5'
+						<a
+							href='#category'
+							className='colors-300 absolute bottom-0 left-1/2 flex w-max -translate-y-1/2 animate-bounce  justify-center py-2 text-2xl text-gray hover:text-white md:bottom-5  md:text-4xl  lg:bottom-5'
 						>
 							<BsChevronDoubleDown />
-						</Link>
+						</a>
 					</div>
 				</SectionWrapper>
 			</Wrapper>

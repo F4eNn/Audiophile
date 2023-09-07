@@ -16,5 +16,5 @@ export const animateMobileNav = (logo: AnimatedRef, hamburger: AnimatedRef, cart
 }
 export const animateSection = (element: AnimatedRef) => {
 	gsap.set(element.current, { y: 200 })
-	gsap.to(element.current, { y: 0, opacity: 1, duration: 1, delay: 0.7 })
+	gsap.to(element.current, { y: 0, opacity: 1, duration: 1, delay: 1.2 })
 }

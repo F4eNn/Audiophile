@@ -1,5 +1,10 @@
+export type ThumbnailProps = {
+	src: string
+	title: string
+}
+
 export const thumbnails = [
-	'/assets/image-category-thumbnail-headphones.png',
-	'/assets/image-category-thumbnail-speakers.png',
-	'/assets/image-category-thumbnail-earphones.png',
-]
+	{ src: '/assets/image-category-thumbnail-headphones.png', title: 'headphones' },
+	{ src: '/assets/image-category-thumbnail-speakers.png', title: 'speakers' },
+	{ src: '/assets/image-category-thumbnail-earphones.png', title: 'earphones' },
+] as const

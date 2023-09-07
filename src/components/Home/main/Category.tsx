@@ -6,13 +6,13 @@ import { Wrapper } from '@/components/ui/Wrapper'
 
 export const Category = () => {
 	return (
-		<section className='flex  py-32'>
+		<section id='category' className='flex  py-32'>
 			<Wrapper>
-				<div className='flex flex-wrap gap-20'>
-					{thumbnails.map((src, index) => (
-						<CategoryItem key={index} src={src} />
+				<ul className='flex flex-wrap gap-20 gap-y-28'>
+					{thumbnails.map((items, index) => (
+						<CategoryItem key={index} {...items} />
 					))}
-				</div>
+				</ul>
 			</Wrapper>
 		</section>
 	)

@@ -58,11 +58,11 @@ export const MobileMenu = ({ isOpen, setIsOpen, isScroll }: MobileMenuProps) => 
 				onClick={handleOverlayClose}
 				className='fixed bottom-0 left-0 -z-50 h-0 w-full overflow-auto  bg-primaryDark/70'
 			>
-				<ul className=' flex  w-full flex-row flex-wrap gap-y-20  rounded-b-lg bg-white px-5 pb-10 pt-24 text-primaryDark'>
-					{thumbnails.map((src, index) => (
-						<CategoryItem key={index} src={src} />
+				<div className=' flex  w-full flex-row flex-wrap gap-y-20 gap-x-6 rounded-b-lg bg-white px-5 pb-10 pt-24 text-primaryDark'>
+					{thumbnails.map((items, index) => (
+						<CategoryItem key={index} {...items} />
 					))}
-				</ul>
+				</div>
 			</div>
 		</div>
 	)

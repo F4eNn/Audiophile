@@ -49,7 +49,7 @@ export const Home = async () => {
 	// const products = await getProducts()
 
 	return (
-		<main className='  h-full w-full  '>
+		<main className='h-full w-full'>
 			<Main />
 		</main>
 	)
