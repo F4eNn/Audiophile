@@ -1,5 +1,8 @@
 import { RefObject } from 'react'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 type AnimatedRef = RefObject<HTMLElement>
 
@@ -17,4 +20,17 @@ export const animateMobileNav = (logo: AnimatedRef, hamburger: AnimatedRef, cart
 export const animateSection = (element: AnimatedRef) => {
 	gsap.set(element.current, { y: 200 })
 	gsap.to(element.current, { y: 0, opacity: 1, duration: 1, delay: 1.2 })
+}
+export const animateSpeakerSection = (element: AnimatedRef) => {
+	gsap.set(element.current, { autoAlpha: 0, y: 200 })
+	gsap.to(element.current, {
+		scrollTrigger: {
+			trigger: element.current,
+			start: '-450px center ',
+		},
+		y: 0,
+		autoAlpha: 1,
+		duration: 1,
+		ease: 'rough',
+	})
 }

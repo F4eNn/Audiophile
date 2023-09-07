@@ -1,4 +1,6 @@
-import { Main } from '@/components/Home/main/Main'
+import { Category } from '@/components/Home/main/Category'
+import { Hero } from '@/components/Home/main/Hero'
+import { SpeakerZX9 } from '@/components/Home/main/SpeakerZX9'
 import { fetcher } from '@/helpers/api'
 
 type ImageUrls = {
@@ -49,8 +51,10 @@ export const Home = async () => {
 	// const products = await getProducts()
 
 	return (
-		<main className='h-full w-full'>
-			<Main />
+		<main className='h-full w-full '>
+			<Hero />
+			<Category />
+			<SpeakerZX9 />
 		</main>
 	)
 }

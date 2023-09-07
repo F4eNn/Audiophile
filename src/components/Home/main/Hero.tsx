@@ -11,9 +11,9 @@ export const Hero = () => {
 		<section className='overflow-hidden bg-lightDark'>
 			<Wrapper>
 				<SectionWrapper>
-					<div className='relative  h-[100svh] w-full md:h-auto  md:min-h-[100vh]'>
+					<div className={`relative  h-[100svh] w-full md:h-auto  md:min-h-[100vh]  `}>
 						<div className='relative aspect-square h-full max-h-[1100px] w-full lg:max-h-[900px]'>
-							<picture className=''>
+							<picture>
 								<source media='(min-width:1280px)' srcSet='/assets/home/desktop/image-hero.jpg' />
 								<source media='(min-width:768px)' srcSet='/assets/home/tablet/image-header.jpg' />
 								<Image

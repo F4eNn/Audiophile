@@ -9,9 +9,11 @@ const config: Config = {
 	theme: {
 		colors: {
 			primary: '#D87D4A',
+			veryLightPrimary: '#f5ded2',
 			secondary: '#FBAF85',
 			primaryDark: '#000000',
 			secondaryDark: '#101010',
+			grayish: '#4c4c4c',
 			lightDark: '#191919',
 			white: '#FFFFFF',
 			lightWhite: '#FAFAFA',
@@ -32,7 +34,7 @@ const config: Config = {
 					},
 				],
 				H2: [
-					'3.2rem',
+					'2rem',
 					{
 						lineHeight: '2.4rem',
 						letterSpacing: '1.5px',
