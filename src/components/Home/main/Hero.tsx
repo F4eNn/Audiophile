@@ -9,10 +9,10 @@ import { SectionWrapper } from '@/components/ui/SectionWrapper'
 
 export const Hero = () => {
 	return (
-		<section className='bg-lightDark'>
+		<section className='bg-lightDark overflow-hidden'>
 			<Wrapper>
 				<SectionWrapper>
-					<div className='relative   h-[100svh] w-full '>
+					<div className='relative  h-[100svh] md:h-auto md:min-h-[100vh]  w-full'>
 						<div className='relative aspect-square h-full max-h-[1100px] w-full lg:max-h-[900px]'>
 							<picture className=''>
 								<source media='(min-width:1280px)' srcSet='/assets/home/desktop/image-hero.jpg' />

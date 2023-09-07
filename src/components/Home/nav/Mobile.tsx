@@ -1,4 +1,4 @@
-import React, { type Dispatch, SetStateAction, useRef, MouseEvent, useEffect, useCallback } from 'react'
+import React, { type Dispatch, SetStateAction, useRef, MouseEvent, useEffect } from 'react'
 import { Divide as Hamburger } from 'hamburger-react'
 
 import { CategoryItem } from '../../ui/CategoryItem'
@@ -10,9 +10,10 @@ import { animateMobileMenu, animateMobileNav } from '@/animations/animation'
 interface MobileMenuProps {
 	setIsOpen: Dispatch<SetStateAction<boolean>>
 	isOpen: boolean
+	isScroll: boolean
 }
 
-export const MobileMenu = ({ isOpen, setIsOpen }: MobileMenuProps) => {
+export const MobileMenu = ({ isOpen, setIsOpen, isScroll }: MobileMenuProps) => {
 	const overlayRef = useRef<HTMLDivElement>(null)
 	const logoRef = useRef<HTMLLIElement>(null)
 	const hamburgerRef = useRef<HTMLLIElement>(null)
@@ -40,7 +41,7 @@ export const MobileMenu = ({ isOpen, setIsOpen }: MobileMenuProps) => {
 	}, [])
 
 	return (
-		<div className='mx-3  overflow-hidden  border-b-[1px] border-darkGray py-5    md:mx-5 md:hidden md:py-7'>
+		<div className={`mx-3  overflow-hidden  border-b-[1px] ${isScroll ? 'border-primaryDark' : 'border-darkGray'} py-5    md:mx-5 md:hidden md:py-7`}>
 			<ul className='flex  items-center  justify-between  '>
 				<li ref={hamburgerRef} className='opacity-0'>
 					<Hamburger toggle={setIsOpen} toggled={isOpen} />

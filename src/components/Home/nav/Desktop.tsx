@@ -7,7 +7,11 @@ import { Logo } from '@/components/ui/Logo'
 import { CartButton } from '@/components/ui/CartButton'
 import { animateDesktopNav } from '@/animations/animation'
 
-export const Desktop = () => {
+interface DesktopProps {
+	isScroll: boolean
+}
+
+export const Desktop = ({isScroll}: DesktopProps) => {
 	const desktopNav = [
 		['/', 'home'],
 		['/', 'headphones'],
@@ -25,7 +29,7 @@ export const Desktop = () => {
 		<Wrapper>
 			<div
 				ref={desktopNavRef}
-				className=' mx-5 hidden  scale-0 items-center justify-between border-b-[1px] border-darkGray py-7 opacity-0 md:flex lg:mx-7  '
+				className={` mx-5 hidden  scale-0 items-center justify-between border-b-[1px] transition-all duration-500   ${isScroll ? 'py-4 border-primaryDark': 'py-7 border-darkGray '} opacity-0 md:flex lg:mx-7  `}
 			>
 				<span>
 					<Logo />
