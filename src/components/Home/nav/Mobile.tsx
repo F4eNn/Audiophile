@@ -42,13 +42,13 @@ export const MobileMenu = ({ isOpen, setIsOpen }: MobileMenuProps) => {
 	return (
 		<div className='mx-3  overflow-hidden  border-b-[1px] border-darkGray py-5    md:mx-5 md:hidden md:py-7'>
 			<ul className='flex  items-center  justify-between  '>
-				<li ref={hamburgerRef}>
+				<li ref={hamburgerRef} className='opacity-0'>
 					<Hamburger toggle={setIsOpen} toggled={isOpen} />
 				</li>
-				<li ref={logoRef}>
+				<li ref={logoRef} className='opacity-0'>
 					<Logo />
 				</li>
-				<li ref={cartRef}>
+				<li ref={cartRef} className='opacity-0'>
 					<CartButton />
 				</li>
 			</ul>
