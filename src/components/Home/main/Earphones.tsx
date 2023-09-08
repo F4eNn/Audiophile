@@ -7,7 +7,7 @@ import { LinkButton } from '@/components/ui/LinkButton'
 
 export const Earphones = () => {
 	return (
-		<section className='mx-3 mt-5 pb-44 md:mt-10 lg:mt-20'>
+		<section className='mx-3 mt-5 md:mt-10 lg:mt-20'>
 			<Wrapper>
 				<AnimateSection>
 					<div className='flex flex-col gap-3 md:flex-row lg:gap-10'>
