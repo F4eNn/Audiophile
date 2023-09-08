@@ -7,10 +7,10 @@ import { AnimateSection } from '@/components/ui/AnimateSection'
 
 export const SpeakerZX7 = () => {
 	return (
-		<section className='mx-3 mt-20 pb-44'>
+		<section className='mx-3 mt-5  md:mt-10 lg:mt-20 '>
 			<Wrapper>
 				<AnimateSection>
-					<div className='relative z-0 flex aspect-square  max-h-[450px] w-full items-center overflow-hidden rounded-lg sm:aspect-video'>
+					<div className='relative z-0 flex aspect-square  max-h-[400px] w-full items-center overflow-hidden rounded-lg sm:aspect-video'>
 						<picture>
 							<source media='(min-width: 1024px)' srcSet='/assets/home/desktop/image-speaker-zx7.jpg' />
 							<source media='(min-width: 640px)' srcSet='/assets/home/tablet/image-speaker-zx7.jpg' />
