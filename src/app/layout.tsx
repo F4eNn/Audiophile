@@ -3,6 +3,9 @@ import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 
 import { Nav } from '@/components/Home/nav/Nav'
+import { Footer } from '@/components/Home/main/Footer'
+import { Description } from '@/components/Home/main/Description'
+
 const manrope = Manrope({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -14,9 +17,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='en' className='scroll-smooth'>
-			<body className={`${manrope.className}  h-screen`}>
+			<body className={`${manrope.className}  `}>
 				<Nav />
 				{children}
+				<Description />
+				<Footer />
 			</body>
 		</html>
 	)

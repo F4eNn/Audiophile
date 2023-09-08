@@ -1,5 +1,4 @@
 import { Category } from '@/components/Home/main/Category'
-import { Description } from '@/components/Home/main/Description'
 import { Earphones } from '@/components/Home/main/Earphones'
 import { Hero } from '@/components/Home/main/Hero'
 import { SpeakerZX7 } from '@/components/Home/main/SpeakerZX7'
@@ -60,7 +59,6 @@ export const Home = async () => {
 			<SpeakerZX9 />
 			<SpeakerZX7 />
 			<Earphones />
-			<Description />
 		</main>
 	)
 }

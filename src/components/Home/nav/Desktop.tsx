@@ -6,18 +6,14 @@ import { Wrapper } from '@/components/ui/Wrapper'
 import { Logo } from '@/components/ui/Logo'
 import { CartButton } from '@/components/ui/CartButton'
 import { animateDesktopNav } from '@/animations/animation'
+import { desktopNav } from '@/constants/navigation'
 
 interface DesktopProps {
 	isScroll: boolean
 }
 
 export const Desktop = ({isScroll}: DesktopProps) => {
-	const desktopNav = [
-		['/', 'home'],
-		['/', 'headphones'],
-		['/', 'speakers'],
-		['/', 'earphones'],
-	]
+	
 
 	const desktopNavRef = useRef<HTMLDivElement>(null)
 	

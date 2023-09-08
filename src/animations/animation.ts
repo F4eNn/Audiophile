@@ -21,12 +21,12 @@ export const animateHeroSection = (element: AnimatedRef) => {
 	gsap.set(element.current, { y: 200 })
 	gsap.to(element.current, { y: 0, opacity: 1, duration: 1, delay: 1.2 })
 }
-export const animateSection = (element: AnimatedRef) => {
+export const animateSection = (element: AnimatedRef, start = '-450px') => {
 	gsap.set(element.current, { autoAlpha: 0, y: 200 })
 	gsap.to(element.current, {
 		scrollTrigger: {
 			trigger: element.current,
-			start: '-450px center ',
+			start: `${start} center `,
 		},
 		y: 0,
 		autoAlpha: 1,
