@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { MobileMenu } from './Mobile'
 import { Desktop } from './Desktop'
@@ -16,7 +16,9 @@ export const Nav = () => {
 		}
 	}
 
-	window.addEventListener('scroll', handleScroll)
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll)
+	}, [])
 
 	return (
 		<nav
