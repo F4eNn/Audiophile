@@ -4,13 +4,13 @@ import { BsChevronDoubleDown } from 'react-icons/bs'
 
 import { LinkButton } from '@/components/ui/LinkButton'
 import { Wrapper } from '@/components/ui/Wrapper'
-import { SectionWrapper } from '@/components/ui/SectionWrapper'
+import { HeroSectionWrapper } from '@/components/ui/HeroSectionWrapper'
 
 export const Hero = () => {
 	return (
 		<section className='overflow-hidden bg-lightDark'>
 			<Wrapper>
-				<SectionWrapper>
+				<HeroSectionWrapper>
 					<div className={`relative  h-[100svh] w-full md:h-auto  md:min-h-[100vh]  `}>
 						<div className='relative aspect-square h-full max-h-[1100px] w-full lg:max-h-[900px]'>
 							<picture>
@@ -44,7 +44,7 @@ export const Hero = () => {
 							<BsChevronDoubleDown />
 						</a>
 					</div>
-				</SectionWrapper>
+				</HeroSectionWrapper>
 			</Wrapper>
 		</section>
 	)

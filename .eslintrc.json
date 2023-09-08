@@ -12,7 +12,7 @@
 		"no-unused-expressions": "warn",
 		"quotes": ["error", "single", { "allowTemplateLiterals": true }],
 		"object-shorthand": "error",
-		"no-multi-spaces": "error",
+		"no-multi-spaces": "warn",
 		"no-else-return": "error",
 		"no-empty": "error",
 		"import/order": [

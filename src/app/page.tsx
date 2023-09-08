@@ -1,5 +1,6 @@
 import { Category } from '@/components/Home/main/Category'
 import { Hero } from '@/components/Home/main/Hero'
+import { SpeakerZX7 } from '@/components/Home/main/SpeakerZX7'
 import { SpeakerZX9 } from '@/components/Home/main/SpeakerZX9'
 import { fetcher } from '@/helpers/api'
 
@@ -55,6 +56,7 @@ export const Home = async () => {
 			<Hero />
 			<Category />
 			<SpeakerZX9 />
+			<SpeakerZX7 />
 		</main>
 	)
 }

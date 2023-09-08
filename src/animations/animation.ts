@@ -17,11 +17,11 @@ export const animateMobileNav = (logo: AnimatedRef, hamburger: AnimatedRef, cart
 	animatedItemsArr.forEach(item => gsap.set(item.current, { y: -70 }))
 	animatedItemsArr.forEach((item, idx) => gsap.to(item.current, { opacity: 1, y: 0, delay: idx * 0.4 }))
 }
-export const animateSection = (element: AnimatedRef) => {
+export const animateHeroSection = (element: AnimatedRef) => {
 	gsap.set(element.current, { y: 200 })
 	gsap.to(element.current, { y: 0, opacity: 1, duration: 1, delay: 1.2 })
 }
-export const animateSpeakerSection = (element: AnimatedRef) => {
+export const animateSection = (element: AnimatedRef) => {
 	gsap.set(element.current, { autoAlpha: 0, y: 200 })
 	gsap.to(element.current, {
 		scrollTrigger: {
