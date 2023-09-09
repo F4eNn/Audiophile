@@ -1,6 +1,6 @@
 export const desktopNav = [
 	['/', 'home'],
-	['/', 'headphones'],
-	['/', 'speakers'],
-	['/', 'earphones'],
+	['/category/headphones', 'headphones'],
+	['/category/speakers', 'speakers'],
+	['/category/earphones', 'earphones'],
 ]
