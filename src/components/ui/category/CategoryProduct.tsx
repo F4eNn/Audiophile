@@ -28,7 +28,7 @@ export const CategoryProduct = ({
 				</div>
 				<div className='flex flex-col items-center gap-8 px-5 text-center lg:items-start lg:text-left'>
 					{newProduct && <p className='text-overline uppercase text-primary'>new product</p>}
-					<h2 className=' max-w-[150px] text-H1 uppercase md:max-w-[300px]'>{name}</h2>
+					<h2 className={`max-w-[300px] text-H2 uppercase md:max-w-[425px] md:text-H1`}>{name}</h2>
 					<p className='max-w-[525px] text-sm leading-6 text-[#7d7d7d]'>{description}</p>
 					<LinkButton url='/' />
 				</div>
