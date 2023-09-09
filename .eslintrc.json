@@ -12,6 +12,7 @@
 		"no-unused-expressions": "warn",
 		"quotes": ["error", "single", { "allowTemplateLiterals": true }],
 		"object-shorthand": "error",
+		"react-hooks/exhaustive-deps": "error",
 		"no-multi-spaces": "warn",
 		"no-else-return": "error",
 		"no-empty": "error",

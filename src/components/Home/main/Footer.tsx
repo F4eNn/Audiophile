@@ -40,22 +40,22 @@ export const Footer = () => {
 								<p className='text-sm text-[#878787]'>&copy; Copyright 2021. All Rights Reserved</p>
 							</div>
 							<div className='flex gap-8'>
-								<a
+								<Link
 									href='https://discordapp.com/users/992404385705513010'
 									target='_blank'
-									rel='noopener'
+									rel='noopener noreferrer'
 									className='colors-300 transition-all duration-300  hover:scale-110 hover:text-primary'
 								>
 									<BsDiscord />
-								</a>
-								<a
+								</Link>
+								<Link
 									target='_blank'
-									rel='noopener'
+									rel='noopener noreferrer'
 									href='https://github.com/F4eNn'
 									className='colors-300 transition-all duration-300 hover:scale-110 hover:text-primary'
 								>
 									<BsGithub />
-								</a>
+								</Link>
 							</div>
 						</div>
 					</div>
