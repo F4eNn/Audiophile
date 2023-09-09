@@ -32,7 +32,7 @@ export const Desktop = ({ isScroll }: DesktopProps) => {
 					<Logo />
 				</span>
 				<ul className='-ml-[5%] flex items-center gap-7 text-sm font-[500] uppercase tracking-widest lg:-ml-[15%] lg:gap-10 lg:text-base'>
-					{desktopNav.map(([url, title]) => (
+					{desktopNav.map(([url, title,]) => (
 						<li
 							className={`desktopLink transition-colors duration-300 hover:text-primary ${
 								pathname === url ? 'text-primary' : ''

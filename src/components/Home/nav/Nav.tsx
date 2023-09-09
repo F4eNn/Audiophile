@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 import { MobileMenu } from './Mobile'
 import { Desktop } from './Desktop'
@@ -7,6 +8,8 @@ import { Desktop } from './Desktop'
 export const Nav = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [isScroll, setIsScroll] = useState(false)
+	const pathname = usePathname()
+	
 	const handleScroll = () => {
 		if (scrollY >= 101) {
 			setIsScroll(true)
@@ -18,6 +21,11 @@ export const Nav = () => {
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll)
 	}, [])
+
+
+	useEffect(() => {
+		setIsOpen(false)
+	}, [pathname])
 
 	return (
 		<nav
