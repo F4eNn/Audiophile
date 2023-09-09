@@ -2,7 +2,7 @@ import React from 'react'
 
 const layout = () => {
   return (
-    <div className='bg-primaryDark h-screen w-full'>
+    <div className='bg-primaryDark h-[500px] w-full'>
 
     </div>
   )

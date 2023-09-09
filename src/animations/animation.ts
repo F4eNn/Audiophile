@@ -27,7 +27,7 @@ export const animateSection = (element: AnimatedRef, start = '-450px') => {
 		scrollTrigger: {
 			trigger: element.current,
 			start: `${start} center `,
-			markers: true
+			end: 'none',
 		},
 		y: 0,
 		autoAlpha: 1,

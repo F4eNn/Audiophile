@@ -9,7 +9,7 @@ import { AnimateSection } from '@/components/ui/AnimateSection'
 
 export const Footer = () => {
 	return (
-		<footer className='w-full overflow-hidden bg-primaryDark pb-14 text-white'>
+		<footer className='w-full overflow-hidden bg-primaryDark pb-14 mt-auto text-white'>
 			<Wrapper>
 				<AnimateSection start='-650px'>
 					<div className='mx-7 space-y-12 text-center sm:space-y-8 sm:text-left'>
