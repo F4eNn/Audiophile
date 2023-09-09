@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ProductsData } from '@/types/data';
-import { CategoryProduct } from '../ui/CategoryProduct';
+import { CategoryProduct } from '../ui/category/CategoryProduct';
 import { Wrapper } from '../ui/Wrapper';
 
 type SpeakersSectionProps = {
