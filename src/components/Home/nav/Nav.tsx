@@ -7,7 +7,6 @@ import { Desktop } from './Desktop'
 export const Nav = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [isScroll, setIsScroll] = useState(false)
-
 	const handleScroll = () => {
 		if (scrollY >= 101) {
 			setIsScroll(true)

@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-const layout = () => {
-  return (
-    <div className='bg-primaryDark h-[500px] w-full'>
+import { ChildrenWithProps } from '@/types/general';
 
-    </div>
-  )
-}
+const layout = ({ children }: ChildrenWithProps) => {
+	return <div className='flex flex-col'>{children}</div>;
+};
 
-export default layout
+export default layout;
