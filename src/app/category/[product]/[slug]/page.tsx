@@ -4,6 +4,7 @@ import { fetcher } from '@/helpers/api';
 import { Product } from '@/components/product/Product';
 import { ProductFeatures } from '@/components/product/ProductFeatures';
 import { ProductGallery } from '@/components/product/ProductGallery';
+import { OtherProducts } from '@/components/product/Others';
 
 const getProducDetails = async (slug: string) => {
 	const res = await fetcher(undefined, slug);
@@ -18,6 +19,7 @@ const ProductDetail = async ({ params }: { params: { slug: string } }) => {
 			<Product {...product} />
 			<ProductFeatures {...product} />
 			<ProductGallery {...product} />
+			<OtherProducts {...product} />
 		</div>
 	);
 };
