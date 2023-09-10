@@ -1,9 +1,10 @@
-import Image from 'next/image'
-import React from 'react'
+import Image from 'next/image';
+import React from 'react';
 
-import { Wrapper } from '@/components/ui/Wrapper'
-import { LinkButton } from '@/components/ui/LinkButton'
-import { AnimateSection } from '@/components/ui/AnimateSection'
+import { Wrapper } from '@/components/ui/Wrapper';
+import { LinkButton } from '@/components/ui/LinkButton';
+import { AnimateSection } from '@/components/ui/AnimateSection';
+import { navigationPaths } from '@/constants/navigation';
 
 export const SpeakerZX9 = () => {
 	return (
@@ -30,11 +31,16 @@ export const SpeakerZX9 = () => {
 							<p className=' max-w-[250px] text-sm leading-6 text-veryLightPrimary md:max-w-[300px]'>
 								Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.
 							</p>
-							<LinkButton url='/' bg='bg-primaryDark' bgHover='hover:bg-grayish' />
+							<LinkButton
+								url={navigationPaths.SpeakerZX9.path}
+								label={navigationPaths.SpeakerZX9.label}
+								bg='bg-primaryDark'
+								bgHover='hover:bg-grayish'
+							/>
 						</div>
 					</div>
 				</AnimateSection>
 			</Wrapper>
 		</section>
-	)
-}
+	);
+};

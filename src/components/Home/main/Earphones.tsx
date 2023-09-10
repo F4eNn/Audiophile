@@ -1,9 +1,10 @@
-import React from 'react'
-import Image from 'next/image'
+import React from 'react';
+import Image from 'next/image';
 
-import { Wrapper } from '@/components/ui/Wrapper'
-import { AnimateSection } from '@/components/ui/AnimateSection'
-import { LinkButton } from '@/components/ui/LinkButton'
+import { Wrapper } from '@/components/ui/Wrapper';
+import { AnimateSection } from '@/components/ui/AnimateSection';
+import { LinkButton } from '@/components/ui/LinkButton';
+import { navigationPaths } from '@/constants/navigation';
 
 export const Earphones = () => {
 	return (
@@ -22,7 +23,8 @@ export const Earphones = () => {
 							<h2 className='text-H2 uppercase'>yx1 earphones</h2>
 							<div>
 								<LinkButton
-									url='/'
+									url={navigationPaths.earphonesYX1.path}
+									label={navigationPaths.earphonesYX1.label}
 									isBorder={true}
 									bgHover='hover:bg-primaryDark'
 									bg='transparent'
@@ -35,5 +37,5 @@ export const Earphones = () => {
 				</AnimateSection>
 			</Wrapper>
 		</section>
-	)
-}
+	);
+};

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { HeroCategory } from '@/components/ui/category/Hero';
-import { SpeakersSection } from '@/components/ui/category/CategorySection';
+import { HeroCategory } from '@/components/category/Hero';
+import { SpeakersSection } from '@/components/category/CategorySection';
 import { fetcher } from '@/helpers/api';
 
 const getSpeakers = async () => {

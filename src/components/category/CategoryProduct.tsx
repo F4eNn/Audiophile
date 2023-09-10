@@ -2,8 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 
 import { ProductsData } from '@/types/data';
-import { LinkButton } from '../LinkButton';
-import { AnimateSection } from '../AnimateSection';
+import { LinkButton } from '../ui/LinkButton';
+import { AnimateSection } from '../ui/AnimateSection';
 
 type CategoryProductProps = ProductsData & {
 	rowReverse?: 'lg:flex-row-reverse' | 'lg:flex-row';
@@ -14,6 +14,8 @@ export const CategoryProduct = ({
 	name,
 	description,
 	new: newProduct,
+	slug,
+	category,
 	rowReverse = 'lg:flex-row',
 }: CategoryProductProps) => {
 	return (
@@ -30,7 +32,7 @@ export const CategoryProduct = ({
 					{newProduct && <p className='text-overline uppercase text-primary'>new product</p>}
 					<h2 className={`max-w-[300px] text-H2 uppercase md:max-w-[425px] md:text-H1`}>{name}</h2>
 					<p className='max-w-[525px] text-sm leading-6 text-[#7d7d7d]'>{description}</p>
-					<LinkButton url='/' />
+					<LinkButton url={`/category/${category}/${slug}`} />
 				</div>
 			</div>
 		</AnimateSection>

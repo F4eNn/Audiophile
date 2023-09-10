@@ -20,6 +20,22 @@ export const navigationPaths = {
 		path: '/category/earphones',
 		label: 'go to earphones',
 	},
+	headphonesXX99: {
+		path: '/category/headphones/xx99-mark-two-headphones',
+		label: 'Check new XX99 mark 2 headphones ',
+	},
+	SpeakerZX9: {
+		path: '/category/speakers/zx9-speaker',
+		label: 'Check ZX9 speaker ',
+	},
+	SpeakerZX7: {
+		path: '/category/speakers/zx7-speaker',
+		label: 'Check ZX7 speaker ',
+	},
+	earphonesYX1: {
+		path: '/category/earphones/yx1-earphones',
+		label: 'Check YX1 earphones ',
+	},
 } as const satisfies Record<PropertyKey, navigationItem>;
 
 export const desktopNav = [

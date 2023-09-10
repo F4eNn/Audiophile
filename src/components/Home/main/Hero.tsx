@@ -1,10 +1,11 @@
-import React from 'react'
-import Image from 'next/image'
-import { BsChevronDoubleDown } from 'react-icons/bs'
+import React from 'react';
+import Image from 'next/image';
+import { BsChevronDoubleDown } from 'react-icons/bs';
 
-import { LinkButton } from '@/components/ui/LinkButton'
-import { Wrapper } from '@/components/ui/Wrapper'
-import { HeroSectionWrapper } from '@/components/ui/HeroSectionWrapper'
+import { LinkButton } from '@/components/ui/LinkButton';
+import { Wrapper } from '@/components/ui/Wrapper';
+import { HeroSectionWrapper } from '@/components/ui/HeroSectionWrapper';
+import { navigationPaths } from '@/constants/navigation';
 
 export const Hero = () => {
 	return (
@@ -34,7 +35,7 @@ export const Hero = () => {
 									Experience natural, lifelike audio and exceptional build quality made for the passionate music
 									enthusiast.
 								</p>
-								<LinkButton url='/' />
+								<LinkButton url={navigationPaths.headphonesXX99.path} label={navigationPaths.headphonesXX99.label} />
 							</div>
 						</div>
 						<a
@@ -47,5 +48,5 @@ export const Hero = () => {
 				</HeroSectionWrapper>
 			</Wrapper>
 		</section>
-	)
-}
+	);
+};
