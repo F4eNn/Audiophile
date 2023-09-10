@@ -2,6 +2,7 @@ import React from 'react';
 
 import { fetcher } from '@/helpers/api';
 import { Product } from '@/components/product/Product';
+import { ProductFeatures } from '@/components/product/ProductFeatures';
 
 const getProducDetails = async (slug: string) => {
 	const res = await fetcher(undefined, slug);
@@ -14,6 +15,7 @@ const ProductDetail = async ({ params }: { params: { slug: string } }) => {
 	return (
 		<div className='mt-[100px]'>
 			<Product {...product} />
+			<ProductFeatures {...product} />
 		</div>
 	);
 };

@@ -12,7 +12,7 @@ export const Product = ({ price, new: newProduct, name, description, image }: Pr
 		<section className='mt-[100px]  text-primaryDark'>
 			<Wrapper>
 				<AnimateSection>
-					<div className='mx-5 flex flex-col lg:mx-7 '>
+					<div className='mx-6 flex flex-col lg:mx-7 '>
 						<GoBack />
 						<div className='flex flex-col gap-10 sm:flex-row sm:items-center md:gap-12'>
 							<div className='relative  aspect-square w-full overflow-hidden rounded-lg  bg-rose sm:aspect-auto sm:h-[600px]'>
