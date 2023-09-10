@@ -1,11 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { ProductsData } from '@/types/data';
+import { ProductData } from '@/types/data';
 import { LinkButton } from '../ui/LinkButton';
 import { AnimateSection } from '../ui/AnimateSection';
 
-type CategoryProductProps = ProductsData & {
+type CategoryProductProps = ProductData & {
 	rowReverse?: 'lg:flex-row-reverse' | 'lg:flex-row';
 };
 

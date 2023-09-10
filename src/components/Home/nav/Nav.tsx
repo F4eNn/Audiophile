@@ -1,36 +1,36 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import { usePathname } from 'next/navigation'
+'use client';
+import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
-import { MobileMenu } from './Mobile'
-import { Desktop } from './Desktop'
+import { MobileMenu } from './Mobile';
+import { Desktop } from './Desktop';
+import { defaultPaths } from '@/constants/navigation';
 
 export const Nav = () => {
-	const [isOpen, setIsOpen] = useState(false)
-	const [isScroll, setIsScroll] = useState(false)
-	const pathname = usePathname()
-	
+	const [isOpen, setIsOpen] = useState(false);
+	const [isScroll, setIsScroll] = useState(false);
+	const pathname = usePathname();
+
 	const handleScroll = () => {
 		if (scrollY >= 101) {
-			setIsScroll(true)
+			setIsScroll(true);
 		} else {
-			setIsScroll(false)
+			setIsScroll(false);
 		}
-	}
+	};
 
 	useEffect(() => {
-		window.addEventListener('scroll', handleScroll)
-	}, [])
-
+		window.addEventListener('scroll', handleScroll);
+	}, []);
 
 	useEffect(() => {
-		setIsOpen(false)
-	}, [pathname])
+		setIsOpen(false);
+	}, [pathname]);
 
 	return (
 		<nav
 			className={` fixed top-0 z-10 ${
-				isScroll ? 'bg-primaryDark' : 'bg-transparent'
+				isScroll || !defaultPaths.includes(pathname) ? 'bg-primaryDark' : 'bg-transparent'
 			}   w-full text-white transition-colors duration-200
 		${isOpen ? 'bg-primaryDark' : 'bg-transparent'}
 		`}
@@ -38,5 +38,5 @@ export const Nav = () => {
 			<MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} isScroll={isScroll} />
 			<Desktop isScroll={isScroll} />
 		</nav>
-	)
-}
+	);
+};

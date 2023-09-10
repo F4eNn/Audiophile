@@ -1,15 +1,15 @@
-import React from 'react'
-import Link from 'next/link'
-import { BsDiscord, BsGithub } from 'react-icons/bs'
+import React from 'react';
+import Link from 'next/link';
+import { BsDiscord, BsGithub } from 'react-icons/bs';
 
-import { Wrapper } from '@/components/ui/Wrapper'
-import { Logo } from '@/components/ui/Logo'
-import { desktopNav } from '@/constants/navigation'
-import { AnimateSection } from '@/components/ui/AnimateSection'
+import { Wrapper } from '@/components/ui/Wrapper';
+import { Logo } from '@/components/ui/Logo';
+import { AnimateSection } from '@/components/ui/AnimateSection';
+import { FooterNav } from './FooterNav';
 
 export const Footer = () => {
 	return (
-		<footer className='w-full overflow-hidden bg-primaryDark pb-14 mt-auto text-white'>
+		<footer className='mt-auto w-full overflow-hidden bg-primaryDark pb-14 text-white'>
 			<Wrapper>
 				<AnimateSection start='-650px'>
 					<div className='mx-7 space-y-12 text-center sm:space-y-8 sm:text-left'>
@@ -19,15 +19,7 @@ export const Footer = () => {
 								<div className='mx-auto w-max sm:mx-0'>
 									<Logo />
 								</div>
-								<ul className=' flex flex-col items-center gap-6  text-sm font-[500] uppercase tracking-widest sm:flex-row   sm:gap-5 lg:text-base'>
-									{desktopNav.map(([url, title]) => (
-										<li className=' w-full transition-colors duration-300 hover:text-primary sm:w-max ' key={title}>
-											<Link className='inline-block  w-full  p-2' href={url}>
-												{title}
-											</Link>
-										</li>
-									))}
-								</ul>
+								<FooterNav />
 							</div>
 						</div>
 						<div className='flex flex-col items-center gap-12  text-3xl sm:flex-row sm:items-end sm:justify-between lg:items-center'>
@@ -62,5 +54,5 @@ export const Footer = () => {
 				</AnimateSection>
 			</Wrapper>
 		</footer>
-	)
-}
+	);
+};

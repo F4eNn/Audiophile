@@ -38,6 +38,8 @@ export const navigationPaths = {
 	},
 } as const satisfies Record<PropertyKey, navigationItem>;
 
+export const defaultPaths = ['/', '/category/headphones', '/category/earphones', '/category/speakers'];
+
 export const desktopNav = [
 	[navigationPaths.home.path, 'home'],
 	[navigationPaths.headphones.path, 'headphones'],

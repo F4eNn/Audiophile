@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
 	content: [
@@ -18,10 +18,11 @@ const config: Config = {
 			white: '#FFFFFF',
 			lightWhite: '#FAFAFA',
 			rose: '#F1F1F1',
+			brown: '#7d7d7d',
 			lightBrown: '#797979',
 			darkGray: '#2c2c2c',
 			lightGray: '#c5c5c5',
-			gray: '#8b8b8b'
+			gray: '#8b8b8b',
 		},
 		extend: {
 			fontSize: {
@@ -92,8 +93,6 @@ const config: Config = {
 			},
 		},
 	},
-	plugins: [
-    require('@tailwindcss/forms')
-  ],
-}
-export default config
+	plugins: [require('@tailwindcss/forms')],
+};
+export default config;

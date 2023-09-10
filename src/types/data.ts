@@ -1,14 +1,14 @@
 type Images = {
-	mobile: string;
+	readonly mobile: string;
 	tablet: string;
 	desktop: string;
 };
 
-export type ProductsData = {
+export type ProductData = {
 	id: number;
 	slug: string;
 	name: string;
-	image: Images[];
+	image: Images;
 	category: string;
 	categoryImage: Images;
 	new: boolean;
