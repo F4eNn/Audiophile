@@ -1,4 +1,4 @@
-import React, { type Dispatch, SetStateAction, useRef, MouseEvent, useEffect } from 'react';
+import React, { useRef, MouseEvent, useEffect } from 'react';
 import { Divide as Hamburger } from 'hamburger-react';
 
 import { CategoryItem } from '../../ui/CategoryItem';
@@ -6,18 +6,21 @@ import { thumbnails } from '@/constants/thumbnails';
 import { Logo } from '@/components/ui/Logo';
 import { CartButton } from '@/components/ui/CartButton';
 import { animateMobileMenu, animateMobileNav } from '@/animations/animation';
+import { DispatchAction } from '@/types/general';
 
 interface MobileMenuProps {
-	setIsOpen: Dispatch<SetStateAction<boolean>>;
+	setIsOpen: DispatchAction<boolean>;
 	isOpen: boolean;
 	isScroll: boolean;
+	setCart: () => void;
 }
 
-export const MobileMenu = ({ isOpen, setIsOpen, isScroll }: MobileMenuProps) => {
+export const MobileMenu = ({ isOpen, setIsOpen, isScroll, setCart }: MobileMenuProps) => {
 	const overlayRef = useRef<HTMLDivElement>(null);
 	const logoRef = useRef<HTMLLIElement>(null);
 	const hamburgerRef = useRef<HTMLLIElement>(null);
 	const cartRef = useRef<HTMLLIElement>(null);
+
 	const handleOverlayClose = (e: MouseEvent<HTMLDivElement>) => {
 		if (e.target === overlayRef.current) setIsOpen(false);
 	};
@@ -53,7 +56,7 @@ export const MobileMenu = ({ isOpen, setIsOpen, isScroll }: MobileMenuProps) => 
 					<Logo />
 				</li>
 				<li ref={cartRef} className='opacity-0'>
-					<CartButton />
+					<CartButton toggleCart={setCart} />
 				</li>
 			</ul>
 			<div

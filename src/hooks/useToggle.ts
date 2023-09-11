@@ -1,11 +1,11 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react';
 
-export const useToggle = (initialState = false) => {
-	const [isOpen, setOpen] = useState(initialState)
+export const useToggle = (initialState = false): [boolean, () => void] => {
+	const [isOpen, setOpen] = useState(initialState);
 
 	const toggleState = useCallback(() => {
-		setOpen(prev => !prev)
-	}, [])
+		setOpen(prev => !prev);
+	}, []);
 
-	return [isOpen, toggleState]
-}
+	return [isOpen, toggleState];
+};

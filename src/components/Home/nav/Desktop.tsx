@@ -10,9 +10,10 @@ import { defaultPaths, desktopNav } from '@/constants/navigation';
 
 interface DesktopProps {
 	isScroll: boolean;
+	setCart: () => void;
 }
 
-export const Desktop = ({ isScroll }: DesktopProps) => {
+export const Desktop = ({ isScroll, setCart }: DesktopProps) => {
 	const desktopNavRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -46,7 +47,7 @@ export const Desktop = ({ isScroll }: DesktopProps) => {
 						</li>
 					))}
 				</ul>
-				<CartButton />
+				<CartButton toggleCart={setCart} />
 			</div>
 		</Wrapper>
 	);
