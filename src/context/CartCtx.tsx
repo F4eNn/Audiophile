@@ -32,40 +32,48 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 		setCartItem(product);
 	};
 
+	const cartWithoudDuplicates = (cartString: string | null) => {
+		if (cartString !== null) {
+			let updatedItem;
+			let updateCart;
+
+			const parseCart: CartTypes[] = JSON.parse(cartString);
+			const cartStorage: CartTypes[] = parseCart.filter(i => i !== null);
+			const existingCartItem = cartStorage.findIndex(item => item.name === cartItem?.name);
+
+			if (existingCartItem === -1 && cartItem) {
+				localStorage.setItem('cart', JSON.stringify([...cartStorage, cartItem]));
+			} else if (cartItem) {
+				const existingItem = cartStorage[existingCartItem];
+				updatedItem = {
+					...existingItem,
+					quantity: existingItem.quantity + cartItem.quantity,
+				};
+				updateCart = [...cartStorage];
+				updateCart[existingCartItem] = updatedItem;
+				localStorage.setItem('cart', JSON.stringify(updateCart));
+			}
+		} else {
+			localStorage.setItem('cart', JSON.stringify([]));
+		}
+	};
+
 	useEffect(() => {
 		const cartString = localStorage.getItem('cart');
-		if (cartString !== null) {
-			const cartStorage = JSON.parse(cartString);
-			console.log(cartStorage);
-		}
-		const existingCartItem = cart.findIndex(item => item.name === cartItem?.name);
-		let updatedItem;
-		let updatedItems;
-		if (existingCartItem === -1 && cartItem) {
-			setCart(prev => [...prev, cartItem]);
-		} else if (cartItem) {
-			const existingItem = cart[existingCartItem];
-			updatedItem = {
-				...existingItem,
-				quantity: existingItem.quantity + cartItem.quantity,
-			};
-			updatedItems = [...cart];
-			updatedItems[existingCartItem] = updatedItem;
-			setCart(updatedItems);
-		}
+		cartWithoudDuplicates(cartString);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [cartItem]);
 
-	// useEffect(() => {
-	// 	const cartStorage = localStorage.getItem('cart');
-	// 	if (cartStorage !== null) {
-	// 		const isCart = JSON.parse(cartStorage);
-	// 		localStorage.setItem('cart', JSON.stringify(cart));
-	// 		console.log(isCart);
-	// 	} else {
-	// 		localStorage.setItem('cart', JSON.stringify(cart));
-	// 	}
-	// }, [cart]);
+	useEffect(() => {
+		const checkCartData = () => {
+			const items = localStorage.getItem('cart');
+			if (items) {
+				const parseItems = JSON.parse(items);
+				setCart(parseItems);
+			}
+		};
+		checkCartData();
+	}, [cartItem]);
 
 	const value = {
 		addToCart,
