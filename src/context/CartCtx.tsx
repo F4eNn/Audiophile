@@ -27,14 +27,17 @@ export const useCartCtx = () => useContext(CartCtx);
 export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 	const [cart, setCart] = useState<CartTypes[]>([]);
 	const [cartItem, setCartItem] = useState<CartTypes>();
-	// const [cartProducts, setCartProducts] = useState(0);
-	// const [cart, setCart] = useState(false)
 
 	const addToCart = (product: CartTypes) => {
 		setCartItem(product);
 	};
 
 	useEffect(() => {
+		const cartString = localStorage.getItem('cart');
+		if (cartString !== null) {
+			const cartStorage = JSON.parse(cartString);
+			console.log(cartStorage);
+		}
 		const existingCartItem = cart.findIndex(item => item.name === cartItem?.name);
 		let updatedItem;
 		let updatedItems;
@@ -54,8 +57,15 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 	}, [cartItem]);
 
 	// useEffect(() => {
-	// 	setCart()
-	// },[allCartItems])
+	// 	const cartStorage = localStorage.getItem('cart');
+	// 	if (cartStorage !== null) {
+	// 		const isCart = JSON.parse(cartStorage);
+	// 		localStorage.setItem('cart', JSON.stringify(cart));
+	// 		console.log(isCart);
+	// 	} else {
+	// 		localStorage.setItem('cart', JSON.stringify(cart));
+	// 	}
+	// }, [cart]);
 
 	const value = {
 		addToCart,

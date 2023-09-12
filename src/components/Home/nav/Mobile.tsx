@@ -55,7 +55,7 @@ export const MobileMenu = ({ isOpen, setIsOpen, isScroll, setCart }: MobileMenuP
 				<li ref={logoRef} className='opacity-0'>
 					<Logo />
 				</li>
-				<li ref={cartRef} className='opacity-0'>
+				<li ref={cartRef} className='opacity-0 '>
 					<CartButton toggleCart={setCart} />
 				</li>
 			</ul>
