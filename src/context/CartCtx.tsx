@@ -1,7 +1,7 @@
 'use client';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-import { ChildrenWithProps } from '@/types/general';
+import { ChildrenWithProps, DispatchAction } from '@/types/general';
 
 export type CartTypes = {
 	name: string;
@@ -13,11 +13,17 @@ export type CartTypes = {
 type CartContextTypes = {
 	addToCart: (_product: CartTypes) => void;
 	cart: CartTypes[];
+	setCart: DispatchAction<CartTypes[]>;
+	setAddCart: DispatchAction<boolean>;
+	isAdd: boolean;
 };
 
 const defaultValue: CartContextTypes = {
 	addToCart: (_product: CartTypes) => {},
+	setCart: () => {},
 	cart: [],
+	setAddCart: () => {},
+	isAdd: false,
 };
 
 const CartCtx = createContext(defaultValue);
@@ -27,12 +33,13 @@ export const useCartCtx = () => useContext(CartCtx);
 export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 	const [cart, setCart] = useState<CartTypes[]>([]);
 	const [cartItem, setCartItem] = useState<CartTypes>();
+	const [isAdd, setAddCart] = useState(false);
 
 	const addToCart = (product: CartTypes) => {
 		setCartItem(product);
 	};
 
-	const cartWithoudDuplicates = (cartString: string | null) => {
+	const cartWithoutDuplicates = (cartString: string | null) => {
 		if (cartString !== null) {
 			let updatedItem;
 			let updateCart;
@@ -60,7 +67,7 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 
 	useEffect(() => {
 		const cartString = localStorage.getItem('cart');
-		cartWithoudDuplicates(cartString);
+		cartWithoutDuplicates(cartString);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [cartItem]);
 
@@ -77,7 +84,10 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 
 	const value = {
 		addToCart,
+		setAddCart,
+		isAdd,
 		cart,
+		setCart,
 	};
 	return <CartCtx.Provider value={value}>{children}</CartCtx.Provider>;
 };

@@ -8,7 +8,7 @@ export const AddToCart = ({ image, price, name }: Partial<CartTypes>) => {
 	const [delay, setDelay] = useState(true);
 	const quantityRef = useRef<HTMLInputElement>(null);
 
-	const { addToCart: addProductToCart } = useCartCtx();
+	const { addToCart: addProductToCart, setAddCart } = useCartCtx();
 
 	const createShorterName = () => {
 		const splitName = name!.split(' ');
@@ -25,9 +25,11 @@ export const AddToCart = ({ image, price, name }: Partial<CartTypes>) => {
 
 		if (delay) {
 			setDelay(false);
+			setAddCart(true);
 			setTimeout(() => {
 				addProductToCart({ image: image!, name: shorterName, price: price!, quantity });
 				setDelay(true);
+				setAddCart(false);
 			}, 300);
 		}
 	};

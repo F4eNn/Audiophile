@@ -50,3 +50,10 @@ export const toggleCartAnimation = (isCartOpen: boolean, tl: MutableRefObject<Ti
 	if (!tl.current) return;
 	return isCartOpen ? tl.current.play() : tl.current.reverse();
 };
+export const addToCartAnimation = (element: AnimatedRef) => {
+	const timeline = gsap.timeline();
+	timeline
+		.to(element.current, { duration: 0.3, scale: 0.8 })
+		.to(element.current, { duration: 0.3, scale: 1.15 })
+		.to(element.current, { duration: 0.3, scale: 1.1 });
+};

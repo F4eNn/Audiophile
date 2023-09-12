@@ -6,6 +6,15 @@
 	.colors-300 {
 		@apply transition-colors duration-300;
 	}
+	.cartScroll::-webkit-scrollbar {
+		@apply w-2;
+	}
+	.cartScrollTrack::-webkit-scrollbar-track {
+		@apply bg-rose;
+	}
+	.cartScrollThumb::-webkit-scrollbar-thumb {
+		@apply rounded-lg bg-brown;
+	}
 }
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
