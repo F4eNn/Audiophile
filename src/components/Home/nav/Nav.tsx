@@ -7,6 +7,7 @@ import { Desktop } from './Desktop';
 import { defaultPaths } from '@/constants/navigation';
 import { Cart } from '@/components/Home/nav/Cart';
 import { useToggle } from '@/hooks/useToggle';
+import { Wrapper } from '@/components/ui/Wrapper';
 
 export const Nav = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -39,9 +40,11 @@ export const Nav = () => {
 		${isOpen ? 'bg-primaryDark' : 'bg-transparent'}
 		`}
 		>
-			<MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} isScroll={isScroll} setCart={toggleCart} />
-			<Desktop isScroll={isScroll} setCart={toggleCart} />
-			<Cart isCartOpen={isCartOpen} setCart={toggleCart} />
+			<Wrapper>
+				<MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} isScroll={isScroll} setCart={toggleCart} />
+				<Desktop isScroll={isScroll} setCart={toggleCart} />
+				<Cart isCartOpen={isCartOpen} setCart={toggleCart} />
+			</Wrapper>
 		</nav>
 	);
 };

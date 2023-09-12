@@ -1,5 +1,5 @@
 type Images = {
-	readonly mobile: string;
+	mobile: string;
 	tablet: string;
 	desktop: string;
 };

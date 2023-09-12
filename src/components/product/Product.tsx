@@ -29,7 +29,7 @@ export const Product = ({ price, new: newProduct, name, description, image }: Pr
 								</div>
 								<p className='leading-7 text-brown '>{description}</p>
 								<p className='text-2xl font-bold tracking-wider'>$ {price}</p>
-								<AddToCart />
+								<AddToCart name={name} image={image.mobile} price={price} />
 							</div>
 						</div>
 					</div>

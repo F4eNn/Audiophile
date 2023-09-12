@@ -1,13 +1,37 @@
 'use client';
 import React, { useState } from 'react';
 
-export const AddToCart = () => {
+import { CartTypes, useCartCtx } from '@/context/CartCtx';
+
+export const AddToCart = ({ image, price, name }: Partial<CartTypes>) => {
 	const [quantity, setQuantity] = useState(1);
+	const [delay, setDelay] = useState(true);
 	const incrementQuantity = () => setQuantity(prev => prev + 1);
 	const decrementQuantity = () => setQuantity(prev => prev - 1);
 
+	const { addToCart: addProductToCart } = useCartCtx();
+
+	const createShorterName = () => {
+		const splitName = name!.split(' ');
+		const removeDeviceName = ['Headphones', 'Speaker', 'Earphones', 'Wireless'];
+		const shorterName = splitName.filter(p => !removeDeviceName.includes(p));
+
+		return shorterName.join(' ');
+	};
+
+	const addToCart = () => {
+		const shorterName = createShorterName();
+		if (delay) {
+			setDelay(false);
+			setTimeout(() => {
+				addProductToCart({ image: image!, name: shorterName, price: price!, quantity });
+				setDelay(true);
+			}, 400);
+		}
+	};
+
 	return (
-		<form className='flex gap-4'>
+		<div className='flex gap-4'>
 			<div className='w-max bg-rose'>
 				<button
 					onClick={decrementQuantity}
@@ -37,11 +61,11 @@ export const AddToCart = () => {
 			</div>
 
 			<button
-				type='submit'
+				onClick={addToCart}
 				className='colors-300 min-w-max max-w-[175px] flex-1 bg-primary px-6 uppercase text-white  hover:bg-secondary'
 			>
 				add to cart
 			</button>
-		</form>
+		</div>
 	);
 };
