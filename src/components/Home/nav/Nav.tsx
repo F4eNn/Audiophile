@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { MobileMenu } from './Mobile';
 import { Desktop } from './Desktop';
 import { defaultPaths } from '@/constants/navigation';
-import { Cart } from '@/components/Home/nav/Cart';
+import { Cart } from '@/components/Home/nav/cart/Cart';
 import { useToggle } from '@/hooks/useToggle';
 import { Wrapper } from '@/components/ui/Wrapper';
 
