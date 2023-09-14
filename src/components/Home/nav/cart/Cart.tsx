@@ -21,7 +21,7 @@ export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 	return (
 		<Wrapper>
 			<OverlayCart setCart={setCart} isOpen={isCartOpen} />
-			<div className=' absolute right-0 ml-auto mr-10 mt-[20px] flex h-[500px]  w-[425px] scale-0 flex-col justify-between rounded-lg  bg-white p-8 text-primaryDark opacity-0 '>
+			<div className=' absolute right-0 ml-auto mr-3 mt-[20px] flex h-[500px] w-[325px] scale-0 flex-col justify-between rounded-lg bg-white px-5  py-8 text-primaryDark opacity-0 sm:mr-10 sm:w-[425px] sm:p-8 '>
 				<div className='flex justify-between'>
 					<h3 className='text-H5'>{`Cart (${cart.length})`}</h3>
 					<button onClick={handleRemoveAll} className='underline'>
