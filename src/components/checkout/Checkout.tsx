@@ -14,7 +14,7 @@ export const Checkout = () => {
 				</div>
 				<div className='mx-6 mt-5 flex justify-between gap-10 lg:mx-7'>
 					<CheckoutForm />
-					<div className='h-[500px] w-full rounded-lg bg-white'>
+					<div className='h-[500px] w-[600px] rounded-lg bg-white'>
 						<Summary />
 					</div>
 				</div>

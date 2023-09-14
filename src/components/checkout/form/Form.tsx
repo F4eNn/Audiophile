@@ -14,11 +14,13 @@ export const CheckoutForm = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(handleSentForm)} className='h-[500px] w-full rounded-lg bg-white p-10'>
+		<form onSubmit={handleSubmit(handleSentForm)} className=' w-full rounded-lg bg-white p-10'>
 			<h1 className='text-3xl font-bold uppercase'>Checkout</h1>
-			<BillingDetails />
-			<ShippingInfo />
-			<PaymentDetails />
+			<div className='mt-12'>
+				<BillingDetails />
+				<ShippingInfo />
+				<PaymentDetails />
+			</div>
 		</form>
 	);
 };
