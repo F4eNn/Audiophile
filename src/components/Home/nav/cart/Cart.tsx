@@ -5,6 +5,7 @@ import { useCartCtx } from '@/context/CartCtx';
 import { Wrapper } from '@/components/ui/Wrapper';
 import { OverlayCart } from './Overlay';
 import { Items } from './Items';
+import { navigationPaths } from '@/constants/navigation';
 type CartProps = {
 	isCartOpen: boolean;
 	setCart: () => void;
@@ -22,8 +23,8 @@ export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 
 	const goToCheckout = () => {
 		if (cart.length !== 0) {
-			push('/');
 			setIsCartEmpty(false);
+			push(navigationPaths.checkout.path);
 		} else {
 			setIsCartEmpty(true);
 		}

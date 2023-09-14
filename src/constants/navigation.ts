@@ -20,6 +20,10 @@ export const navigationPaths = {
 		path: '/category/earphones',
 		label: 'go to earphones',
 	},
+	checkout: {
+		path: '/checkout',
+		label: 'go to checkout',
+	},
 	headphonesXX99: {
 		path: '/category/headphones/xx99-mark-two-headphones',
 		label: 'Check new XX99 mark 2 headphones ',

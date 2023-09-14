@@ -1,12 +1,16 @@
-import React from 'react'
-import Image from 'next/image'
+'use client';
+import React from 'react';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
-import { AnimateSection } from '@/components/ui/AnimateSection'
-import { Wrapper } from '@/components/ui/Wrapper'
+import { AnimateSection } from '@/components/ui/AnimateSection';
+import { Wrapper } from '@/components/ui/Wrapper';
+import { navigationPaths } from '@/constants/navigation';
 
 export const Description = () => {
+	const pathname = usePathname();
 	return (
-		<section className='mx-3 mt-32 lg:mt-52 pb-44 '>
+		<section className={`mx-3 mt-32 pb-44 lg:mt-52 ${pathname === navigationPaths.checkout.path ? 'hidden' : ''} `}>
 			<Wrapper>
 				<AnimateSection>
 					<div className=' flex flex-col items-center gap-3 lg:flex-row-reverse lg:justify-center'>
@@ -18,10 +22,10 @@ export const Description = () => {
 							</picture>
 						</div>
 						<div className='mt-14 flex-1 space-y-8 text-center md:space-y-12 lg:text-left'>
-							<h2 className='mx-auto max-w-[500px] md:max-w-[650px] text-H2 uppercase lg:mx-0 lg:max-w-[500px] md:text-H1'>
+							<h2 className='mx-auto max-w-[500px] text-H2 uppercase md:max-w-[650px] md:text-H1 lg:mx-0 lg:max-w-[500px]'>
 								bringing you the <span className='text-primary'>best</span> audio gear
 							</h2>
-							<p className='mx-4 text-sm text-[#7d7d7d] md:text-base lg:mx-0 max-w-[750px] lg:max-w-[550px]'>
+							<p className='mx-4 max-w-[750px] text-sm text-[#7d7d7d] md:text-base lg:mx-0 lg:max-w-[550px]'>
 								Located at the heart of New York City, Audiophile is the premier store for high end headphones,
 								earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms
 								available for you to browse and experience a wide range of our products. Stop by our store to meet some
@@ -32,5 +36,5 @@ export const Description = () => {
 				</AnimateSection>
 			</Wrapper>
 		</section>
-	)
-}
+	);
+};

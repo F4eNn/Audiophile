@@ -17,7 +17,7 @@ const config: Config = {
 			lightDark: '#191919',
 			white: '#FFFFFF',
 			lightWhite: '#FAFAFA',
-			rose: '#F1F1F1',
+			rose: '#f1f1f1',
 			brown: '#7d7d7d',
 			lightBrown: '#797979',
 			darkGray: '#2c2c2c',
@@ -67,7 +67,7 @@ const config: Config = {
 					},
 				],
 				H6: [
-					'1rem',
+					'0.85rem',
 					{
 						lineHeight: '1.3',
 						letterSpacing: '1.3px',
