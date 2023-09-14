@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { useCartCtx } from '@/context/CartCtx';
 import { Wrapper } from '@/components/ui/Wrapper';
@@ -11,12 +12,25 @@ type CartProps = {
 
 export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 	const { cart, setCart: removeCartItems, totalPrice, setTotalPrice } = useCartCtx();
-
+	const [isCartEmpty, setIsCartEmpty] = useState(false);
+	const { push } = useRouter();
 	const handleRemoveAll = () => {
 		localStorage.setItem('cart', JSON.stringify([]));
 		removeCartItems([]);
 		setTotalPrice('0');
 	};
+
+	const goToCheckout = () => {
+		if (cart.length !== 0) {
+			push('/');
+			setIsCartEmpty(false);
+		} else {
+			setIsCartEmpty(true);
+		}
+	};
+	useEffect(() => {
+		if (!isCartOpen) setIsCartEmpty(false);
+	}, [isCartOpen]);
 
 	return (
 		<Wrapper>
@@ -40,9 +54,21 @@ export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 						<span className='uppercase text-brown'>Total</span>
 						<span className='font-bold'>$ {totalPrice}</span>
 					</p>
-					<button className='colors-300 w-full bg-primary py-2 uppercase text-white hover:bg-secondary'>
-						Checkout
-					</button>
+					<div className='relative'>
+						<button
+							onClick={goToCheckout}
+							className='colors-300 w-full bg-primary py-2 uppercase text-white hover:bg-secondary'
+						>
+							Checkout
+						</button>
+						{isCartEmpty ? (
+							<p className='absolute -top-8 left-1/2 -translate-x-1/2 text-center text-sm font-[600] text-primary'>
+								Cart is Empty
+							</p>
+						) : (
+							''
+						)}
+					</div>
 				</div>
 			</div>
 		</Wrapper>
