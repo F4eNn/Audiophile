@@ -2,9 +2,9 @@ import React, { LabelHTMLAttributes } from 'react';
 
 type LabelProps = LabelHTMLAttributes<HTMLLabelElement> & { title?: string };
 
-export const Label = ({ title, ...rest }: LabelProps) => {
+export const Label = ({ title, ...props }: LabelProps) => {
 	return (
-		<label {...rest} className='text-sm font-bold capitalize'>
+		<label {...props} className='text-sm font-bold capitalize'>
 			{title}
 		</label>
 	);

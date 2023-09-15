@@ -1,26 +1,50 @@
 import React from 'react';
+import { type Control, Controller } from 'react-hook-form';
 
 import { FormTitle } from './FormTitle';
 import { Input } from './Input';
 import { Label } from './Label';
 import { InputCard } from './InputCard';
+import { FormValues } from './Form';
 
-export const BillingDetails = () => {
+type BillingProps = {
+	control: Control<FormValues>;
+};
+
+export const BillingDetails = ({ control }: BillingProps) => {
 	return (
 		<div>
 			<FormTitle title='Billing details' />
 			<div className=' mt-5 flex flex-wrap gap-x-8 gap-y-5'>
 				<InputCard>
 					<Label title='name' htmlFor='name' />
-					<Input type='text' id='name' placeholder='Alexei Ward' />
+					<Controller
+						name='name'
+						control={control}
+						render={({ field }) => {
+							return <Input type='text' id='name' placeholder='Alexei Ward' {...field} />;
+						}}
+					/>
 				</InputCard>
 				<InputCard>
 					<Label title='email' htmlFor='email' />
-					<Input type='email' id='email' placeholder='alexei@mail.com' />
+					<Controller
+						name='email'
+						control={control}
+						render={({ field }) => {
+							return <Input type='email' id='email' placeholder='alexei@mail.com' {...field} />;
+						}}
+					/>
 				</InputCard>
 				<InputCard>
 					<Label title='phone number' htmlFor='phoneNumber' />
-					<Input type='number' id='phoneNumber' placeholder='+48 202 555 014' />
+					<Controller
+						name='phone'
+						control={control}
+						render={({ field }) => {
+							return <Input type='tel' id='phoneNumber' placeholder='+48 202 555 014' {...field} />;
+						}}
+					/>
 				</InputCard>
 			</div>
 		</div>
