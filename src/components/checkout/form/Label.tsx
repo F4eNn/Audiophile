@@ -1,10 +1,10 @@
 import React, { LabelHTMLAttributes } from 'react';
 
-type LabelProps = LabelHTMLAttributes<HTMLLabelElement> & { title?: string };
+type LabelProps = Pick<LabelHTMLAttributes<HTMLLabelElement>, 'htmlFor'> & { title?: string; isError: boolean };
 
-export const Label = ({ title, ...props }: LabelProps) => {
+export const Label = ({ title, isError, ...props }: LabelProps) => {
 	return (
-		<label {...props} className='text-sm font-bold capitalize'>
+		<label {...props} className={`text-sm ${isError ? 'text-error' : ''} font-bold capitalize`}>
 			{title}
 		</label>
 	);

@@ -1,52 +1,61 @@
 import React from 'react';
-import { Control, Controller } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import { FormTitle } from './FormTitle';
 import { Label } from './Label';
 import { Input } from './Input';
 import { InputCard } from './InputCard';
-import { FormValues } from './Form';
+import { ErrorMessage } from './ErrorMessage';
+import { FormProps } from '@/types/general';
 
-type ShippingProps = {
-	control: Control<FormValues>;
-};
-
-export const ShippingInfo = ({ control }: ShippingProps) => {
+export const ShippingInfo = ({ control, errors }: FormProps) => {
 	return (
 		<div className='mt-16'>
 			<FormTitle title='shipping info' />
 			<div className='mt-5 flex flex-wrap gap-5'>
 				<InputCard fullWidth={true}>
-					<Label title='Address' htmlFor='address' />
+					<Label isError={!!errors.address} title='Address' htmlFor='address' />
 					<Controller
 						name='address'
 						control={control}
-						render={({ field }) => <Input id='address' placeholder='1137 Wiliams Avenue' {...field} />}
+						render={({ field }) => (
+							<Input isError={!!errors.address} id='address' type='text' placeholder='1137 Wiliams Avenue' {...field} />
+						)}
 					/>
+					<ErrorMessage msg={errors.address?.message} />
 				</InputCard>
 				<InputCard>
-					<Label title='ZIP Code' htmlFor='zipCode' />
+					<Label title='ZIP Code' htmlFor='zipCode' isError={!!errors.zipCode} />
 					<Controller
 						name='zipCode'
 						control={control}
-						render={({ field }) => <Input placeholder='10001' id='zipCode' {...field} />}
+						render={({ field }) => (
+							<Input isError={!!errors.zipCode} placeholder='10001' type='text' id='zipCode' {...field} />
+						)}
 					/>
+					<ErrorMessage msg={errors.zipCode?.message} />
 				</InputCard>
 				<InputCard>
-					<Label title='city' htmlFor='city' />
+					<Label title='city' htmlFor='city' isError={!!errors.city} />
 					<Controller
 						name='city'
 						control={control}
-						render={({ field }) => <Input placeholder='New York' id='city' {...field} />}
+						render={({ field }) => (
+							<Input isError={!!errors.city} type='text' placeholder='New York' id='city' {...field} />
+						)}
 					/>
+					<ErrorMessage msg={errors.city?.message} />
 				</InputCard>
 				<InputCard>
-					<Label title='country' htmlFor='country' />
+					<Label title='country' htmlFor='country' isError={!!errors.country} />
 					<Controller
 						name='country'
 						control={control}
-						render={({ field }) => <Input placeholder='United States' id='country' {...field} />}
+						render={({ field }) => (
+							<Input isError={!!errors.country} placeholder='United States' id='country' {...field} />
+						)}
 					/>
+					<ErrorMessage msg={errors.country?.message} />
 				</InputCard>
 			</div>
 		</div>

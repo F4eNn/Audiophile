@@ -1,50 +1,55 @@
 import React from 'react';
-import { type Control, Controller } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import { FormTitle } from './FormTitle';
 import { Input } from './Input';
 import { Label } from './Label';
 import { InputCard } from './InputCard';
-import { FormValues } from './Form';
+import { ErrorMessage } from './ErrorMessage';
+import { FormProps } from '@/types/general';
 
-type BillingProps = {
-	control: Control<FormValues>;
-};
-
-export const BillingDetails = ({ control }: BillingProps) => {
+export const BillingDetails = ({ control, errors }: FormProps) => {
+	const isNameIsInvalid = !!errors.name;
 	return (
 		<div>
 			<FormTitle title='Billing details' />
 			<div className=' mt-5 flex flex-wrap gap-x-8 gap-y-5'>
 				<InputCard>
-					<Label title='name' htmlFor='name' />
+					<Label title='name' htmlFor='name' isError={isNameIsInvalid} />
 					<Controller
 						name='name'
 						control={control}
 						render={({ field }) => {
-							return <Input type='text' id='name' placeholder='Alexei Ward' {...field} />;
+							return <Input isError={isNameIsInvalid} type='text' id='name' placeholder='Alexei Ward' {...field} />;
 						}}
 					/>
+					<ErrorMessage msg={errors.name?.message} />
 				</InputCard>
 				<InputCard>
-					<Label title='email' htmlFor='email' />
+					<Label title='email' htmlFor='email' isError={!!errors.email} />
 					<Controller
 						name='email'
 						control={control}
 						render={({ field }) => {
-							return <Input type='email' id='email' placeholder='alexei@mail.com' {...field} />;
+							return (
+								<Input isError={!!errors.email} type='email' id='email' placeholder='alexei@mail.com' {...field} />
+							);
 						}}
 					/>
+					<ErrorMessage msg={errors.email?.message} />
 				</InputCard>
 				<InputCard>
-					<Label title='phone number' htmlFor='phoneNumber' />
+					<Label title='phone number' htmlFor='phoneNumber' isError={!!errors.phone} />
 					<Controller
 						name='phone'
 						control={control}
 						render={({ field }) => {
-							return <Input type='tel' id='phoneNumber' placeholder='+48 202 555 014' {...field} />;
+							return (
+								<Input isError={!!errors.phone} type='tel' id='phoneNumber' placeholder='+48 202 555 014' {...field} />
+							);
 						}}
 					/>
+					<ErrorMessage msg={errors.phone?.message} />
 				</InputCard>
 			</div>
 		</div>

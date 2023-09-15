@@ -22,6 +22,7 @@ const config: Config = {
 			lightBrown: '#797979',
 			darkGray: '#2c2c2c',
 			lightGray: '#c5c5c5',
+			error: ' #cd2c2c',
 			gray: '#8b8b8b',
 		},
 		extend: {

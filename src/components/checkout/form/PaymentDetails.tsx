@@ -1,20 +1,25 @@
-import React, { ChangeEvent, useState } from 'react';
-import { Control, Controller } from 'react-hook-form';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { Controller } from 'react-hook-form';
 
 import { FormTitle } from './FormTitle';
-import { FormValues } from './Form';
 import { InputCard } from './InputCard';
 import { Label } from './Label';
 import { Input } from './Input';
 import CashDeliveryIcon from '../../../../public/assets/checkout/icon-cash-on-delivery.svg';
+import { ErrorMessage } from './ErrorMessage';
+import { DispatchAction, FormProps } from '@/types/general';
 
 type PaymentTypes = 'e-Money' | 'cash';
 
-type PaymentProps = {
-	control: Control<FormValues>;
-};
-export const PaymentDetails = ({ control }: PaymentProps) => {
+type PaymentProps = FormProps & { onPaymentMethod: DispatchAction<boolean> };
+
+export const PaymentDetails = ({ control, errors, onPaymentMethod }: PaymentProps) => {
 	const [selectedOption, setSelectedOption] = useState<PaymentTypes>('e-Money');
+
+	useEffect(() => {
+		onPaymentMethod(selectedOption === 'e-Money');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedOption]);
 
 	const handleChangePaymentMethod = (e: ChangeEvent<HTMLInputElement>) => {
 		setSelectedOption(e.target.value as PaymentTypes);
@@ -61,24 +66,36 @@ export const PaymentDetails = ({ control }: PaymentProps) => {
 			{selectedOption === 'e-Money' ? (
 				<div className='mt-10 flex justify-between gap-5'>
 					<InputCard>
-						<Label htmlFor='eMoneyNumber' title='e-Money Number' />
+						<Label htmlFor='eMoneyNumber' isError={!!errors.eMoneyNumber} title='e-Money Number' />
 						<Controller
 							control={control}
 							name='eMoneyNumber'
 							render={({ field }) => {
-								return <Input id='eMoneyNumber' placeholder='238521993' {...field} />;
+								return (
+									<Input
+										id='eMoneyNumber'
+										isError={!!errors.eMoneyNumber}
+										placeholder='238521993'
+										type='number'
+										{...field}
+									/>
+								);
 							}}
 						/>
+						<ErrorMessage msg={errors.eMoneyNumber?.message as string | undefined} />
 					</InputCard>
 					<InputCard>
-						<Label htmlFor='eMoneyPin' title='e-Money Pin' />
+						<Label htmlFor='eMoneyPin' isError={!!errors.eMoneyPin} title='e-Money Pin' />
 						<Controller
 							control={control}
 							name='eMoneyPin'
 							render={({ field }) => {
-								return <Input id='eMoneyPin' placeholder='6891' {...field} />;
+								return (
+									<Input id='eMoneyPin' placeholder='6891' isError={!!errors.eMoneyPin} type='number' {...field} />
+								);
 							}}
 						/>
+						<ErrorMessage msg={errors.eMoneyPin?.message as string | undefined} />
 					</InputCard>
 				</div>
 			) : (
