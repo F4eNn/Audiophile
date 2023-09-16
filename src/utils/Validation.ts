@@ -27,13 +27,13 @@ export const schema = yup.object({
 	city: yup.string().trim().required('City is required').min(3, 'min. 3 characters'),
 	country: yup.string().trim().required('Country is required').min(3, 'min. 3 characters'),
 
-	eMoneyNumber: yup.mixed().test('is-9-digits', 'Must contains exacly 9 digits', (value, context) => {
+	eMoneyNumber: yup.mixed().test('is-9-digits', 'Must includes 9 digits', (value, context) => {
 		if (context.options.context && !context.options.context.isPayOnline) return true;
 		if (!value) return false;
 		const stringValue = value.toString();
 		return stringValue.length === 9;
 	}) as any,
-	eMoneyPin: yup.mixed().test('is-4-digits', 'must contains exacly 4 digits', (value, context) => {
+	eMoneyPin: yup.mixed().test('is-4-digits', 'must includes 4 digits', (value, context) => {
 		if (context.options.context && !context.options.context.isPayOnline) return true;
 		if (!value) return false;
 		const stringValue = value.toString();

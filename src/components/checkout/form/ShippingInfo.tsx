@@ -12,7 +12,7 @@ export const ShippingInfo = ({ control, errors }: FormProps) => {
 	return (
 		<div className='mt-16'>
 			<FormTitle title='shipping info' />
-			<div className='mt-5 flex flex-wrap gap-5'>
+			<div className='mt-5 flex flex-wrap gap-5 lg:gap-10'>
 				<InputCard fullWidth={true}>
 					<Label isError={!!errors.address} title='Address' htmlFor='address' />
 					<Controller

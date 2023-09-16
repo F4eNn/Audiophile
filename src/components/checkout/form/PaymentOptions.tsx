@@ -15,7 +15,7 @@ export const PaymentOptions = ({ control, errors, selectedOption }: PaymentOptio
 	return (
 		<>
 			{selectedOption === 'e-Money' ? (
-				<div className='mt-10 flex justify-between gap-5'>
+				<div className='mt-10 flex flex-col justify-between gap-5 md:flex-row'>
 					<InputCard>
 						<Label htmlFor='eMoneyNumber' isError={!!errors.eMoneyNumber} title='e-Money Number' />
 						<Controller
@@ -50,11 +50,11 @@ export const PaymentOptions = ({ control, errors, selectedOption }: PaymentOptio
 					</InputCard>
 				</div>
 			) : (
-				<div className='mt-10 flex items-center gap-12 pr-6'>
+				<div className='mt-14 flex flex-col items-center gap-12 md:mt-10 md:flex-row md:pr-6'>
 					<span>
 						<CashDeliveryIcon />
 					</span>
-					<p className='font-[500] leading-7 text-brown'>
+					<p className='text-center font-[500] leading-7 text-brown md:text-left'>
 						The &quot;Cash on Delivery&quot; option enables you to pay in cash when our delivery courier arrives at your
 						residence. Just make sure your address is correct so that your order will not be cancelled.
 					</p>

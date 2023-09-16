@@ -8,6 +8,7 @@ import { BillingDetails } from './BillingDetails';
 import { ShippingInfo } from './ShippingInfo';
 import { PaymentDetails } from './PaymentDetails';
 import { schema } from '@/utils/Validation';
+import { Summary } from '../Summary';
 
 export type FormValues = yup.InferType<typeof schema>;
 
@@ -39,16 +40,24 @@ export const CheckoutForm = () => {
 	};
 
 	return (
-		<form noValidate onSubmit={handleSubmit(handleSentForm)} className=' w-full rounded-lg bg-white p-10'>
-			<h1 className='text-3xl font-bold uppercase'>Checkout</h1>
-			<div className='mt-12'>
-				<BillingDetails control={control} errors={errors} />
-				<ShippingInfo control={control} errors={errors} />
-				<PaymentDetails control={control} errors={errors} onPaymentMethod={setIsPayOnline} />
+		<form noValidate onSubmit={handleSubmit(handleSentForm)} className=' flex w-full flex-col gap-10 lg:flex-row'>
+			<div className='w-full rounded-lg bg-white  px-5 py-10 sm:px-6 lg:w-2/3 lg:p-10'>
+				<h1 className='text-3xl font-bold uppercase'>Checkout</h1>
+				<div className='mt-12'>
+					<BillingDetails control={control} errors={errors} />
+					<ShippingInfo control={control} errors={errors} />
+					<PaymentDetails control={control} errors={errors} onPaymentMethod={setIsPayOnline} />
+				</div>
 			</div>
-			<button type='submit' className='my-5 w-full bg-primary p-3 text-white'>
-				submit
-			</button>
+			<div className='mr-6 mt-10 h-[500px] w-full rounded-lg bg-white  px-5 py-8 lg:mt-0 lg:w-1/3 '>
+				<Summary />
+				<button
+					type='submit'
+					className='colors-300 w-full bg-primary p-3 text-H6 uppercase text-white hover:bg-secondary'
+				>
+					Continue & pay
+				</button>
+			</div>
 		</form>
 	);
 };

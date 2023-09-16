@@ -12,7 +12,7 @@ export const PaymentRadios = ({ onChangePayment, selectedOption }: PaymentRadios
 		<div className='flex flex-col gap-5'>
 			<label
 				htmlFor='eMoney'
-				className='colors-300 flex w-[350px] cursor-pointer items-center gap-5 rounded-lg border-[1px] border-[#cfcfcf] p-4 hover:border-primary'
+				className='colors-300 flex cursor-pointer items-center gap-5 rounded-lg border-[1px] border-[#cfcfcf] p-4 hover:border-primary md:w-[350px]'
 			>
 				<input
 					type='radio'

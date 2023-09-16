@@ -23,7 +23,7 @@ export const PaymentDetails = ({ onPaymentMethod, ...props }: PaymentProps) => {
 	return (
 		<div className='mt-16'>
 			<FormTitle title='payment details' />
-			<div className='mt-5 flex justify-between'>
+			<div className='mt-5 flex flex-col justify-between gap-5 md:flex-row'>
 				<label htmlFor='paymentMethod' className='text-sm font-bold capitalize'>
 					Payment method
 				</label>
