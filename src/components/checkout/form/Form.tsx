@@ -49,7 +49,7 @@ export const CheckoutForm = () => {
 					<PaymentDetails control={control} errors={errors} onPaymentMethod={setIsPayOnline} />
 				</div>
 			</div>
-			<div className='mr-6 mt-10 h-[500px] w-full rounded-lg bg-white  px-5 py-8 lg:mt-0 lg:w-1/3 '>
+			<div className='mr-6 mt-10 h-max w-full rounded-lg bg-white  px-5 py-8 lg:mt-0 lg:w-1/3 '>
 				<Summary />
 				<button
 					type='submit'

@@ -16,8 +16,8 @@ type CartContextTypes = {
 	setCart: DispatchAction<CartTypes[]>;
 	setAddCart: DispatchAction<boolean>;
 	isAdd: boolean;
-	totalPrice: string;
-	setTotalPrice: DispatchAction<string>;
+	totalPrice: number;
+	setTotalPrice: DispatchAction<number>;
 };
 
 const defaultValue: CartContextTypes = {
@@ -26,7 +26,7 @@ const defaultValue: CartContextTypes = {
 	cart: [],
 	setAddCart: () => {},
 	isAdd: false,
-	totalPrice: '0',
+	totalPrice: 0,
 	setTotalPrice: () => {},
 };
 
@@ -38,7 +38,7 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 	const [cart, setCart] = useState<CartTypes[]>([]);
 	const [cartItem, setCartItem] = useState<CartTypes>();
 	const [isAdd, setAddCart] = useState(false);
-	const [totalPrice, setTotalPrice] = useState('0');
+	const [totalPrice, setTotalPrice] = useState(0);
 
 	const addToCart = (product: CartTypes) => {
 		setCartItem(product);
@@ -81,12 +81,10 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 			const items = localStorage.getItem('cart');
 			if (items) {
 				const parseItems: CartTypes[] = JSON.parse(items);
-				const sumItems = parseItems
-					.reduce((acc, curentValue) => acc + curentValue.price * curentValue.quantity, 0)
-					.toLocaleString();
+				const sumItems = parseItems.reduce((acc, curentValue) => acc + curentValue.price * curentValue.quantity, 0);
 
 				setCart(parseItems);
-				setTotalPrice(sumItems);
+				setTotalPrice(Number(sumItems));
 			}
 		};
 		checkCartData();

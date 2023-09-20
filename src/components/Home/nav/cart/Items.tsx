@@ -6,7 +6,12 @@ import { QuantityInput } from '@/components/ui/QuantityInput';
 import { CartTypes } from '@/context/CartCtx';
 import emptyCartAnimation from '../../../../../public/animation_lmhnhdpl.json';
 
-export const Items = ({ cart }: { cart: CartTypes[] }) => {
+type ItemsCart = {
+	cart: CartTypes[];
+	isSummary?: boolean;
+};
+
+export const Items = ({ cart, isSummary = false }: ItemsCart) => {
 	return (
 		<>
 			{cart.length !== 0 ? (
@@ -23,13 +28,19 @@ export const Items = ({ cart }: { cart: CartTypes[] }) => {
 										<span className='text-brown'>${price}</span>
 									</div>
 								</div>
-								<div>
-									<QuantityInput productQuantity={quantity} px='px-3' py='py-0' pInput='p-1.5' />
-								</div>
+								{isSummary ? (
+									<span className='text-sm font-[600] text-brown'>{`x${quantity}`}</span>
+								) : (
+									<div>
+										<QuantityInput productQuantity={quantity} px='px-3' py='py-0' pInput='p-1.5' />
+									</div>
+								)}
 							</div>
 						);
 					})}
 				</>
+			) : isSummary ? (
+				''
 			) : (
 				<Lottie animationData={emptyCartAnimation} style={{ height: '320px' }} />
 			)}

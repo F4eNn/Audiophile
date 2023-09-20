@@ -18,7 +18,7 @@ export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 	const handleRemoveAll = () => {
 		localStorage.setItem('cart', JSON.stringify([]));
 		removeCartItems([]);
-		setTotalPrice('0');
+		setTotalPrice(0);
 	};
 
 	const goToCheckout = () => {
@@ -53,7 +53,7 @@ export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 				<div className='space-y-5'>
 					<p className='flex justify-between'>
 						<span className='uppercase text-brown'>Total</span>
-						<span className='font-bold'>$ {totalPrice}</span>
+						<span className='font-bold'>$ {totalPrice.toLocaleString()}</span>
 					</p>
 					<div className='relative'>
 						<button
