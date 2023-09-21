@@ -1,5 +1,6 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import { ChildrenWithProps } from '@/types/general';
@@ -9,12 +10,14 @@ type PortalTypes = ChildrenWithProps & {
 };
 
 export const Portal = ({ children, selector }: PortalTypes) => {
-	const refPortal = useRef<HTMLDialogElement | null>(null);
-	const [isMounted, setMounted] = useState(false);
+	const [isMounted, setIsMounted] = useState(false);
+	const refPortal = useRef<HTMLDivElement | null>(null);
+
 	useEffect(() => {
+		setIsMounted(true);
 		refPortal.current = document.querySelector(selector);
-		setMounted(true);
+		return () => setIsMounted(false);
 	}, [selector]);
 
-	return isMounted ? createPortal(children, refPortal.current as HTMLDialogElement) : null;
+	return isMounted ? createPortal(children, refPortal.current as HTMLDivElement) : null;
 };

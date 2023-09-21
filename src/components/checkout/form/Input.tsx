@@ -12,7 +12,7 @@ export const Input = forwardRef(({ isError, ...props }: InputProps, ref: Forward
 					? 'border-[1px] border-error focus:border-[1px] focus:border-error focus:ring-1 focus:ring-error'
 					: 'border-[#cfcfcf] focus:border-primary focus:ring-0 focus:ring-primary'
 			} form-input block w-full
-            rounded-lg p-4 pl-6 text-sm caret-primary placeholder:font-[600] placeholder:text-[#999999]   `}
+            rounded-lg p-4 pl-6  caret-primary placeholder:font-[600] placeholder:text-[#999999]`}
 		/>
 	);
 });
