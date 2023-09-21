@@ -9,6 +9,7 @@ type LinkButtonProps = {
 	textColor?: string;
 	isBorder?: boolean;
 	hoverTextColor?: string;
+	title?: string | 'see product';
 };
 
 export const LinkButton = ({
@@ -19,6 +20,7 @@ export const LinkButton = ({
 	isBorder = false,
 	label,
 	hoverTextColor,
+	title = 'see product',
 }: LinkButtonProps) => {
 	return (
 		<Link
@@ -28,7 +30,7 @@ export const LinkButton = ({
 				isBorder ? 'border-[1px] border-primaryDark' : ''
 			} colors-300`}
 		>
-			see product
+			{title}
 		</Link>
 	);
 };

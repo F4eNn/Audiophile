@@ -19,8 +19,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang='en' className='scroll-smooth'>
 			<body className={`${manrope.className}  flex min-h-screen flex-col `}>
-				<div id='modal' />
 				<CartCtxProvider>
+					<div id='modal' />
 					<Nav />
 					{children}
 				</CartCtxProvider>

@@ -9,16 +9,18 @@ import { ShippingInfo } from './ShippingInfo';
 import { PaymentDetails } from './PaymentDetails';
 import { schema } from '@/utils/Validation';
 import { Summary } from '../Summary';
+import { ModalCheckout } from '../Modal';
 
 export type FormValues = yup.InferType<typeof schema>;
 
 export const CheckoutForm = () => {
 	const [isPayOnline, setIsPayOnline] = useState(true);
+	const [isShowModal, setIsShowModal] = useState(false);
 
 	const {
 		control,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors, isSubmitted },
 	} = useForm<FormValues>({
 		defaultValues: {
 			name: '',
@@ -37,6 +39,9 @@ export const CheckoutForm = () => {
 
 	const handleSentForm = (data: FormValues) => {
 		console.log(data);
+		if (isSubmitted) {
+			setIsShowModal(true);
+		}
 	};
 
 	return (
@@ -58,6 +63,7 @@ export const CheckoutForm = () => {
 					Continue & pay
 				</button>
 			</div>
+			{!isShowModal && <ModalCheckout />}
 		</form>
 	);
 };
