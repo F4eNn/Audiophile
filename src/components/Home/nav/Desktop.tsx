@@ -7,6 +7,7 @@ import { Logo } from '@/components/ui/Logo';
 import { CartButton } from '@/components/ui/CartButton';
 import { animateDesktopNav } from '@/animations/animation';
 import { defaultPaths, desktopNav } from '@/constants/navigation';
+import { AccountNav } from './AccountNav';
 
 interface DesktopProps {
 	isScroll: boolean;
@@ -47,7 +48,10 @@ export const Desktop = ({ isScroll, setCart }: DesktopProps) => {
 						</li>
 					))}
 				</ul>
-				<CartButton toggleCart={setCart} />
+				<div className='flex items-center gap-5'>
+					<CartButton toggleCart={setCart} />
+					<AccountNav />
+				</div>
 			</div>
 		</Wrapper>
 	);
