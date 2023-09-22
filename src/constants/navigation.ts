@@ -24,6 +24,10 @@ export const navigationPaths = {
 		path: '/checkout',
 		label: 'go to checkout',
 	},
+	register: {
+		path: '/register',
+		label: 'go to your account',
+	},
 	headphonesXX99: {
 		path: '/category/headphones/xx99-mark-two-headphones',
 		label: 'Check new XX99 mark 2 headphones ',
