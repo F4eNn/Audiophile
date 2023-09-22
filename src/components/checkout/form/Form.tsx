@@ -15,12 +15,11 @@ export type FormValues = yup.InferType<typeof schema>;
 
 export const CheckoutForm = () => {
 	const [isPayOnline, setIsPayOnline] = useState(true);
-	const [isShowModal, setIsShowModal] = useState(false);
 
 	const {
 		control,
 		handleSubmit,
-		formState: { errors, isSubmitted },
+		formState: { errors, isSubmitSuccessful },
 	} = useForm<FormValues>({
 		defaultValues: {
 			name: '',
@@ -39,9 +38,6 @@ export const CheckoutForm = () => {
 
 	const handleSentForm = (data: FormValues) => {
 		console.log(data);
-		if (isSubmitted) {
-			setIsShowModal(true);
-		}
 	};
 
 	return (
@@ -63,7 +59,7 @@ export const CheckoutForm = () => {
 					Continue & pay
 				</button>
 			</div>
-			{!isShowModal && <ModalCheckout />}
+			{isSubmitSuccessful && <ModalCheckout />}
 		</form>
 	);
 };

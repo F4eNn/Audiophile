@@ -8,7 +8,13 @@ import { navigationPaths } from '@/constants/navigation';
 import { useCartCtx } from '@/context/CartCtx';
 
 export const ModalCheckout = () => {
-	const { cart } = useCartCtx();
+	const { cart, grandTotal, setCart: removeCartItems, setTotalPrice } = useCartCtx();
+
+	const handleCleanCart = () => {
+		localStorage.setItem('cart', JSON.stringify([]));
+		removeCartItems([]);
+		setTotalPrice(0);
+	};
 
 	return (
 		<Portal selector='#modal'>
@@ -16,7 +22,7 @@ export const ModalCheckout = () => {
 				className='fixed bottom-0 left-0 top-[89px] z-50 flex  w-full   items-center justify-center overflow-auto bg-primaryDark/30 lg:top-0
             '
 			>
-				<div className='mx-3   flex w-full max-w-[600px] flex-col space-y-8 overflow-auto rounded-md bg-white p-8 py-14 sm:p-14'>
+				<div className='mx-3   flex w-full max-w-[600px] flex-col space-y-8 overflow-auto rounded-md bg-white p-8 py-12 sm:px-14 '>
 					<div className='space-y-5'>
 						<ConfirmationIcon />
 						<h2 className=' text-H2  uppercase text-primaryDark'>
@@ -39,7 +45,7 @@ export const ModalCheckout = () => {
 											</div>
 											<span className='self-start font-[600] text-brown '>x{quantity}</span>
 										</div>
-										{!(cart.length > 1) ? (
+										{cart.length > 1 ? (
 											<>
 												<hr className='border-veryLightPrimary' />
 												<p className='align text-center  font-[600] text-brown'>and {cart.length - 1} other item(s)</p>
@@ -51,10 +57,10 @@ export const ModalCheckout = () => {
 						})}
 						<div className='flex  flex-col  justify-center gap-2 bg-primaryDark  p-6 sm:w-1/3'>
 							<h3 className='uppercase text-brown'>grand Total</h3>
-							<p className='font-bold text-white'>$ 5,446</p>
+							<p className='font-bold text-white'>$ {grandTotal}</p>
 						</div>
 					</div>
-					<LinkButton url={navigationPaths.home.path} title='back to home' />
+					<LinkButton onHandleClick={handleCleanCart} url={navigationPaths.home.path} title='back to home' />
 				</div>
 			</div>
 		</Portal>

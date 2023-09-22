@@ -18,6 +18,8 @@ type CartContextTypes = {
 	isAdd: boolean;
 	totalPrice: number;
 	setTotalPrice: DispatchAction<number>;
+	setGrandTotal: DispatchAction<string>;
+	grandTotal: string;
 };
 
 const defaultValue: CartContextTypes = {
@@ -28,6 +30,8 @@ const defaultValue: CartContextTypes = {
 	isAdd: false,
 	totalPrice: 0,
 	setTotalPrice: () => {},
+	setGrandTotal: () => {},
+	grandTotal: '',
 };
 
 const CartCtx = createContext(defaultValue);
@@ -39,6 +43,7 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 	const [cartItem, setCartItem] = useState<CartTypes>();
 	const [isAdd, setAddCart] = useState(false);
 	const [totalPrice, setTotalPrice] = useState(0);
+	const [grandTotal, setGrandTotal] = useState('');
 
 	const addToCart = (product: CartTypes) => {
 		setCartItem(product);
@@ -93,6 +98,8 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 	const value = {
 		addToCart,
 		setAddCart,
+		setGrandTotal,
+		grandTotal,
 		isAdd,
 		cart,
 		setCart,

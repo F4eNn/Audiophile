@@ -10,6 +10,7 @@ type LinkButtonProps = {
 	isBorder?: boolean;
 	hoverTextColor?: string;
 	title?: string | 'see product';
+	onHandleClick?: () => void;
 };
 
 export const LinkButton = ({
@@ -21,10 +22,12 @@ export const LinkButton = ({
 	label,
 	hoverTextColor,
 	title = 'see product',
+	onHandleClick,
 }: LinkButtonProps) => {
 	return (
 		<Link
 			aria-label={label}
+			onClick={onHandleClick}
 			href={url}
 			className={`inline-block px-10 py-3 text-center font-[500] uppercase  ${bg} ${textColor} ${bgHover} ${hoverTextColor} ${
 				isBorder ? 'border-[1px] border-primaryDark' : ''

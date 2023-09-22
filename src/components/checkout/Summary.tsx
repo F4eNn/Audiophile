@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Items } from '../Home/nav/cart/Items';
 import { useCartCtx } from '@/context/CartCtx';
 
 export const Summary = () => {
-	const { cart, totalPrice } = useCartCtx();
+	const { cart, totalPrice, setGrandTotal } = useCartCtx();
 	const formatedTotalPrice = totalPrice.toLocaleString();
 
 	const shippingCost = 50;
@@ -13,6 +13,12 @@ export const Summary = () => {
 	const vat = Number((totalPrice * vatPercantage).toFixed());
 	const formatedVat = vat.toLocaleString();
 	const grandTotal = (vat + totalPrice + shippingCost).toLocaleString();
+
+	useEffect(() => {
+		setGrandTotal(grandTotal);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [grandTotal]);
 
 	return (
 		<div>

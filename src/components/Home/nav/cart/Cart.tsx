@@ -15,6 +15,7 @@ export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 	const { cart, setCart: removeCartItems, totalPrice, setTotalPrice } = useCartCtx();
 	const [isCartEmpty, setIsCartEmpty] = useState(false);
 	const { push } = useRouter();
+
 	const handleRemoveAll = () => {
 		localStorage.setItem('cart', JSON.stringify([]));
 		removeCartItems([]);
