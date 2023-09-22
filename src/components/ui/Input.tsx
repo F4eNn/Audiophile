@@ -1,6 +1,6 @@
 import React, { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
 
-type InputProps = InputHTMLAttributes<HTMLInputElement> & { isError: boolean };
+type InputProps = InputHTMLAttributes<HTMLInputElement> & { isError?: boolean };
 
 export const Input = forwardRef(({ isError, ...props }: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
 	return (

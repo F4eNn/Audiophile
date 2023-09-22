@@ -1,6 +1,6 @@
 import React, { LabelHTMLAttributes } from 'react';
 
-type LabelProps = Pick<LabelHTMLAttributes<HTMLLabelElement>, 'htmlFor'> & { title?: string; isError: boolean };
+type LabelProps = Pick<LabelHTMLAttributes<HTMLLabelElement>, 'htmlFor'> & { title?: string; isError?: boolean };
 
 export const Label = ({ title, isError, ...props }: LabelProps) => {
 	return (

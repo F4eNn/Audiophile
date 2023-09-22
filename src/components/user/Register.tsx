@@ -1,5 +1,12 @@
 import React from 'react';
 
+import { Login } from './Login';
+import { Wrapper } from '../ui/Wrapper';
+
 export const Register = () => {
-	return <div>Register</div>;
+	return (
+		<Wrapper>
+			<Login />
+		</Wrapper>
+	);
 };

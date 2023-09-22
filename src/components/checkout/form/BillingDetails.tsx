@@ -2,8 +2,8 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 
 import { FormTitle } from './FormTitle';
-import { Input } from './Input';
-import { Label } from './Label';
+import { Input } from '../../ui/Input';
+import { Label } from '../../ui/Label';
 import { InputCard } from './InputCard';
 import { ErrorMessage } from './ErrorMessage';
 import { FormProps } from '@/types/general';
