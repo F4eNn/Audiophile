@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,24 +12,54 @@ import { schemaRegister } from '@/utils/Validation';
 import { InputCard } from '../checkout/form/InputCard';
 import { ErrorMessage } from '../ui/ErrorMessage';
 
-type RegisterValues = yup.InferType<typeof schemaRegister>;
+export type RegisterValues = yup.InferType<typeof schemaRegister>;
 
 export const SignUp = () => {
+	const [isUser, setIsUser] = useState({ accountExist: false, msg: '' });
 	const {
-		formState: { errors },
+		formState: { errors, isSubmitting },
 		handleSubmit,
 		register,
 	} = useForm<RegisterValues>({
 		defaultValues: { confirmationPassword: '', email: '', name: '', password: '' },
 		resolver: yupResolver(schemaRegister),
 	});
-	const handleRegisterUser = (data: RegisterValues) => {
-		console.log(data);
+
+	const handleRegisterUser = async (data: RegisterValues) => {
+		try {
+			const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/local/register`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					username: data.name,
+					email: data.email,
+					password: data.password,
+				}),
+			});
+			const responseData = await response.json();
+
+			if (responseData.error && responseData.error.status === 400) {
+				setIsUser({
+					accountExist: true,
+					msg: responseData.error.message,
+				});
+			} else {
+				setIsUser({
+					accountExist: false,
+					msg: '',
+				});
+			}
+		} catch (error) {
+			console.error(error);
+		}
 	};
 	return (
 		<div className='mx-5 mt-[150px] max-w-[600px] rounded-md  bg-white  p-10 sm:mx-auto'>
 			<h2 className='text-H2 font-bold'>Register</h2>
-			<form className='my-10 space-y-10' onSubmit={handleSubmit(handleRegisterUser)}>
+			{isUser.accountExist && <p className='-mb-5 mt-5 text-center font-[500] text-error'>{isUser.msg}</p>}
+			<form className='my-10 space-y-9' onSubmit={handleSubmit(handleRegisterUser)}>
 				<InputCard fullWidth={true}>
 					<Label htmlFor='name' />
 					<Input placeholder='Name' id='name' {...register('name')} isError={!!errors.name} type='text' />
@@ -62,7 +92,7 @@ export const SignUp = () => {
 					/>
 					<ErrorMessage msg={errors.confirmationPassword?.message} isLabel={false} />
 				</InputCard>
-				<SubmitButton title='sign up' />
+				<SubmitButton title='sign up' isSending={isSubmitting} />
 			</form>
 			<Link href={navigationPaths.register.path + '?mode=login'} className='colors-300 underline  hover:text-primary'>
 				Have an account?
