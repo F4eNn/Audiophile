@@ -20,7 +20,7 @@ export const Login = () => {
 						<Label htmlFor='password' />
 						<Input id='password' placeholder='Password' />
 					</div>
-					<SubmitButton />
+					<SubmitButton title='log in' />
 				</form>
 				<div className='mt-8 flex items-center'>
 					<span className='w-full border-t-[1px] border-secondary' />
