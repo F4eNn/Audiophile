@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 import { InputCard } from './InputCard';
 import { Label } from '../../ui/Label';
 import { Input } from '../../ui/Input';
-import { ErrorMessage } from './ErrorMessage';
+import { ErrorMessage } from '../../ui/ErrorMessage';
 import CashDeliveryIcon from '../../../../public/assets/checkout/icon-cash-on-delivery.svg';
 import { FormProps } from '@/types/general';
 import { PaymentTypes } from './PaymentDetails';

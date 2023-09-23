@@ -7,11 +7,11 @@ import * as yup from 'yup';
 import { BillingDetails } from './BillingDetails';
 import { ShippingInfo } from './ShippingInfo';
 import { PaymentDetails } from './PaymentDetails';
-import { schema } from '@/utils/Validation';
+import { schemaCheckout } from '@/utils/Validation';
 import { Summary } from '../Summary';
 import { ModalCheckout } from '../Modal';
 
-export type FormValues = yup.InferType<typeof schema>;
+export type FormValues = yup.InferType<typeof schemaCheckout>;
 
 export const CheckoutForm = () => {
 	const [isPayOnline, setIsPayOnline] = useState(true);
@@ -32,7 +32,7 @@ export const CheckoutForm = () => {
 			eMoneyNumber: undefined,
 			eMoneyPin: undefined,
 		},
-		resolver: yupResolver(schema),
+		resolver: yupResolver(schemaCheckout),
 		context: { isPayOnline },
 	});
 

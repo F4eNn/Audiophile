@@ -5,7 +5,7 @@ import { FormTitle } from './FormTitle';
 import { Input } from '../../ui/Input';
 import { Label } from '../../ui/Label';
 import { InputCard } from './InputCard';
-import { ErrorMessage } from './ErrorMessage';
+import { ErrorMessage } from '../../ui/ErrorMessage';
 import { FormProps } from '@/types/general';
 
 export const BillingDetails = ({ control, errors }: FormProps) => {

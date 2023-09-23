@@ -5,7 +5,7 @@ import { FormTitle } from './FormTitle';
 import { Label } from '../../ui/Label';
 import { Input } from '../../ui/Input';
 import { InputCard } from './InputCard';
-import { ErrorMessage } from './ErrorMessage';
+import { ErrorMessage } from '../../ui/ErrorMessage';
 import { FormProps } from '@/types/general';
 
 export const ShippingInfo = ({ control, errors }: FormProps) => {

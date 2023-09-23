@@ -1,8 +1,7 @@
 import * as yup from 'yup';
 import isEmail from 'validator/lib/isEmail';
 
-export const schema = yup.object({
-	name: yup.string().trim().required('Name is required').min(3, 'Min. 3 characters'),
+const basicDataValidation = {
 	email: yup
 		.string()
 		.required('Email is required')
@@ -10,6 +9,12 @@ export const schema = yup.object({
 			if (!value) return;
 			return isEmail(value);
 		}),
+	name: yup.string().trim().required('Name is required').min(3, 'Min. 3 characters'),
+};
+
+export const schemaCheckout = yup.object({
+	name: basicDataValidation.name,
+	email: basicDataValidation.email,
 	phone: yup
 		.string()
 		.required('phone is required')
@@ -39,4 +44,18 @@ export const schema = yup.object({
 		const stringValue = value.toString();
 		return stringValue.length === 4;
 	}) as any,
+});
+
+export const schemaRegister = yup.object({
+	name: basicDataValidation.name,
+	email: basicDataValidation.email,
+	password: yup
+		.string()
+		.required('password is required')
+		.trim()
+		.min(7, 'min. 7 characters')
+		.matches(/^(?=.*[A-Z])/, 'at least one capital letter')
+		.matches(/^(?=.*\d).+$/, 'at leat one number')
+		.matches(/^(?=.*[~!@#$%^&*()_=+-])/, 'at least one spcecial sign'),
+	confirmationPassword: yup.string().oneOf([yup.ref('password'), undefined], 'passwords must match'),
 });
