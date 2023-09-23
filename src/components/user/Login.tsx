@@ -1,26 +1,70 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 import { Input } from '../ui/Input';
 import { Label } from '../ui/Label';
 import { SubmitButton } from './SubmitButton';
 import { navigationPaths } from '@/constants/navigation';
+import { setToken } from '@/helpers/auth';
 
 export const Login = () => {
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const { replace } = useRouter();
+	const [data, setData] = useState({ password: '', identifier: '' });
+
+	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setData({ ...data, [e.target.name]: e.target.value });
+	};
+
+	const handleSubmit = async (e: FormEvent) => {
+		e.preventDefault();
+		try {
+			setIsSubmitting(true);
+
+			const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/local`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					identifier: data.identifier,
+					password: data.password,
+				}),
+			});
+			const responseData = await res.json();
+			setToken(responseData);
+			if (Cookies.get('username')) {
+				replace('/');
+			}
+			setIsSubmitting(false);
+		} catch (error) {
+			console.error(error);
+			setIsSubmitting(false);
+		}
+	};
+
 	return (
 		<div className=' mx-5 mt-[150px] flex flex-col gap-5 md:flex-row '>
 			<div className=' flex-1 rounded-md bg-white p-10'>
 				<h1 className='text-H2 text-primaryDark'>Log In</h1>
-				<form className='mt-12 space-y-8'>
+				<form className='mt-12 space-y-8' onSubmit={handleSubmit}>
 					<div>
-						<Label htmlFor='email' />
-						<Input id='email' placeholder='E-mail' />
+						<Label htmlFor='identifier' />
+						<Input
+							id='identifier'
+							placeholder='E-mail or Name'
+							type='text'
+							name='identifier'
+							onChange={handleOnChange}
+						/>
 					</div>
 					<div>
 						<Label htmlFor='password' />
-						<Input id='password' placeholder='Password' />
+						<Input id='password' placeholder='Password' type='password' name='password' onChange={handleOnChange} />
 					</div>
-					<SubmitButton title='log in' />
+					<SubmitButton title='log in' isSending={isSubmitting} />
 				</form>
 				<div className='mt-8 flex items-center'>
 					<span className='w-full border-t-[1px] border-secondary' />

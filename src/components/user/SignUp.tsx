@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/navigation';
 
 import { navigationPaths } from '@/constants/navigation';
 import { Label } from '../ui/Label';
@@ -16,6 +17,7 @@ export type RegisterValues = yup.InferType<typeof schemaRegister>;
 
 export const SignUp = () => {
 	const [isUser, setIsUser] = useState({ accountExist: false, msg: '' });
+	const router = useRouter();
 	const {
 		formState: { errors, isSubmitting },
 		handleSubmit,
@@ -50,6 +52,7 @@ export const SignUp = () => {
 					accountExist: false,
 					msg: '',
 				});
+				router.replace(navigationPaths.checkout.path);
 			}
 		} catch (error) {
 			console.error(error);
