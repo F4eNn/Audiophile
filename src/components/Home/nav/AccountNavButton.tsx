@@ -6,6 +6,7 @@ import { LinkButton } from '@/components/ui/LinkButton';
 import { navigationPaths } from '@/constants/navigation';
 import HelloIcon from '../../../../public/assets/hello-rafiki.svg';
 import { useToggle } from '@/hooks/useToggle';
+import { useUser } from '@/context/AuthCtx';
 
 export const AccountNavButton = () => {
 	const [isVisible, setIsVisible] = useToggle();
@@ -14,6 +15,8 @@ export const AccountNavButton = () => {
 	const handleShowSettings = () => {
 		setIsVisible();
 	};
+	const { user } = useUser();
+	console.log(user);
 	const handleCloseDropdown = (e: any) => {
 		if (dropdownRef.current && isVisible && !dropdownRef.current.contains(e.target as HTMLElement)) {
 			setIsVisible();
@@ -45,17 +48,27 @@ export const AccountNavButton = () => {
 					ref={dropdownRef}
 					className='absolute right-0 top-[75px] flex w-[300px] flex-col gap-5 rounded-lg bg-white p-2 pb-5 shadow-md sm:w-[350px]'
 				>
-					<HelloIcon />
-					<p className='text-center text-brown '>Log in and see your purchases</p>
-					<LinkButton url={navigationPaths.register.path + '?mode=login'} title='Log In' bgHover='hover:bg-secondary' />
-					<LinkButton
-						url={navigationPaths.register.path + '?mode=register'}
-						textColor='text-primary'
-						bg='bg-rose'
-						hoverTextColor='hover:text-white'
-						bgHover='hover:bg-primary'
-						title='Sign up'
-					/>
+					{user ? (
+						<p className='text-primaryDark'>zalogowany użytkownik</p>
+					) : (
+						<>
+							<HelloIcon />
+							<p className='text-center text-brown '>Log in and see your purchases</p>
+							<LinkButton
+								url={navigationPaths.register.path + '?mode=login'}
+								title='Log In'
+								bgHover='hover:bg-secondary'
+							/>
+							<LinkButton
+								url={navigationPaths.register.path + '?mode=register'}
+								textColor='text-primary'
+								bg='bg-rose'
+								hoverTextColor='hover:text-white'
+								bgHover='hover:bg-primary'
+								title='Sign up'
+							/>
+						</>
+					)}
 				</div>
 			)}
 		</div>

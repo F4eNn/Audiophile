@@ -6,6 +6,7 @@ import { Nav } from '@/components/Home/nav/Nav';
 import { Footer } from '@/components/Home/main/Footer';
 import { Description } from '@/components/Home/main/Description';
 import { CartCtxProvider } from '@/context/CartCtx';
+import { UserProvider } from '@/context/AuthCtx';
 
 const manrope = Manrope({ subsets: ['latin'] });
 
@@ -19,13 +20,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang='en' className='scroll-smooth'>
 			<body className={`${manrope.className}  flex min-h-screen flex-col `}>
-				<CartCtxProvider>
-					<div id='modal' />
-					<Nav />
-					{children}
-				</CartCtxProvider>
-				<Description />
-				<Footer />
+				<UserProvider>
+					<CartCtxProvider>
+						<div id='modal' />
+						<Nav />
+						{children}
+					</CartCtxProvider>
+					<Description />
+					<Footer />
+				</UserProvider>
 			</body>
 		</html>
 	);
