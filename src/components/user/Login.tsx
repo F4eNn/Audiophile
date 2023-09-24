@@ -8,12 +8,18 @@ import { Label } from '../ui/Label';
 import { SubmitButton } from './SubmitButton';
 import { navigationPaths } from '@/constants/navigation';
 import { setToken } from '@/helpers/auth';
+import { useUser } from '@/context/AuthCtx';
+import GoogleIcon from '../../../public/assets/google-icon.svg';
+import GithubIcon from '../../../public/assets/github-mark-white.svg';
+import { LoginButton } from './LoginButton';
+
+const providersName = ['github', 'google'];
 
 export const Login = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { replace } = useRouter();
 	const [data, setData] = useState({ password: '', identifier: '' });
-
+	const { setIsAuth } = useUser();
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setData({ ...data, [e.target.name]: e.target.value });
 	};
@@ -39,6 +45,7 @@ export const Login = () => {
 				replace('/');
 			}
 			setIsSubmitting(false);
+			setIsAuth(true);
 		} catch (error) {
 			console.error(error);
 			setIsSubmitting(false);
@@ -71,8 +78,15 @@ export const Login = () => {
 					<span className='text-lg'>or</span>
 					<span className='w-full border-t-[1px] border-secondary' />
 				</div>
-				<button className='mx-auto my-5 block'>Google</button>
-				<button className='mx-auto block '>Github</button>
+
+				<LoginButton providerName='google' icon={<GoogleIcon />} />
+				<LoginButton
+					providerName='github'
+					icon={<GithubIcon />}
+					bg='bg-primaryDark'
+					bgHover='hover:bg-primaryDark/90'
+					text='text-white'
+				/>
 			</div>
 			<div className='flex flex-1 flex-col gap-5 rounded-md bg-white p-10'>
 				<h2 className='text-H4 capitalize'>Join us</h2>

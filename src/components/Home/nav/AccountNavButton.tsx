@@ -7,6 +7,7 @@ import { navigationPaths } from '@/constants/navigation';
 import HelloIcon from '../../../../public/assets/hello-rafiki.svg';
 import { useToggle } from '@/hooks/useToggle';
 import { useUser } from '@/context/AuthCtx';
+import { unsetToken } from '@/helpers/auth';
 
 export const AccountNavButton = () => {
 	const [isVisible, setIsVisible] = useToggle();
@@ -15,10 +16,14 @@ export const AccountNavButton = () => {
 	const handleShowSettings = () => {
 		setIsVisible();
 	};
-	const { user } = useUser();
-	console.log(user);
+	const { user, setIsAuth } = useUser();
 	const handleCloseDropdown = (e: any) => {
-		if (dropdownRef.current && isVisible && !dropdownRef.current.contains(e.target as HTMLElement)) {
+		if (
+			dropdownRef.current &&
+			isVisible &&
+			!dropdownRef.current.contains(e.target as HTMLElement) &&
+			!buttonRef.current?.contains(e.target as HTMLElement)
+		) {
 			setIsVisible();
 		}
 	};
@@ -27,6 +32,11 @@ export const AccountNavButton = () => {
 		return () => document.removeEventListener('mousedown', handleCloseDropdown);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isVisible]);
+
+	const logout = () => {
+		unsetToken();
+		setIsAuth(false);
+	};
 
 	return (
 		<div className=' relative '>
@@ -49,7 +59,12 @@ export const AccountNavButton = () => {
 					className='absolute right-0 top-[75px] flex w-[300px] flex-col gap-5 rounded-lg bg-white p-2 pb-5 shadow-md sm:w-[350px]'
 				>
 					{user ? (
-						<p className='text-primaryDark'>zalogowany użytkownik</p>
+						<>
+							<p className='text-primaryDark'>zalogowany użytkownik</p>
+							<button onClick={logout} className='colors-300 bg-error py-3 text-white hover:bg-error/75'>
+								Log out
+							</button>
+						</>
 					) : (
 						<>
 							<HelloIcon />

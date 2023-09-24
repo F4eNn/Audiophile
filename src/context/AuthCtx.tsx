@@ -1,17 +1,18 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
 
-import { ChildrenWithProps } from '@/types/general';
+import { ChildrenWithProps, DispatchAction } from '@/types/general';
 import { getUserFromLocalCookie } from '@/helpers/auth';
 
-type UserType = { user: string | undefined };
+type UserType = { user: string | undefined; setIsAuth: DispatchAction<boolean> };
 
-const User = createContext<UserType>({ user: undefined });
+const User = createContext<UserType>({ user: undefined, setIsAuth: () => {} });
 
 let userState: string | undefined;
 
 export const UserProvider = ({ children }: ChildrenWithProps) => {
-	const { user } = useFetchUser();
+	const [isAuth, setIsAuth] = useState(false);
+	const { user } = useFetchUser(isAuth);
 
 	useEffect(() => {
 		if (!userState && user) {
@@ -20,14 +21,14 @@ export const UserProvider = ({ children }: ChildrenWithProps) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const value = { user };
+	const value = { user, setIsAuth };
 
 	return <User.Provider value={value}>{children}</User.Provider>;
 };
 
 export const useUser = () => useContext(User);
 
-export const useFetchUser = () => {
+export const useFetchUser = (isAuth: boolean) => {
 	const [dataUser, setUser] = useState({
 		user: userState || undefined,
 	});
@@ -37,7 +38,7 @@ export const useFetchUser = () => {
 
 		const user = getUserFromLocalCookie();
 		setUser({ user });
-	}, []);
+	}, [isAuth]);
 
 	return dataUser;
 };
