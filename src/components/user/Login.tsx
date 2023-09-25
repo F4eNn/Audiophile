@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Cookies from 'js-cookie';
 
 import { Input } from '../ui/Input';
@@ -12,8 +12,6 @@ import { useUser } from '@/context/AuthCtx';
 import GoogleIcon from '../../../public/assets/google-icon.svg';
 import GithubIcon from '../../../public/assets/github-mark-white.svg';
 import { LoginButton } from './LoginButton';
-
-const providersName = ['github', 'google'];
 
 export const Login = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
