@@ -1,21 +1,27 @@
 'use client';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 import { DataTokenResponse, setToken } from '@/helpers/auth';
 const AuthCallbackPage = () => {
 	const params = useSearchParams();
+	const pathname = usePathname();
+
 	const { replace } = useRouter();
 	const [text, setText] = useState('Loading...');
 	const [isLoading, setLoading] = useState(false);
 
 	useEffect(() => {
 		const token = params.get('access_token');
+		const authProvider = pathname.split('/')[2];
+
 		const fetchUser = async () => {
 			try {
 				setLoading(true);
-				const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/google/callback?access_token=${token}`);
+				const res = await fetch(
+					`${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/${authProvider}/callback?access_token=${token}`,
+				);
 				if (!res.ok) {
 					throw new Error(`Could't login to strapi. Status ${res.status}`);
 				}
