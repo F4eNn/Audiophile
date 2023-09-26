@@ -4,7 +4,7 @@ import { Checkout } from '@/components/checkout/Checkout';
 
 const CheckoutPage = () => {
 	return (
-		<main className='relative inset-0 z-0 min-h-screen bg-rose'>
+		<main className='flex-1 bg-rose'>
 			<Checkout />
 		</main>
 	);

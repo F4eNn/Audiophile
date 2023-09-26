@@ -24,6 +24,10 @@ export const navigationPaths = {
 		path: '/checkout',
 		label: 'go to checkout',
 	},
+	account: {
+		path: '/account',
+		label: 'go to your account',
+	},
 	register: {
 		path: '/register',
 		label: 'go to your account',

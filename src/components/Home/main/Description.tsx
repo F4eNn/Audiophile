@@ -9,7 +9,10 @@ import { navigationPaths } from '@/constants/navigation';
 
 export const Description = () => {
 	const pathname = usePathname();
-	const hideSection = pathname === navigationPaths.register.path || pathname === navigationPaths.checkout.path;
+	const hideSection =
+		pathname === navigationPaths.register.path ||
+		pathname === navigationPaths.checkout.path ||
+		pathname === navigationPaths.account.path;
 	return (
 		<section className={`mx-3 mt-32 pb-44 lg:mt-52 ${hideSection ? 'hidden' : ''} `}>
 			<Wrapper>

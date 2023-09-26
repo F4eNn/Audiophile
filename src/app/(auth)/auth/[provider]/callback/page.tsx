@@ -43,8 +43,8 @@ const AuthCallbackPage = () => {
 	}, []);
 
 	return (
-		<main className='mx-3 mt-20 whitespace-pre-line text-center text-2xl leading-10 text-white'>
-			<div>
+		<main className=' h-screen whitespace-pre-line bg-secondaryDark pt-20 text-center text-2xl leading-10 text-white'>
+			<div className='mx-3 '>
 				{text}
 				{isLoading && (
 					<span className='mt-10  block'>

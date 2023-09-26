@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='en'>
-			<body className={`h-full bg-secondaryDark ${manrope.className}`}>{children}</body>
+			<body className={`h-full  ${manrope.className}`}>{children}</body>
 		</html>
 	);
 }

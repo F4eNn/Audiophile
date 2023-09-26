@@ -66,6 +66,25 @@ export const CheckoutForm = () => {
 	};
 
 	const getCartHistory = async () => {
+		if (user) {
+			const jwt = getTokenFromLocalCookie();
+			await fetch(`${STRAPI_URL}/cart-histories`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${jwt}`,
+				},
+				body: JSON.stringify({
+					data: {
+						image: '',
+						product: '',
+						price: 0,
+						quantity: 0,
+						username: await getUserFromLocalCookie(),
+					},
+				}),
+			});
+		}
 		// const res = await fetch('http://127.0.0.1:1337/api/cart-histories?filters[username][$contains]=F4eNn', {
 		// 	headers: {
 		// 		Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzcsImlhdCI6MTY5NTczODE0MSwiZXhwIjoxNjk4MzMwMTQxfQ.LDKBLqI5nyWiZ5UDF5rUCctFzzMT08UiozWUyl5M8JQ`,

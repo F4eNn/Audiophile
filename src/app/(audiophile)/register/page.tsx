@@ -4,7 +4,7 @@ import { Register } from '@/components/user/Register';
 
 const AuthPage = () => {
 	return (
-		<main className='relative inset-0 z-0 min-h-screen bg-rose'>
+		<main className='flex-1 bg-rose  pb-32'>
 			<Register />
 		</main>
 	);

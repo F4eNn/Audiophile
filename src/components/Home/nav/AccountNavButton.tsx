@@ -69,7 +69,8 @@ export const AccountNavButton = () => {
 					{user ? (
 						<>
 							<p className='text-primaryDark'>zalogowany użytkownik</p>
-							<button onClick={logout} className='colors-300 bg-error py-3 text-white hover:bg-error/75'>
+							<LinkButton url={navigationPaths.account.path} title='Account' />
+							<button onClick={logout} className='colors-300  bg-error py-3 text-white hover:bg-error/75'>
 								Log out
 							</button>
 						</>
