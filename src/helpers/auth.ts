@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-type DataToken = {
+export type DataTokenResponse = {
 	user: {
 		username: string;
 		id: string;
@@ -8,7 +8,7 @@ type DataToken = {
 	jwt: string;
 };
 
-export const setToken = (data: DataToken) => {
+export const setToken = (data: DataTokenResponse) => {
 	if (typeof window === 'undefined') return;
 	Cookies.set('id', data.user.id);
 	Cookies.set('username', data.user.username);
