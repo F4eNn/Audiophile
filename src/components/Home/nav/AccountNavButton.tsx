@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import { BiUser } from 'react-icons/bi';
+import { useRouter } from 'next/navigation';
 
 import { LinkButton } from '@/components/ui/LinkButton';
 import { navigationPaths } from '@/constants/navigation';
@@ -13,16 +14,22 @@ export const AccountNavButton = () => {
 	const [isVisible, setIsVisible] = useToggle();
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
+
+	const { refresh } = useRouter();
+
+	const { user, setIsAuth } = useUser();
+
 	const handleShowSettings = () => {
 		setIsVisible();
 	};
-	const { user, setIsAuth } = useUser();
+
 	const handleCloseDropdown = (e: any) => {
+		const target = e.target as HTMLElement;
 		if (
 			dropdownRef.current &&
 			isVisible &&
-			!dropdownRef.current.contains(e.target as HTMLElement) &&
-			!buttonRef.current?.contains(e.target as HTMLElement)
+			!dropdownRef.current.contains(target) &&
+			!buttonRef.current?.contains(target)
 		) {
 			setIsVisible();
 		}
@@ -35,6 +42,7 @@ export const AccountNavButton = () => {
 
 	const logout = () => {
 		unsetToken();
+		refresh();
 		setIsAuth(false);
 	};
 

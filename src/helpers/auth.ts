@@ -1,5 +1,7 @@
 import Cookies from 'js-cookie';
 
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+
 export type DataTokenResponse = {
 	user: {
 		username: string;
@@ -23,6 +25,17 @@ export const unsetToken = () => {
 	Cookies.remove('jwt');
 };
 
-export const getUserFromLocalCookie = () => {
-	return Cookies.get('username');
+export const getUserFromLocalCookie = async () => {
+	const jwt = getTokenFromLocalCookie();
+	if (jwt) {
+		const res = await fetch(`${STRAPI_URL}/users/me`, {
+			headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
+		});
+		const resData = await res.json();
+		return resData.username;
+	}
+};
+
+export const getTokenFromLocalCookie = () => {
+	return Cookies.get('jwt');
 };

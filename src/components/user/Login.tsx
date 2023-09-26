@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
 import { Input } from '../ui/Input';
@@ -18,6 +18,7 @@ export const Login = () => {
 	const { replace } = useRouter();
 	const [data, setData] = useState({ password: '', identifier: '' });
 	const { setIsAuth } = useUser();
+
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setData({ ...data, [e.target.name]: e.target.value });
 	};

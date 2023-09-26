@@ -10,11 +10,18 @@ import { PaymentDetails } from './PaymentDetails';
 import { schemaCheckout } from '@/utils/Validation';
 import { Summary } from '../Summary';
 import { ModalCheckout } from '../Modal';
+import { useUser } from '@/context/AuthCtx';
+import { getTokenFromLocalCookie, getUserFromLocalCookie } from '@/helpers/auth';
+import { useCartCtx } from '@/context/CartCtx';
 
 export type FormValues = yup.InferType<typeof schemaCheckout>;
 
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+
 export const CheckoutForm = () => {
 	const [isPayOnline, setIsPayOnline] = useState(true);
+	const { user } = useUser();
+	const { cart } = useCartCtx();
 
 	const {
 		control,
@@ -36,8 +43,37 @@ export const CheckoutForm = () => {
 		context: { isPayOnline },
 	});
 
-	const handleSentForm = (data: FormValues) => {
-		console.log(data);
+	const handleSentForm = async (data: FormValues) => {
+		if (user) {
+			const jwt = getTokenFromLocalCookie();
+			await fetch(`${STRAPI_URL}/cart-histories`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${jwt}`,
+				},
+				body: JSON.stringify({
+					data: {
+						image: '',
+						product: '',
+						price: 0,
+						quantity: 0,
+						username: await getUserFromLocalCookie(),
+					},
+				}),
+			});
+		}
+	};
+
+	const getCartHistory = async () => {
+		// const res = await fetch('http://127.0.0.1:1337/api/cart-histories?filters[username][$contains]=F4eNn', {
+		// 	headers: {
+		// 		Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzcsImlhdCI6MTY5NTczODE0MSwiZXhwIjoxNjk4MzMwMTQxfQ.LDKBLqI5nyWiZ5UDF5rUCctFzzMT08UiozWUyl5M8JQ`,
+		// 	},
+		// });
+		// const resData = await res.json();
+		// const currentUserCart = resData.data.filter((item: any) => item.attributes.username === 'F4eNn');
+		// console.log(currentUserCart);
 	};
 
 	return (
@@ -57,6 +93,14 @@ export const CheckoutForm = () => {
 					className='colors-300 w-full bg-primary p-3 text-H6 uppercase text-white hover:bg-secondary'
 				>
 					Continue & pay
+				</button>
+
+				<button
+					type='button'
+					onClick={getCartHistory}
+					className='colors-300 mt-10 w-full bg-primary p-3 text-H6 uppercase text-white hover:bg-secondary'
+				>
+					pobierz odpowiedniego uzytkownika
 				</button>
 			</div>
 			{isSubmitSuccessful && <ModalCheckout />}

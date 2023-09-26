@@ -12,33 +12,31 @@ let userState: string | undefined;
 
 export const UserProvider = ({ children }: ChildrenWithProps) => {
 	const [isAuth, setIsAuth] = useState(false);
-	const { user } = useFetchUser(isAuth);
+	const [dataUser, setUser] = useState({
+		user: userState || undefined,
+	});
+	useEffect(() => {
+		if (userState !== undefined) return;
+
+		const getUser = async () => {
+			const user = await getUserFromLocalCookie();
+			setUser({ user });
+		};
+		getUser();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isAuth]);
 
 	useEffect(() => {
-		if (!userState && user) {
-			userState = user;
+		if (!userState && dataUser) {
+			userState = dataUser.user;
+			setIsAuth(true);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const value = { user, setIsAuth };
+	const value = { user: dataUser.user, setIsAuth };
 
 	return <User.Provider value={value}>{children}</User.Provider>;
 };
 
 export const useUser = () => useContext(User);
-
-export const useFetchUser = (isAuth: boolean) => {
-	const [dataUser, setUser] = useState({
-		user: userState || undefined,
-	});
-
-	useEffect(() => {
-		if (userState !== undefined) return;
-
-		const user = getUserFromLocalCookie();
-		setUser({ user });
-	}, [isAuth]);
-
-	return dataUser;
-};
