@@ -28,7 +28,7 @@ export const unsetToken = () => {
 export const getUserFromLocalCookie = async () => {
 	const jwt = getTokenFromLocalCookie();
 	const data = await getUser(jwt);
-	return data.username;
+	return data && data.username;
 };
 export const getUsernameData = async () => {
 	const jwt = getTokenFromLocalCookie();
