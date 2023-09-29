@@ -3,26 +3,77 @@ import React, { useEffect, useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import { FaPen } from 'react-icons/fa6';
 
-import { getUsernameData } from '@/helpers/auth';
+import { getTokenFromLocalCookie } from '@/helpers/auth';
 import { LoadingSpinner } from '../ui/LoadingSpinner';
 import { useAccountCtx } from '@/context/AccountCtx';
 
 type UserInfoType = {
 	username: string;
 	email: string;
+	createdAt: string;
+};
+type DurationType = {
+	years: number;
+	days: number;
+	months: number;
 };
 
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+
 export const AccountProfile = () => {
-	const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
+	const [userInfo, setUserInfo] = useState<Omit<UserInfoType, 'createdAt'> | null>(null);
+	const [userDuration, setUserDuration] = useState<DurationType>({ days: 0, months: 0, years: 0 });
 	const { generalUserInfo } = useAccountCtx();
+
+	const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
+
+	const countUserDurationTime = (createdAt: string) => {
+		const createdDateTime = new Date(createdAt);
+		const newDate = new Date();
+		const currentMonthDays = getDaysInMonth(newDate.getFullYear(), newDate.getMonth());
+
+		const timeDifference = newDate.getTime() - createdDateTime.getTime();
+		const milisecondsInDay = 1000 * 60 * 60 * 24;
+
+		let totalDays = Math.floor(timeDifference / milisecondsInDay);
+
+		let months = 0;
+		let days = totalDays % currentMonthDays;
+		let years = 0;
+
+		while (totalDays >= currentMonthDays) {
+			totalDays -= currentMonthDays;
+			months++;
+		}
+		while (months >= 12) {
+			months -= 12;
+			years++;
+		}
+		setUserDuration({ days, months, years });
+	};
+
 	useEffect(() => {
-		const getUsername = async () => {
-			const { username, email } = await getUsernameData();
-			setTimeout(() => {
-				setUserInfo({ username, email });
-			}, 500);
+		const getCreateAccountDate = async () => {
+			try {
+				const jwt = getTokenFromLocalCookie();
+				const res = await fetch(`${STRAPI_URL}/users/me`, {
+					headers: {
+						Authorization: `Bearer ${jwt}`,
+					},
+				});
+				const resData: UserInfoType = await res.json();
+				const { createdAt, email, username } = resData;
+				countUserDurationTime(createdAt);
+				setTimeout(() => {
+					setUserInfo({ username, email });
+				}, 500);
+			} catch (error) {
+				console.error(error);
+			}
 		};
-		getUsername();
+
+		getCreateAccountDate();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -56,7 +107,15 @@ export const AccountProfile = () => {
 			{userInfo ? (
 				<div className='flex  flex-1 flex-col gap-2 self-stretch  p-8'>
 					<h2 className='text-H5'>You&apos;re already with us</h2>
-					<span className='text-H5 font-bold text-primary'>4 months, 3 days</span>
+					<div className='space-x-3 text-H5 font-bold text-primary'>
+						{userDuration.years !== 0 && (
+							<span>{userDuration.years <= 1 ? `${userDuration.years} year` : `${userDuration.years} years`}</span>
+						)}
+						{userDuration.months !== 0 && (
+							<span>{userDuration.months <= 1 ? `${userDuration.months} month` : `${userDuration.months} months`}</span>
+						)}
+						<span>{userDuration.days <= 1 ? `${userDuration.days} day` : `${userDuration.days} days`}</span>
+					</div>
 					<hr className='mt-3  border-veryLightPrimary' />
 					<div className='mx-auto flex aspect-square min-w-[100px] items-center justify-center rounded-full border-[3px] border-primary p-12'>
 						<span className='mx-auto min-w-[100px] text-center text-H3 font-bold text-secondaryDark'>

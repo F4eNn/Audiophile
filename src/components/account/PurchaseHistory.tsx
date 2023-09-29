@@ -1,7 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { getTokenFromLocalCookie } from '@/helpers/auth';
+import { getTokenFromLocalCookie, getUserFromLocalCookie } from '@/helpers/auth';
 import { LoadingSpinner } from '../ui/LoadingSpinner';
 import { HistoryItem } from './HistoryItem';
 import { useAccountCtx } from '@/context/AccountCtx';
@@ -34,7 +34,8 @@ export const PurchaseHistory = () => {
 		const getHistoryCart = async () => {
 			try {
 				const jwt = getTokenFromLocalCookie();
-				const res = await fetch(`${STRAPI_URL}/histories`, {
+				const username = await getUserFromLocalCookie();
+				const res = await fetch(`${STRAPI_URL}/histories?filters[username][$eq]=${username}`, {
 					headers: {
 						'Content-Type': 'application/json',
 						Authorization: `Bearer ${jwt}`,
