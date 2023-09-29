@@ -1,11 +1,10 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { AiOutlineUser } from 'react-icons/ai';
-import { FaPen } from 'react-icons/fa6';
 
 import { getTokenFromLocalCookie } from '@/helpers/auth';
 import { LoadingSpinner } from '../ui/LoadingSpinner';
 import { useAccountCtx } from '@/context/AccountCtx';
+import { UserProfilePicture } from './UserProfilePicture';
 
 type UserInfoType = {
 	username: string;
@@ -21,7 +20,7 @@ type DurationType = {
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
 export const AccountProfile = () => {
-	const [userInfo, setUserInfo] = useState<Omit<UserInfoType, 'createdAt'> | null>(null);
+	const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
 	const [userDuration, setUserDuration] = useState<DurationType>({ days: 0, months: 0, years: 0 });
 	const { generalUserInfo } = useAccountCtx();
 
@@ -65,7 +64,7 @@ export const AccountProfile = () => {
 				const { createdAt, email, username } = resData;
 				countUserDurationTime(createdAt);
 				setTimeout(() => {
-					setUserInfo({ username, email });
+					setUserInfo({ username, email, createdAt });
 				}, 500);
 			} catch (error) {
 				console.error(error);
@@ -82,20 +81,18 @@ export const AccountProfile = () => {
 				{userInfo ? (
 					<>
 						<div className='space-y-2.5'>
-							<h1 className='text-H5'>Hi {userInfo.username}</h1>
-							<p className='font-[500]'>{userInfo.email}</p>
+							<h1 className='text-H5'>
+								Hi <span className='text-primary'>{userInfo.username}</span>
+							</h1>
+							<span className='block font-[700]'>{userInfo.email}</span>
+							<p className='block font-[500]'>
+								Account created at:{' '}
+								<span className='font-[700] text-primaryDark'>
+									{new Date(userInfo.createdAt).toLocaleDateString('en-GB', { dateStyle: 'long' })}
+								</span>
+							</p>
 						</div>
-						<div className='-mt-8 w-max'>
-							<label className='  group h-[40px] cursor-pointer p-3 text-primary' aria-label='upload profile picture'>
-								<input type='file' hidden />
-								<div className=' colors-300 relative rounded-full border-[1px] border-primary p-3 group-hover:bg-veryLightPrimary'>
-									<AiOutlineUser size='5em' />
-									<div className='absolute right-1 top-0 text-gray'>
-										<FaPen size='1.5em' />
-									</div>
-								</div>
-							</label>
-						</div>
+						<UserProfilePicture />
 					</>
 				) : (
 					<div className='mt-10 flex flex-1 justify-center '>
