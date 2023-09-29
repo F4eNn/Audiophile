@@ -114,7 +114,11 @@ export const AccountProfile = () => {
 						{userDuration.months !== 0 && (
 							<span>{userDuration.months <= 1 ? `${userDuration.months} month` : `${userDuration.months} months`}</span>
 						)}
-						<span>{userDuration.days <= 1 ? `${userDuration.days} day` : `${userDuration.days} days`}</span>
+						{userDuration.days === 0 ? (
+							<span>{'This is your first day here :)'} </span>
+						) : (
+							<span>{userDuration.days <= 1 ? `${userDuration.days} day` : `${userDuration.days} days`}</span>
+						)}
 					</div>
 					<hr className='mt-3  border-veryLightPrimary' />
 					<div className='mx-auto flex aspect-square min-w-[100px] items-center justify-center rounded-full border-[3px] border-primary p-12'>
