@@ -27,7 +27,7 @@ export const HistoryItem = ({ history }: HistoryItemProps) => {
 									</div>
 									<div className='flex flex-1  flex-col justify-start gap-5 p-3'>
 										<div className='flex justify-between'>
-											<span className='font-bold text-primaryDark'>{name}</span>
+											<span className='w-[100px] font-bold text-primaryDark'>{name}</span>
 											<span className='font-bold text-primaryDark'>
 												{quantity}x {price}$
 											</span>
@@ -58,7 +58,7 @@ export const HistoryItem = ({ history }: HistoryItemProps) => {
 												<Image src={image} alt={name} fill />
 											</div>
 											<div className='flex flex-1 justify-between'>
-												<span className='font-bold text-primaryDark'>{name}</span>
+												<span className='w-[100px]  font-bold  text-primaryDark'>{name}</span>
 												<span className='font-bold text-primaryDark'>
 													{quantity}x {price}$
 												</span>

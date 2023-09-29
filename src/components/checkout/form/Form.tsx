@@ -21,7 +21,7 @@ const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 export const CheckoutForm = () => {
 	const [isPayOnline, setIsPayOnline] = useState(true);
 	const { user } = useUser();
-	const { cart } = useCartCtx();
+	const { cart, grandTotal } = useCartCtx();
 
 	const {
 		control,
@@ -55,7 +55,7 @@ export const CheckoutForm = () => {
 				body: JSON.stringify({
 					data: {
 						history: cart,
-						totalPrice: '4000',
+						totalPrice: grandTotal,
 						username: await getUserFromLocalCookie(),
 					},
 				}),

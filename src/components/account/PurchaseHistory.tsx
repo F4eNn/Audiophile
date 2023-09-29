@@ -27,7 +27,7 @@ type HistoryTypes = {
 
 export const PurchaseHistory = () => {
 	const [dataHistory, setDataHistory] = useState<HistoryTypes[] | null>(null);
-	const [status, setStatusItem] = useState({ isVisible: false, isOneItem: false });
+	const [totalSpentMoney, setTotalSpentMoney] = useState(0);
 
 	useEffect(() => {
 		const getHistoryCart = async () => {
@@ -48,6 +48,12 @@ export const PurchaseHistory = () => {
 		};
 		getHistoryCart();
 	}, []);
+
+	const initialValue = 0;
+	dataHistory?.reduce((acc, currVal) => {
+		return acc + Number(currVal.totalPrice);
+	}, initialValue);
+
 	return (
 		<>
 			<h2 className='my-5 text-H3'>Purchase History</h2>
@@ -63,7 +69,7 @@ export const PurchaseHistory = () => {
 								<div key={idx} className='my-10 rounded-md bg-white p-10'>
 									<HistoryItem history={items.history} />
 									<div className='flex items-center justify-between'>
-										<span className=' text-H5 font-bold'>Total</span>
+										<span className=' text-H5 font-bold text-brown'>Total(VAT)</span>
 										<span className='text-H4 font-bold'>${items.totalPrice}</span>
 									</div>
 								</div>
