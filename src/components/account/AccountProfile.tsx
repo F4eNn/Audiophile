@@ -15,6 +15,7 @@ type UserInfoType = {
 export const AccountProfile = () => {
 	const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
 	const { generalUserInfo } = useAccountCtx();
+	const { generalUserInfo } = useAccountCtx();
 	useEffect(() => {
 		const getUsername = async () => {
 			const { username, email } = await getUsernameData();
@@ -58,11 +59,7 @@ export const AccountProfile = () => {
 					<h2 className='text-H5'>You&apos;re already with us</h2>
 					<span className='text-H5 font-bold text-primary'>4 months, 3 days</span>
 					<hr className='mt-3  border-veryLightPrimary' />
-					<div className='relative mx-auto flex aspect-square  items-center justify-center rounded-full border-[3px] border-primary p-10 '>
-						<span className='mx-auto  min-w-[100px] text-center text-H3 font-bold text-secondaryDark '>
-							{generalUserInfo.totalSpentMoney}$
-						</span>
-					</div>
+					<span className='mx-auto mt-5 text-H4 font-bold text-secondaryDark '>3465.78$</span>
 					<span className='mx-auto text-lg font-[500] text-brown'>Total money spent</span>
 				</div>
 			) : (
