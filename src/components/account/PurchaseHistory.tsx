@@ -1,9 +1,10 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { getTokenFromLocalCookie } from '@/helpers/auth';
 import { LoadingSpinner } from '../ui/LoadingSpinner';
 import { HistoryItem } from './HistoryItem';
+import { useAccountCtx } from '@/context/AccountCtx';
 
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
@@ -27,7 +28,7 @@ type HistoryTypes = {
 
 export const PurchaseHistory = () => {
 	const [dataHistory, setDataHistory] = useState<HistoryTypes[] | null>(null);
-	const [totalSpentMoney, setTotalSpentMoney] = useState(0);
+	const { setGeneralUserInfo } = useAccountCtx();
 
 	useEffect(() => {
 		const getHistoryCart = async () => {
@@ -49,10 +50,21 @@ export const PurchaseHistory = () => {
 		getHistoryCart();
 	}, []);
 
-	const initialValue = 0;
-	dataHistory?.reduce((acc, currVal) => {
-		return acc + Number(currVal.totalPrice);
-	}, initialValue);
+	const setGeneralInfo = useCallback(() => {
+		const initialValue = 0;
+		const grandTotal = dataHistory?.reduce((acc, currVal) => {
+			const convertToString = currVal.totalPrice.replace(',', '');
+			return acc + Number(convertToString);
+		}, initialValue);
+
+		if (grandTotal) setGeneralUserInfo({ totalSpentMoney: grandTotal.toLocaleString() });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dataHistory, setGeneralUserInfo]);
+
+	useEffect(() => {
+		setGeneralInfo();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dataHistory]);
 
 	return (
 		<>
