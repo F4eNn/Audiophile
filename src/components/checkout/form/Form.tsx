@@ -55,6 +55,7 @@ export const CheckoutForm = () => {
 				body: JSON.stringify({
 					data: {
 						history: cart,
+						totalPrice: '4000',
 						username: await getUserFromLocalCookie(),
 					},
 				}),
