@@ -36,15 +36,17 @@ export const HistoryItem = ({ history, createdAt }: HistoryItemProps) => {
 											<span className='font-bold text-primaryDark'>{quantity * price}$</span>
 										</div>
 										<div className='flex justify-between'>
-											<button
-												onClick={showMore}
-												className={`colors-300 w-max text-lg font-bold uppercase tracking-widest ${
-													isVisible ? 'text-brown' : 'text-primary'
-												} hover:text-secondary`}
-											>
-												{isVisible ? 'See less' : `See more(${history.length - 1})`}
-											</button>
-											<span className='text-sm'>{boughtDate}</span>
+											{history.length > 1 && (
+												<button
+													onClick={showMore}
+													className={`colors-300 w-max text-lg font-bold uppercase tracking-widest ${
+														isVisible ? 'text-brown' : 'text-primary'
+													} hover:text-secondary`}
+												>
+													{isVisible ? 'See less' : `See more(${history.length - 1})`}
+												</button>
+											)}
+											<span className='ml-auto text-sm'>{boughtDate}</span>
 										</div>
 									</div>
 								</div>
