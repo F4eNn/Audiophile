@@ -23,7 +23,7 @@ type ResData = {
 
 export const UploadModal = ({
 	handleLeave,
-	toggle,
+	toggle: toggleModal,
 	avatarUrl,
 	username,
 	setIsUpdate,
@@ -34,7 +34,7 @@ export const UploadModal = ({
 
 	const closeOnOverlay = (e: MouseEvent<HTMLDivElement>) => {
 		const target = e.target;
-		if (target === overlayRef.current) toggle();
+		if (target === overlayRef.current) toggleModal();
 		handleLeave();
 	};
 
@@ -85,7 +85,8 @@ export const UploadModal = ({
 				body: avatarFiles,
 			});
 			const resData: ResData[] = await res.json();
-			updateUserAvatar({ id: resData[0].id, url: resData[0].url });
+			await updateUserAvatar({ id: resData[0].id, url: resData[0].url });
+			toggleModal();
 			setIsUpdate(true);
 		} catch (error) {
 			console.error(error);
@@ -101,7 +102,7 @@ export const UploadModal = ({
 				<div className='mt-32 h-max w-full max-w-[400px] rounded-md  bg-white'>
 					<div className='flex justify-between px-5 pt-5'>
 						<p className='text-lg font-bold'>{`${avatarUrl ? 'Change' : 'Upload'} your avatar`}</p>
-						<button onClick={toggle} className='colors-300 text-brown hover:text-primaryDark '>
+						<button onClick={toggleModal} className='colors-300 text-brown hover:text-primaryDark '>
 							<IoClose size='30px' />
 						</button>
 					</div>
@@ -125,7 +126,7 @@ export const UploadModal = ({
 							<ButtonPrimary
 								title='Cancel'
 								type='button'
-								onClick={toggle}
+								onClick={toggleModal}
 								classNames='hover:bg-veryLightPrimary rounded-md px-3 py-2.5'
 							/>
 						</div>

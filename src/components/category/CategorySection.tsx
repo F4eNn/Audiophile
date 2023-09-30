@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { ProductsData } from '@/types/data';
+import { ProductData } from '@/types/data';
 import { CategoryProduct } from './CategoryProduct';
 import { Wrapper } from '../ui/Wrapper';
 
 type SpeakersSectionProps = {
-	products: ProductsData[];
+	products: ProductData[];
 };
 
 export const SpeakersSection = ({ products }: SpeakersSectionProps) => {
