@@ -1,17 +1,25 @@
-import React, { ChangeEvent, MouseEvent, useRef, useState } from 'react';
+import React, { ChangeEvent, FormEvent, MouseEvent, useRef, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Portal } from '../ui/Portal';
 import { ButtonPrimary } from '../ui/ButtonPrimary';
+import { UserInfoType } from './AccountProfile';
+import { STRAPI_URL } from '@/constants/url';
+import { errorNotifcation } from '@/constants/errorNotification';
+import { getTokenFromLocalCookie } from '@/helpers/auth';
 
-type UploadModalProps = {
+type UploadModalProps = Pick<UserInfoType, 'avatarID' | 'username'> & {
 	toggle: () => void;
 	handleLeave: () => void;
 };
 
-export const UploadModal = ({ handleLeave, toggle }: UploadModalProps) => {
+type ResData = {
+	url: string;
+	id: number;
+};
+
+export const UploadModal = ({ handleLeave, toggle, avatarID, username }: UploadModalProps) => {
 	const overlayRef = useRef(null);
 	const [file, setFile] = useState<File | null>(null);
 
@@ -27,14 +35,40 @@ export const UploadModal = ({ handleLeave, toggle }: UploadModalProps) => {
 			if (type === 'image/jpeg' || type === 'image/png') {
 				setFile(files[0]);
 			} else {
-				toast.error('Only jpeg and png types are allowed', {
-					hideProgressBar: true,
-					style: { fontFamily: 'sans-serif', border: '3px solid #e74c3c', borderRadius: '10px' },
-				});
+				errorNotifcation('Only jpeg and png types are allowed');
 			}
 		}
 	};
 
+	const updateUserAvatar = async ({ id, url }: ResData) => {
+		console.log(id, url);
+	};
+	const handleSubmit = async (e: FormEvent) => {
+		e.preventDefault();
+
+		if (!file) {
+			return errorNotifcation('File is required');
+		}
+
+		try {
+			const avatarFiles = new FormData();
+			avatarFiles.append('files', file);
+			avatarFiles.append('name', `${username} avatar`);
+
+			const jwt = getTokenFromLocalCookie();
+			const res = await fetch(`${STRAPI_URL}/upload`, {
+				method: 'POST',
+				headers: {
+					Authorization: `Bearer ${jwt}`,
+				},
+				body: avatarFiles,
+			});
+			const resData: ResData[] = await res.json();
+			updateUserAvatar({ ...resData[0] });
+		} catch (error) {
+			console.error(error);
+		}
+	};
 	return (
 		<Portal selector='#uploadModal'>
 			<div
@@ -50,7 +84,7 @@ export const UploadModal = ({ handleLeave, toggle }: UploadModalProps) => {
 						</button>
 					</div>
 					<hr className='my-4 border-veryLightPrimary' />
-					<form className='px-5 pb-5  '>
+					<form className='px-5 pb-5' onSubmit={handleSubmit}>
 						<label htmlFor='avatarPicture' className='font-[600] text-secondaryDark'>
 							File
 						</label>

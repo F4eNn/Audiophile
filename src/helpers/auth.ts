@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+import { STRAPI_URL } from '@/constants/url';
 
 export type DataTokenResponse = {
 	user: {

@@ -5,19 +5,20 @@ import { getTokenFromLocalCookie } from '@/helpers/auth';
 import { LoadingSpinner } from '../ui/LoadingSpinner';
 import { useAccountCtx } from '@/context/AccountCtx';
 import { UserProfilePicture } from './UserProfilePicture';
+import { STRAPI_URL } from '@/constants/url';
 
-type UserInfoType = {
+export type UserInfoType = {
 	username: string;
 	email: string;
 	createdAt: string;
+	avatarID: number;
+	avatarUrl: string;
 };
 type DurationType = {
 	years: number;
 	days: number;
 	months: number;
 };
-
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
 export const AccountProfile = () => {
 	const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
@@ -52,7 +53,7 @@ export const AccountProfile = () => {
 	};
 
 	useEffect(() => {
-		const getCreateAccountDate = async () => {
+		const getProfileData = async () => {
 			try {
 				const jwt = getTokenFromLocalCookie();
 				const res = await fetch(`${STRAPI_URL}/users/me`, {
@@ -61,17 +62,17 @@ export const AccountProfile = () => {
 					},
 				});
 				const resData: UserInfoType = await res.json();
-				const { createdAt, email, username } = resData;
+				const { createdAt, email, username, avatarID, avatarUrl } = resData;
 				countUserDurationTime(createdAt);
 				setTimeout(() => {
-					setUserInfo({ username, email, createdAt });
+					setUserInfo({ username, email, createdAt, avatarID, avatarUrl });
 				}, 500);
 			} catch (error) {
 				console.error(error);
 			}
 		};
 
-		getCreateAccountDate();
+		getProfileData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -92,7 +93,7 @@ export const AccountProfile = () => {
 								</span>
 							</p>
 						</div>
-						<UserProfilePicture />
+						<UserProfilePicture {...userInfo} />
 					</>
 				) : (
 					<div className='mt-10 flex flex-1 justify-center '>

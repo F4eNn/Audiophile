@@ -8,8 +8,7 @@ import { HistoryItem } from './HistoryItem';
 import { useAccountCtx } from '@/context/AccountCtx';
 import { LinkButton } from '../ui/LinkButton';
 import { navigationPaths } from '@/constants/navigation';
-
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+import { STRAPI_URL } from '@/constants/url';
 
 export type HistoryItemType = {
 	image: string;

@@ -13,10 +13,9 @@ import { ModalCheckout } from '../Modal';
 import { useUser } from '@/context/AuthCtx';
 import { getTokenFromLocalCookie, getUserFromLocalCookie } from '@/helpers/auth';
 import { useCartCtx } from '@/context/CartCtx';
+import { STRAPI_URL } from '@/constants/url';
 
 export type FormValues = yup.InferType<typeof schemaCheckout>;
-
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
 export const CheckoutForm = () => {
 	const [isPayOnline, setIsPayOnline] = useState(true);

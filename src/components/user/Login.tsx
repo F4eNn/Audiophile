@@ -12,6 +12,7 @@ import { useUser } from '@/context/AuthCtx';
 import GoogleIcon from '../../../public/assets/google-icon.svg';
 import GithubIcon from '../../../public/assets/github-mark-white.svg';
 import { LoginButton } from './LoginButton';
+import { STRAPI_URL } from '@/constants/url';
 
 export const Login = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,7 +29,7 @@ export const Login = () => {
 		try {
 			setIsSubmitting(true);
 
-			const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/local`, {
+			const res = await fetch(`${STRAPI_URL}/auth/local`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
