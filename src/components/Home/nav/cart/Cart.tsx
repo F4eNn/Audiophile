@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
 
 import { useCartCtx } from '@/context/CartCtx';
@@ -6,6 +6,7 @@ import { Wrapper } from '@/components/ui/Wrapper';
 import { OverlayCart } from './Overlay';
 import { Items } from './Items';
 import { navigationPaths } from '@/constants/navigation';
+import { errorNotifcation } from '@/constants/errorNotification';
 type CartProps = {
 	isCartOpen: boolean;
 	setCart: () => void;
@@ -13,7 +14,6 @@ type CartProps = {
 
 export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 	const { cart, setCart: removeCartItems, totalPrice, setTotalPrice } = useCartCtx();
-	const [isCartEmpty, setIsCartEmpty] = useState(false);
 	const { push } = useRouter();
 
 	const handleRemoveAll = () => {
@@ -24,15 +24,11 @@ export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 
 	const goToCheckout = () => {
 		if (cart.length !== 0) {
-			setIsCartEmpty(false);
 			push(navigationPaths.checkout.path);
 		} else {
-			setIsCartEmpty(true);
+			errorNotifcation('Cart is empty');
 		}
 	};
-	useEffect(() => {
-		if (!isCartOpen) setIsCartEmpty(false);
-	}, [isCartOpen]);
 
 	return (
 		<Wrapper>
@@ -63,13 +59,9 @@ export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 						>
 							Checkout
 						</button>
-						{isCartEmpty ? (
-							<p className='absolute -top-8 left-1/2 -translate-x-1/2 text-center text-sm font-[600] text-primary'>
-								Cart is Empty
-							</p>
-						) : (
-							''
-						)}
+						{/* {isCartEmpty && (
+							errorNotifcation('Cart is empty')
+						)} */}
 					</div>
 				</div>
 			</div>
