@@ -7,7 +7,6 @@ import { SpeakerZX9 } from '@/components/Home/main/SpeakerZX9';
 const Home = () => {
 	return (
 		<main className='h-full w-full  '>
-			<div id='modal'></div>
 			<Hero />
 			<div className='py-32 lg:py-52'>
 				<CategoryNav />

@@ -1,5 +1,7 @@
-import React, { MouseEvent, useRef } from 'react';
+import React, { ChangeEvent, MouseEvent, useRef, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Portal } from '../ui/Portal';
 import { ButtonPrimary } from '../ui/ButtonPrimary';
@@ -11,6 +13,7 @@ type UploadModalProps = {
 
 export const UploadModal = ({ handleLeave, toggle }: UploadModalProps) => {
 	const overlayRef = useRef(null);
+	const [file, setFile] = useState<File | null>(null);
 
 	const closeOnOverlay = (e: MouseEvent<HTMLDivElement>) => {
 		const target = e.target;
@@ -18,8 +21,22 @@ export const UploadModal = ({ handleLeave, toggle }: UploadModalProps) => {
 		handleLeave();
 	};
 
+	const handleFileUpload = ({ target: { files } }: ChangeEvent<HTMLInputElement>) => {
+		if (files?.length) {
+			const { type } = files[0];
+			if (type === 'image/jpeg' || type === 'image/png') {
+				setFile(files[0]);
+			} else {
+				toast.error('Only jpeg and png types are allowed', {
+					hideProgressBar: true,
+					style: { fontFamily: 'sans-serif', border: '3px solid #e74c3c', borderRadius: '10px' },
+				});
+			}
+		}
+	};
+
 	return (
-		<Portal selector='#modal'>
+		<Portal selector='#uploadModal'>
 			<div
 				ref={overlayRef}
 				onClick={closeOnOverlay}
@@ -38,6 +55,7 @@ export const UploadModal = ({ handleLeave, toggle }: UploadModalProps) => {
 							File
 						</label>
 						<input
+							onChange={handleFileUpload}
 							id='avatarPicture'
 							type='file'
 							className='colors-300 form-input block w-full cursor-pointer rounded-md border-[2px] border-secondary p-0 text-primary transition-all duration-300  file:cursor-pointer file:rounded-md file:border-none file:p-2 file:font-[500] hover:ring-[1px] hover:ring-primary  focus:border-[3px] focus:border-primary focus:ring-0'
