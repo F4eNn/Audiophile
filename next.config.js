@@ -1,12 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	reactStrictMode: true,
 	webpack(config) {
 		config.module.rules.push({
 			test: /\.svg$/,
 			use: ['@svgr/webpack'],
-		})
-		return config
+		});
+		return config;
 	},
-}
+	images: {
+		remotePatterns: [{ protocol: 'https', hostname: '6452-185-107-64-107.ngrok-free.app', pathname: '/uploads/**' }],
+	},
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

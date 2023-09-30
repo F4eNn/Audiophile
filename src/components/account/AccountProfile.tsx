@@ -13,6 +13,7 @@ export type UserInfoType = {
 	createdAt: string;
 	avatarID: number;
 	avatarUrl: string;
+	id: string;
 };
 type DurationType = {
 	years: number;
@@ -22,6 +23,7 @@ type DurationType = {
 
 export const AccountProfile = () => {
 	const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
+	const [isUserUpdated, setIsUserUpdated] = useState(false);
 	const [userDuration, setUserDuration] = useState<DurationType>({ days: 0, months: 0, years: 0 });
 	const { generalUserInfo } = useAccountCtx();
 
@@ -62,11 +64,12 @@ export const AccountProfile = () => {
 					},
 				});
 				const resData: UserInfoType = await res.json();
-				const { createdAt, email, username, avatarID, avatarUrl } = resData;
+				const { createdAt, email, username, avatarID, avatarUrl, id: userID } = resData;
 				countUserDurationTime(createdAt);
 				setTimeout(() => {
-					setUserInfo({ username, email, createdAt, avatarID, avatarUrl });
+					setUserInfo({ username, email, createdAt, avatarID, avatarUrl, id: userID });
 				}, 500);
+				setIsUserUpdated(false);
 			} catch (error) {
 				console.error(error);
 			}
@@ -74,7 +77,7 @@ export const AccountProfile = () => {
 
 		getProfileData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [isUserUpdated]);
 
 	return (
 		<div className='flex items-start justify-center gap-7 rounded-md bg-white'>
@@ -93,7 +96,7 @@ export const AccountProfile = () => {
 								</span>
 							</p>
 						</div>
-						<UserProfilePicture {...userInfo} />
+						<UserProfilePicture {...userInfo} setIsUpdate={setIsUserUpdated} />
 					</>
 				) : (
 					<div className='mt-10 flex flex-1 justify-center '>

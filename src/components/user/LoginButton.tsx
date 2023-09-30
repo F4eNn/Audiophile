@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
 
+import { NGROK_URL } from '@/constants/url';
+
 type LoginButtonProps = {
 	providerName: string;
 	icon: any;
@@ -18,7 +20,7 @@ export const LoginButton = ({
 }: LoginButtonProps) => {
 	return (
 		<Link
-			href={`https://6452-185-107-64-107.ngrok-free.app/api/connect/${providerName}`}
+			href={`${NGROK_URL}/api/connect/${providerName}`}
 			className={`colors-300 mx-auto my-7 flex w-full ${text} items-center justify-center gap-3 capitalize ${bg} p-3.5 font-[500] shadow-md ${bgHover}`}
 		>
 			{icon} Continue With {providerName}

@@ -8,10 +8,12 @@ import { UserInfoType } from './AccountProfile';
 import { STRAPI_URL } from '@/constants/url';
 import { errorNotifcation } from '@/constants/errorNotification';
 import { getTokenFromLocalCookie } from '@/helpers/auth';
+import { DispatchAction } from '@/types/general';
 
-type UploadModalProps = Pick<UserInfoType, 'avatarID' | 'username'> & {
+type UploadModalProps = Pick<UserInfoType, 'avatarID' | 'username' | 'avatarUrl' | 'id'> & {
 	toggle: () => void;
 	handleLeave: () => void;
+	setIsUpdate: DispatchAction<boolean>;
 };
 
 type ResData = {
@@ -19,7 +21,14 @@ type ResData = {
 	id: number;
 };
 
-export const UploadModal = ({ handleLeave, toggle, avatarID, username }: UploadModalProps) => {
+export const UploadModal = ({
+	handleLeave,
+	toggle,
+	avatarUrl,
+	username,
+	setIsUpdate,
+	id: userID,
+}: UploadModalProps) => {
 	const overlayRef = useRef(null);
 	const [file, setFile] = useState<File | null>(null);
 
@@ -40,8 +49,21 @@ export const UploadModal = ({ handleLeave, toggle, avatarID, username }: UploadM
 		}
 	};
 
-	const updateUserAvatar = async ({ id, url }: ResData) => {
-		console.log(id, url);
+	const updateUserAvatar = async ({ id: avatarID, url }: ResData) => {
+		try {
+			const jwt = getTokenFromLocalCookie();
+
+			await fetch(`${STRAPI_URL}/users/${userID}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${jwt}`,
+				},
+				body: JSON.stringify({ avatarID, avatarUrl: url }),
+			});
+		} catch (error) {
+			console.error(error);
+		}
 	};
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
@@ -49,7 +71,6 @@ export const UploadModal = ({ handleLeave, toggle, avatarID, username }: UploadM
 		if (!file) {
 			return errorNotifcation('File is required');
 		}
-
 		try {
 			const avatarFiles = new FormData();
 			avatarFiles.append('files', file);
@@ -64,7 +85,8 @@ export const UploadModal = ({ handleLeave, toggle, avatarID, username }: UploadM
 				body: avatarFiles,
 			});
 			const resData: ResData[] = await res.json();
-			updateUserAvatar({ ...resData[0] });
+			updateUserAvatar({ id: resData[0].id, url: resData[0].url });
+			setIsUpdate(true);
 		} catch (error) {
 			console.error(error);
 		}
@@ -78,7 +100,7 @@ export const UploadModal = ({ handleLeave, toggle, avatarID, username }: UploadM
 			>
 				<div className='mt-32 h-max w-full max-w-[400px] rounded-md  bg-white'>
 					<div className='flex justify-between px-5 pt-5'>
-						<p className='text-lg font-bold'>Upload your avatar</p>
+						<p className='text-lg font-bold'>{`${avatarUrl ? 'Change' : 'Upload'} your avatar`}</p>
 						<button onClick={toggle} className='colors-300 text-brown hover:text-primaryDark '>
 							<IoClose size='30px' />
 						</button>
@@ -96,7 +118,7 @@ export const UploadModal = ({ handleLeave, toggle, avatarID, username }: UploadM
 						/>
 						<div className=' ml-auto mt-8 w-max space-x-3'>
 							<ButtonPrimary
-								title='Upload'
+								title={`${avatarUrl ? 'Change' : 'Upload'}`}
 								type='submit'
 								classNames='bg-primary text-white px-5 py-2.5 rounded-md hover:bg-secondary'
 							/>

@@ -6,8 +6,12 @@ import Image from 'next/image';
 import { useToggle } from '@/hooks/useToggle';
 import { UploadModal } from './UploadModal';
 import { UserInfoType } from './AccountProfile';
+import { DispatchAction } from '@/types/general';
+import { NGROK_URL } from '@/constants/url';
 
-type UserProfilePictureProps = Pick<UserInfoType, 'avatarID' | 'avatarUrl' | 'username'>;
+type UserProfilePictureProps = Pick<UserInfoType, 'avatarID' | 'avatarUrl' | 'username' | 'id'> & {
+	setIsUpdate: DispatchAction<boolean>;
+};
 
 export const UserProfilePicture = (props: UserProfilePictureProps) => {
 	const { avatarUrl, username } = props;
@@ -23,10 +27,19 @@ export const UserProfilePicture = (props: UserProfilePictureProps) => {
 
 	return (
 		<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className=' relative mt-6 w-max '>
-			<div className=' colors-300 colors-300 relative rounded-full border-[1px] border-primary p-3 text-primary  '>
+			<div
+				className={` colors-300 colors-300 relative rounded-full ${
+					avatarUrl ? 'border-[3px] p-0' : 'border-[1px] p-3'
+				} border-primary  text-primary`}
+			>
 				{avatarUrl ? (
-					<div className='aspect-square w-20 rounded-full'>
-						<Image src={`http://localhost:1337/${avatarUrl}`} alt={username + 'avatar'} fill />
+					<div className='relative aspect-square w-[200px] rounded-full'>
+						<Image
+							src={`${NGROK_URL}${avatarUrl}`}
+							alt={`${username} avatar`}
+							className=' rounded-full object-cover'
+							fill
+						/>
 					</div>
 				) : (
 					<AiOutlineUser size='9em' />
@@ -39,7 +52,7 @@ export const UserProfilePicture = (props: UserProfilePictureProps) => {
 						onClick={toggleModal}
 						className='colors-300 absolute -bottom-1 left-1/2 min-w-max -translate-x-1/2 rounded-md bg-primary p-3 font-[500] capitalize text-white hover:bg-secondary'
 					>
-						Upload picture
+						{`${avatarUrl ? 'Change' : 'Upload'} picture`}
 					</button>
 				)}
 			</div>
