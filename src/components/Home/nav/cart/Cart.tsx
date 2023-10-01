@@ -59,9 +59,6 @@ export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 						>
 							Checkout
 						</button>
-						{/* {isCartEmpty && (
-							errorNotifcation('Cart is empty')
-						)} */}
 					</div>
 				</div>
 			</div>

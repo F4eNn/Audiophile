@@ -20,6 +20,7 @@ type CartContextTypes = {
 	setTotalPrice: DispatchAction<number>;
 	setGrandTotal: DispatchAction<string>;
 	grandTotal: string;
+	itemsInCart: number;
 };
 
 const defaultValue: CartContextTypes = {
@@ -32,6 +33,7 @@ const defaultValue: CartContextTypes = {
 	setTotalPrice: () => {},
 	setGrandTotal: () => {},
 	grandTotal: '',
+	itemsInCart: 0,
 };
 
 const CartCtx = createContext(defaultValue);
@@ -44,9 +46,17 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 	const [isAdd, setAddCart] = useState(false);
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [grandTotal, setGrandTotal] = useState('');
+	const [itemsInCart, setTotalItemsCart] = useState(0);
 
 	const addToCart = (product: CartTypes) => {
 		setCartItem(product);
+	};
+
+	const countItemsInCart = (purchases: CartTypes[]) => {
+		const countPurchaseItems = purchases.reduce((acc, val) => {
+			return acc + val.quantity;
+		}, 0);
+		return countPurchaseItems;
 	};
 
 	const cartWithoutDuplicates = (cartString: string | null) => {
@@ -56,6 +66,7 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 
 			const parseCart: CartTypes[] = JSON.parse(cartString);
 			const cartStorage: CartTypes[] = parseCart.filter(i => i !== null);
+
 			const existingCartItem = cartStorage.findIndex(item => item.name === cartItem?.name);
 
 			if (existingCartItem === -1 && cartItem) {
@@ -72,12 +83,20 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 			}
 		} else {
 			localStorage.setItem('cart', JSON.stringify([]));
+			localStorage.setItem('cartItems', JSON.stringify(0));
 		}
 	};
 
 	useEffect(() => {
 		const cartString = localStorage.getItem('cart');
 		cartWithoutDuplicates(cartString);
+
+		const current = localStorage.getItem('cart');
+		if (current) {
+			const parsePurchasesArr: CartTypes[] = JSON.parse(current);
+			const numberOfItems = countItemsInCart(parsePurchasesArr);
+			setTotalItemsCart(numberOfItems);
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [cartItem]);
 
@@ -105,6 +124,7 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 		setCart,
 		totalPrice,
 		setTotalPrice,
+		itemsInCart,
 	};
 	return <CartCtx.Provider value={value}>{children}</CartCtx.Provider>;
 };
