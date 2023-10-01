@@ -1,5 +1,6 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { ChildrenWithProps, DispatchAction } from '@/types/general';
 import { getUserFromLocalCookie } from '@/helpers/auth';
@@ -15,14 +16,20 @@ export const UserProvider = ({ children }: ChildrenWithProps) => {
 	const [dataUser, setUser] = useState({
 		user: userState || undefined,
 	});
+	const pathname = usePathname();
+	const router = useRouter();
 	useEffect(() => {
 		if (userState !== undefined) return;
 
 		const getUser = async () => {
 			const user = await getUserFromLocalCookie();
 			setUser({ user });
+			if (pathname === '/account' && !isAuth) {
+				return router.push('/');
+			}
 		};
 		getUser();
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isAuth]);
 

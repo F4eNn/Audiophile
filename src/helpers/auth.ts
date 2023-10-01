@@ -30,17 +30,15 @@ export const getUserFromLocalCookie = async () => {
 	const data = await getUser(jwt);
 	return data && data.username;
 };
-export const getUsernameData = async () => {
-	const jwt = getTokenFromLocalCookie();
-	return await getUser(jwt);
-};
-
 const getUser = async (jwt: string | undefined) => {
 	if (jwt) {
 		const res = await fetch(`${STRAPI_URL}/users/me`, {
 			headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${jwt}` },
 		});
 		const resData = await res.json();
+		if (!resData) {
+			return console.error(`User fetch failed: ${resData.error.message} `);
+		}
 		return resData;
 	}
 };
