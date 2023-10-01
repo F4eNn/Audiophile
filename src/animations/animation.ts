@@ -42,8 +42,8 @@ export const animateCart = (element: AnimatedRef | null, isOpen: boolean) => {
 export const initCartAnimation = (element: AnimatedRef, tl: MutableRefObject<Timeline | undefined>) => {
 	tl.current = gsap.timeline({ pause: true });
 	tl.current.set(element.current?.nextElementSibling!, { y: -300, x: 200 });
-	tl.current.to(element.current, { left: 0, duration: 0.7, ease: 'rough' });
-	tl.current.to(element.current?.nextElementSibling!, { opacity: 1, scale: 1, duration: 0.4, y: 0, x: 0 }, '-=0.5');
+	tl.current.to(element.current, { left: 0, duration: 0.3, ease: 'rough' });
+	tl.current.to(element.current?.nextElementSibling!, { opacity: 1, scale: 1, duration: 0.2, y: 0, x: 0 }, '-=0.2');
 };
 
 export const toggleCartAnimation = (isCartOpen: boolean, tl: MutableRefObject<Timeline | undefined>) => {

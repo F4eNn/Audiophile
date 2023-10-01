@@ -13,10 +13,11 @@ import GoogleIcon from '../../../public/assets/google-icon.svg';
 import GithubIcon from '../../../public/assets/github-mark-white.svg';
 import { LoginButton } from './LoginButton';
 import { STRAPI_URL } from '@/constants/url';
+import { errorNotifcation } from '@/constants/errorNotification';
 
 export const Login = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const { replace } = useRouter();
+	const router = useRouter();
 	const [data, setData] = useState({ password: '', identifier: '' });
 	const { setIsAuth } = useUser();
 
@@ -29,7 +30,7 @@ export const Login = () => {
 		try {
 			setIsSubmitting(true);
 
-			const res = await fetch(`${STRAPI_URL}/auth/local`, {
+			const res = await fetch(`http://127.0.0.1:1337/api/auth/local`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -40,10 +41,16 @@ export const Login = () => {
 				}),
 			});
 			const responseData = await res.json();
-			setToken(responseData);
-			if (Cookies.get('username')) {
-				replace('/');
+			if (res.status === 400) {
+				setIsSubmitting(false);
+				return errorNotifcation('Incorrect credentials');
 			}
+			if (res.status === 429) {
+				setIsSubmitting(false);
+				return errorNotifcation('Try again later');
+			}
+			router.push('/');
+			setToken(responseData);
 			setIsSubmitting(false);
 			setIsAuth(true);
 		} catch (error) {

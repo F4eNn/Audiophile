@@ -4,6 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { ChildrenWithProps, DispatchAction } from '@/types/general';
 import { getUserFromLocalCookie } from '@/helpers/auth';
+import { navigationPaths } from '@/constants/navigation';
 
 type UserType = { user: string | undefined; setIsAuth: DispatchAction<boolean> };
 
@@ -16,6 +17,7 @@ export const UserProvider = ({ children }: ChildrenWithProps) => {
 	const [dataUser, setUser] = useState({
 		user: userState || undefined,
 	});
+	const registerPath = navigationPaths.register.path;
 	const pathname = usePathname();
 	const router = useRouter();
 	useEffect(() => {
@@ -24,8 +26,15 @@ export const UserProvider = ({ children }: ChildrenWithProps) => {
 		const getUser = async () => {
 			const user = await getUserFromLocalCookie();
 			setUser({ user });
+
 			if (pathname === '/account' && !isAuth) {
 				return router.push('/');
+			} else if (
+				(pathname === `${registerPath}?mode=register` && isAuth) ||
+				(pathname === `${registerPath}?mode=login` && isAuth) ||
+				(pathname === registerPath && isAuth)
+			) {
+				return router.back();
 			}
 		};
 		getUser();

@@ -12,6 +12,7 @@ import { SubmitButton } from './SubmitButton';
 import { schemaRegister } from '@/utils/Validation';
 import { InputCard } from '../checkout/form/InputCard';
 import { ErrorMessage } from '../ui/ErrorMessage';
+import { STRAPI_URL } from '@/constants/url';
 
 export type RegisterValues = yup.InferType<typeof schemaRegister>;
 
@@ -29,7 +30,7 @@ export const SignUp = () => {
 
 	const handleRegisterUser = async (data: RegisterValues) => {
 		try {
-			const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/local/register`, {
+			const response = await fetch(`${STRAPI_URL}/auth/local/register`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -41,6 +42,7 @@ export const SignUp = () => {
 				}),
 			});
 			const responseData = await response.json();
+			console.log(responseData);
 
 			if (responseData.error && responseData.error.status === 400) {
 				setIsUser({
@@ -52,7 +54,7 @@ export const SignUp = () => {
 					accountExist: false,
 					msg: '',
 				});
-				router.replace(navigationPaths.checkout.path);
+				router.push(navigationPaths.home.path);
 			}
 		} catch (error) {
 			console.error(error);
