@@ -32,7 +32,14 @@ export const Items = ({ cart, isSummary = false }: ItemsCart) => {
 									<span className='text-sm font-[600] text-brown'>{`x${quantity}`}</span>
 								) : (
 									<div>
-										<QuantityInput productQuantity={quantity} px='px-3' py='py-0' pInput='p-1.5' />
+										<QuantityInput
+											productQuantity={quantity}
+											px='px-3'
+											py='py-0'
+											pInput='p-1.5'
+											isChangeQuantity={true}
+											idx={idx}
+										/>
 									</div>
 								)}
 							</div>

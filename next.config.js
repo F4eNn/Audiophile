@@ -9,7 +9,7 @@ const nextConfig = {
 		return config;
 	},
 	images: {
-		remotePatterns: [{ protocol: 'https', hostname: 'a88f-185-107-64-107.ngrok-free.app', pathname: '/uploads/**' }],
+		remotePatterns: [{ protocol: 'https', hostname: 'e3e7-185-107-64-107.ngrok-free.app', pathname: '/uploads/**' }],
 	},
 };
 
