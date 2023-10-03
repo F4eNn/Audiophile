@@ -11,7 +11,7 @@ import { useUser } from '@/context/AuthCtx';
 import { getUserFromLocalCookie, unsetToken } from '@/helpers/auth';
 
 export const AccountNavButton = () => {
-	const [isVisible, setIsVisible] = useToggle(false);
+	const [isVisible, toggleAccountPopup] = useToggle(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const [username, setUsername] = useState('');
@@ -20,7 +20,7 @@ export const AccountNavButton = () => {
 	const { user, setIsAuth } = useUser();
 
 	const handleShowSettings = () => {
-		setIsVisible();
+		toggleAccountPopup();
 	};
 
 	const handleCloseDropdown = (e: any) => {
@@ -31,7 +31,7 @@ export const AccountNavButton = () => {
 			!dropdownRef.current.contains(target) &&
 			!buttonRef.current?.contains(target)
 		) {
-			setIsVisible();
+			toggleAccountPopup();
 		}
 	};
 	useEffect(() => {
@@ -44,6 +44,7 @@ export const AccountNavButton = () => {
 		unsetToken();
 		refresh();
 		setIsAuth(false);
+		toggleAccountPopup();
 	};
 	useEffect(() => {
 		const getUsername = async () => {
@@ -52,6 +53,9 @@ export const AccountNavButton = () => {
 		};
 		getUsername();
 	}, []);
+
+	const closeAccountPopup = () => toggleAccountPopup();
+
 	return (
 		<div className=' relative '>
 			<button
@@ -77,7 +81,7 @@ export const AccountNavButton = () => {
 							<p className='mx-auto my-3 text-H5 font-[600] text-primaryDark'>
 								Hi <span className='capitalize text-primary'>{username}</span>
 							</p>
-							<LinkButton href={navigationPaths.account.path} title='Account' />
+							<LinkButton onClick={closeAccountPopup} href={navigationPaths.account.path} title='Account' />
 							<button onClick={logout} className='colors-300  bg-error py-3 text-white hover:bg-error/75'>
 								Log out
 							</button>
@@ -90,9 +94,11 @@ export const AccountNavButton = () => {
 								href={navigationPaths.register.path + '?mode=login'}
 								title='Log In'
 								bgHover='hover:bg-secondary'
+								onClick={closeAccountPopup}
 							/>
 							<LinkButton
 								href={navigationPaths.register.path + '?mode=register'}
+								onClick={closeAccountPopup}
 								textColor='text-primary'
 								bg='bg-rose'
 								hoverTextColor='hover:text-white'
