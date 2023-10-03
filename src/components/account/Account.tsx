@@ -6,10 +6,9 @@ import { PurchaseHistory } from './PurchaseHistory';
 
 export const Account = () => {
 	return (
-		<div className='mx-3 mt-[100px]'>
+		<div className='mx-3 mt-[150px] md:mt-[100px]'>
 			<Wrapper>
 				<AccountProfile />
-				<div></div>
 				<PurchaseHistory />
 			</Wrapper>
 		</div>

@@ -26,7 +26,7 @@ export const UserProfilePicture = (props: UserProfilePictureProps) => {
 	};
 
 	return (
-		<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className=' relative mt-6 w-max '>
+		<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className=' relative ml-auto mt-6 w-max '>
 			<div
 				className={` colors-300 colors-300 relative rounded-full ${
 					avatarUrl ? 'border-[3px] p-0' : 'border-[1px] p-3'
