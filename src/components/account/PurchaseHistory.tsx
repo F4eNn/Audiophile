@@ -86,7 +86,7 @@ export const PurchaseHistory = () => {
 									{"Your purchase history is looking a bit empty \n it's the perfect time to start shopping!"}
 								</h3>
 								<div className='mx-auto my-10 w-max'>
-									<LinkButton url={navigationPaths.home.path} title='Go Buy' />
+									<LinkButton href={navigationPaths.home.path} title='Go Buy' />
 								</div>
 							</div>
 						)}

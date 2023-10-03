@@ -42,7 +42,6 @@ export const SignUp = () => {
 				}),
 			});
 			const responseData = await response.json();
-			console.log(responseData);
 
 			if (responseData.error && responseData.error.status === 400) {
 				setIsUser({

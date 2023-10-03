@@ -42,7 +42,7 @@ export const Hero = () => {
 									Experience natural, lifelike audio and exceptional build quality made for the passionate music
 									enthusiast.
 								</p>
-								<LinkButton url={navigationPaths.headphonesXX99.path} label={navigationPaths.headphonesXX99.label} />
+								<LinkButton href={navigationPaths.headphonesXX99.path} label={navigationPaths.headphonesXX99.label} />
 							</div>
 						</div>
 						<a

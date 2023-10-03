@@ -23,7 +23,7 @@ export const OtherProducts = ({ others, category }: ProductData) => {
 									</picture>
 								</div>
 								<h2 className='text-H3 uppercase'>{name}</h2>
-								<LinkButton url={`/category/${category}/${slug}`} />
+								<LinkButton href={`/category/${category}/${slug}`} />
 							</div>
 						))}
 					</div>

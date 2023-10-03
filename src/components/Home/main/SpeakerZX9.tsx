@@ -32,7 +32,7 @@ export const SpeakerZX9 = () => {
 								Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.
 							</p>
 							<LinkButton
-								url={navigationPaths.SpeakerZX9.path}
+								href={navigationPaths.SpeakerZX9.path}
 								label={navigationPaths.SpeakerZX9.label}
 								bg='bg-primaryDark'
 								bgHover='hover:bg-grayish'

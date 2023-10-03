@@ -23,7 +23,7 @@ export const Earphones = () => {
 							<h2 className='text-H2 uppercase'>yx1 earphones</h2>
 							<div>
 								<LinkButton
-									url={navigationPaths.earphonesYX1.path}
+									href={navigationPaths.earphonesYX1.path}
 									label={navigationPaths.earphonesYX1.label}
 									isBorder={true}
 									bgHover='hover:bg-primaryDark'

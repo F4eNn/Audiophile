@@ -77,7 +77,7 @@ export const AccountNavButton = () => {
 							<p className='mx-auto my-3 text-H5 font-[600] text-primaryDark'>
 								Hi <span className='capitalize text-primary'>{username}</span>
 							</p>
-							<LinkButton url={navigationPaths.account.path} title='Account' />
+							<LinkButton href={navigationPaths.account.path} title='Account' />
 							<button onClick={logout} className='colors-300  bg-error py-3 text-white hover:bg-error/75'>
 								Log out
 							</button>
@@ -87,12 +87,12 @@ export const AccountNavButton = () => {
 							<HelloIcon />
 							<p className='text-center text-brown '>Log in and see your purchases</p>
 							<LinkButton
-								url={navigationPaths.register.path + '?mode=login'}
+								href={navigationPaths.register.path + '?mode=login'}
 								title='Log In'
 								bgHover='hover:bg-secondary'
 							/>
 							<LinkButton
-								url={navigationPaths.register.path + '?mode=register'}
+								href={navigationPaths.register.path + '?mode=register'}
 								textColor='text-primary'
 								bg='bg-rose'
 								hoverTextColor='hover:text-white'

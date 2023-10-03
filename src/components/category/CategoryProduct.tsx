@@ -32,7 +32,7 @@ export const CategoryProduct = ({
 					{newProduct && <p className='text-overline uppercase text-primary'>new product</p>}
 					<h2 className={`max-w-[300px] text-H2 uppercase md:max-w-[425px] md:text-H1`}>{name}</h2>
 					<p className='max-w-[525px] text-sm leading-6 text-[#7d7d7d]'>{description}</p>
-					<LinkButton url={`/category/${category}/${slug}`} />
+					<LinkButton href={`/category/${category}/${slug}`} />
 				</div>
 			</div>
 		</AnimateSection>

@@ -60,7 +60,7 @@ export const ModalCheckout = () => {
 							<p className='font-bold text-white'>$ {grandTotal}</p>
 						</div>
 					</div>
-					<LinkButton onHandleClick={handleCleanCart} url={navigationPaths.home.path} title='back to home' />
+					<LinkButton onClick={handleCleanCart} href={navigationPaths.home.path} title='back to home' />
 				</div>
 			</div>
 		</Portal>

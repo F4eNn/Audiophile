@@ -1,7 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
 
 import { Input } from '../ui/Input';
 import { Label } from '../ui/Label';
@@ -30,7 +29,7 @@ export const Login = () => {
 		try {
 			setIsSubmitting(true);
 
-			const res = await fetch(`http://127.0.0.1:1337/api/auth/local`, {
+			const res = await fetch(`${STRAPI_URL}/auth/local`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

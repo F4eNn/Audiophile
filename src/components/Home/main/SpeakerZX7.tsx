@@ -20,7 +20,7 @@ export const SpeakerZX7 = () => {
 						<div className='ml-6 space-y-8 sm:ml-12 md:ml-14 lg:ml-36'>
 							<h2 className='text-H2 uppercase'>zx7 speaker</h2>
 							<LinkButton
-								url={navigationPaths.SpeakerZX7.path}
+								href={navigationPaths.SpeakerZX7.path}
 								label={navigationPaths.SpeakerZX7.label}
 								bg='bg-none'
 								hoverTextColor='hover:text-white'

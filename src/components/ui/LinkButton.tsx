@@ -1,8 +1,9 @@
-import Link from 'next/link';
-import React from 'react';
+import Link, { LinkProps } from 'next/link';
+import React, { AnchorHTMLAttributes } from 'react';
 
-type LinkButtonProps = {
-	url: string;
+type DefaultProps = Pick<LinkProps, 'href' | 'onClick'> & Pick<AnchorHTMLAttributes<HTMLAnchorElement>, 'aria-label'>;
+
+type LinkButtonProps = DefaultProps & {
 	bg?: string;
 	bgHover?: string;
 	label?: string;
@@ -10,11 +11,9 @@ type LinkButtonProps = {
 	isBorder?: boolean;
 	hoverTextColor?: string;
 	title?: string | 'see product';
-	onHandleClick?: () => void;
 };
 
 export const LinkButton = ({
-	url,
 	bg = 'bg-primary',
 	textColor = 'text-white',
 	bgHover = 'hover:bg-secondary',
@@ -22,13 +21,12 @@ export const LinkButton = ({
 	label,
 	hoverTextColor,
 	title = 'see product',
-	onHandleClick,
+	...rest
 }: LinkButtonProps) => {
 	return (
 		<Link
+			{...rest}
 			aria-label={label}
-			onClick={onHandleClick}
-			href={url}
 			className={`inline-block px-10 py-3 text-center font-[500] uppercase  ${bg} ${textColor} ${bgHover} ${hoverTextColor} ${
 				isBorder ? 'border-[1px] border-primaryDark' : ''
 			} colors-300`}
