@@ -66,11 +66,8 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 		return countPurchaseItems;
 	};
 
-	const cartWithoutDuplicates = (cartString: string | null) => {
+	const addUniqueItemsToCart = (cartString: string | null) => {
 		if (cartString !== null) {
-			let updatedItem;
-			let updateCart;
-
 			const parseCart: CartTypes[] = JSON.parse(cartString);
 			const cartStorage: CartTypes[] = parseCart.filter(i => i !== null);
 
@@ -79,14 +76,7 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 			if (existingCartItem === -1 && cartItem) {
 				localStorage.setItem('cart', JSON.stringify([...cartStorage, cartItem]));
 			} else if (cartItem) {
-				const existingItem = cartStorage[existingCartItem];
-				updatedItem = {
-					...existingItem,
-					quantity: existingItem.quantity + cartItem.quantity,
-				};
-				updateCart = [...cartStorage];
-				updateCart[existingCartItem] = updatedItem;
-				localStorage.setItem('cart', JSON.stringify(updateCart));
+				updateQuantityOfProducts(cartStorage, existingCartItem);
 			}
 		} else {
 			localStorage.setItem('cart', JSON.stringify([]));
@@ -94,16 +84,25 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 		}
 	};
 
-	const updateQuantity = (cartItems: CartTypes[], idx: number, value: number) => {
-		let updateCart;
-		const targetItem = cartItems[idx];
-		const newQuantity = {
-			...targetItem,
-			quantity: targetItem.quantity + value,
-		};
-		updateCart = [...cartItems];
-		updateCart[idx] = newQuantity;
+	const updateQuantityOfProducts = (cart: CartTypes[], idxItem: number, value?: number) => {
+		let updateCart = [...cart];
 
+		if (cartItem) {
+			const existingItem = updateCart[idxItem];
+			const updatedItem = {
+				...existingItem,
+				quantity: existingItem.quantity + cartItem!.quantity,
+			};
+			updateCart[idxItem] = updatedItem;
+		} else {
+			const targetItem = updateCart[idxItem];
+			const newQuantity = {
+				...targetItem,
+				quantity: targetItem.quantity + value!,
+			};
+			updateCart = [...cart];
+			updateCart[idxItem] = newQuantity;
+		}
 		localStorage.setItem('cart', JSON.stringify(updateCart));
 	};
 
@@ -114,11 +113,11 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 			const sumItems = parseItems.reduce((acc, curentValue) => acc + curentValue.price * curentValue.quantity, 0);
 
 			if (isIncremenetQuantity.isChange) {
-				updateQuantity(parseItems, isIncremenetQuantity.idx, 1);
+				updateQuantityOfProducts(parseItems, isIncremenetQuantity.idx, 1);
 				setIncremenetQuantity({ isChange: false, idx: 0 });
 			}
 			if (isDecrementQuantity.isChange) {
-				updateQuantity(parseItems, isDecrementQuantity.idx, -1);
+				updateQuantityOfProducts(parseItems, isDecrementQuantity.idx, -1);
 				setDecrementQuantity({ isChange: false, idx: 0 });
 			}
 			setCart(parseItems);
@@ -128,7 +127,7 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 
 	useEffect(() => {
 		const cartString = localStorage.getItem('cart');
-		cartWithoutDuplicates(cartString);
+		addUniqueItemsToCart(cartString);
 
 		const current = localStorage.getItem('cart');
 		if (current) {
