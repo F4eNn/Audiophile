@@ -28,12 +28,12 @@ export const UserProfilePicture = (props: UserProfilePictureProps) => {
 	return (
 		<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className=' relative ml-auto mt-6 w-max '>
 			<div
-				className={` colors-300 colors-300 relative rounded-full ${
+				className={` colors-300 colors-300 relative mt-4 rounded-full md:mt-0 ${
 					avatarUrl ? 'border-[3px] p-0' : 'border-[1px] p-3'
 				} border-primary  text-primary`}
 			>
 				{avatarUrl ? (
-					<div className='relative aspect-square w-[200px] rounded-full'>
+					<div className='relative aspect-square  w-[200px] rounded-full'>
 						<Image
 							src={`${NGROK_URL}${avatarUrl}`}
 							alt={`${username} avatar`}

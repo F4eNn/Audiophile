@@ -92,11 +92,11 @@ export const PurchaseHistory = () => {
 						)}
 						{dataHistory.map((items, idx) => {
 							return (
-								<div key={idx} className='my-10 rounded-md bg-white p-10'>
+								<div key={idx} className='my-10 rounded-md bg-white p-4 sm:p-10'>
 									<HistoryItem createdAt={items.createdAt} history={items.history} />
-									<div className='flex items-center justify-between'>
-										<span className=' text-H5 font-bold text-brown'>Total(VAT)</span>
-										<span className='text-H4 font-bold'>${items.totalPrice}</span>
+									<div className='flex items-center justify-between px-3 sm:px-0'>
+										<span className=' font-bold  text-brown sm:text-H5'>Total(VAT)</span>
+										<span className='text-H5 font-bold sm:text-H4'>${items.totalPrice}</span>
 									</div>
 								</div>
 							);

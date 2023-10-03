@@ -20,22 +20,25 @@ export const HistoryItem = ({ history, createdAt }: HistoryItemProps) => {
 		<div className='my-10 '>
 			{history.map(({ image, name, price, quantity }, idx) => {
 				return (
-					<div key={name + idx} className=' '>
+					<div key={name + idx}>
 						{idx === 0 ? (
 							<div>
-								<div className='  flex flex-1 items-start gap-5'>
-									<div className='relative aspect-square w-28 overflow-hidden rounded-md'>
-										<Image src={image} alt={name} fill />
+								<div className='flex  flex-1 flex-col items-start gap-5 sm:flex-row'>
+									<div className='flex w-full items-center justify-center gap-6 sm:w-max'>
+										<div className='relative aspect-square w-32 overflow-hidden rounded-md sm:w-28'>
+											<Image src={image} alt={name} fill />
+										</div>
+										<span className='text-H5 font-bold text-primaryDark sm:hidden'>{name}</span>
 									</div>
-									<div className='flex flex-1  flex-col justify-start gap-7 p-3'>
-										<div className='flex justify-between'>
-											<span className='w-[100px] font-bold text-primaryDark'>{name}</span>
+									<div className='mt-5 flex  w-full flex-1 flex-col justify-start gap-7 p-3'>
+										<div className='flex justify-between  '>
+											<span className='hidden w-[100px] font-bold text-primaryDark sm:inline-block'>{name}</span>
 											<div className='space-x-2 font-bold text-primaryDark'>
 												<span>{quantity}x</span> <span>{price}$</span>
 											</div>
 											<span className='font-bold text-primaryDark'>{quantity * price}$</span>
 										</div>
-										<div className='flex justify-between'>
+										<div className='flex items-center justify-between'>
 											{history.length > 1 && (
 												<button
 													onClick={showMore}
@@ -56,7 +59,7 @@ export const HistoryItem = ({ history, createdAt }: HistoryItemProps) => {
 							<>
 								{isVisible && (
 									<div>
-										<div className=' ml-10 flex flex-1 items-center gap-5'>
+										<div className=' flex flex-1 items-center gap-5 sm:ml-10'>
 											<div
 												className={`relative aspect-square ${
 													idx === 0 ? 'w-28' : 'my-5 w-20'
@@ -64,12 +67,14 @@ export const HistoryItem = ({ history, createdAt }: HistoryItemProps) => {
 											>
 												<Image src={image} alt={name} fill />
 											</div>
-											<div className='flex flex-1 justify-between'>
+											<div className='flex flex-1 flex-col justify-between gap-3 sm:gap-0'>
 												<span className='w-[100px]  font-bold  text-primaryDark'>{name}</span>
-												<div className='space-x-2 font-bold text-primaryDark'>
-													<span>{quantity}x</span> <span>{price}$</span>
+												<div className='flex justify-between'>
+													<div className='space-x-2 font-bold text-primaryDark'>
+														<span>{quantity}x</span> <span>{price}$</span>
+													</div>
+													<span className='font-bold text-primaryDark'>{quantity * price}$</span>
 												</div>
-												<span className='font-bold text-primaryDark'>{quantity * price}$</span>
 											</div>
 										</div>
 									</div>

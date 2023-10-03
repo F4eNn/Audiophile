@@ -99,7 +99,7 @@ export const AccountProfile = () => {
 						<UserProfilePicture {...userInfo} setIsUpdate={setIsUserUpdated} />
 					</>
 				) : (
-					<div className='mt-10 flex flex-1 justify-center '>
+					<div className='mx-auto mt-10 flex flex-1 justify-center '>
 						<LoadingSpinner />
 					</div>
 				)}
@@ -130,7 +130,7 @@ export const AccountProfile = () => {
 					<span className='mx-auto text-lg font-[500] text-brown'>Total money spent</span>
 				</div>
 			) : (
-				<div className='mt-10 flex flex-1 justify-center '>
+				<div className='mx-auto mb-5 mt-10 flex flex-1 justify-center '>
 					<LoadingSpinner />
 				</div>
 			)}
