@@ -8,9 +8,9 @@ const Home = () => {
 	return (
 		<main className='h-full w-full  '>
 			<Hero />
-			<div className='py-32 lg:py-52'>
+			<section id='category' className='py-32 lg:py-52'>
 				<CategoryNav />
-			</div>
+			</section>
 			<SpeakerZX9 />
 			<SpeakerZX7 />
 			<Earphones />

@@ -7,7 +7,7 @@ import { AnimateSection } from '@/components/ui/AnimateSection';
 
 export const CategoryNav = () => {
 	return (
-		<section id='category' className='flex'>
+		<div className='flex'>
 			<Wrapper>
 				<AnimateSection>
 					<ul className='flex flex-wrap gap-20 gap-y-28'>
@@ -17,6 +17,6 @@ export const CategoryNav = () => {
 					</ul>
 				</AnimateSection>
 			</Wrapper>
-		</section>
+		</div>
 	);
 };

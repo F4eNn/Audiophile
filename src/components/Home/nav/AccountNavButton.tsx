@@ -11,7 +11,7 @@ import { useUser } from '@/context/AuthCtx';
 import { getUserFromLocalCookie, unsetToken } from '@/helpers/auth';
 
 export const AccountNavButton = () => {
-	const [isVisible, setIsVisible] = useToggle(true);
+	const [isVisible, setIsVisible] = useToggle(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const [username, setUsername] = useState('');
@@ -57,12 +57,12 @@ export const AccountNavButton = () => {
 			<button
 				ref={buttonRef}
 				onClick={handleShowSettings}
-				className='colors-300  py-3 text-center text-H6 capitalize hover:text-primary'
+				className='colors-300  py-3 text-center text-H6 hover:text-primary'
 			>
-				<span className='hidden items-center gap-1 sm:flex'>
+				<span className='hidden items-center gap-1 lg:flex'>
 					My account {isVisible ? <BsChevronUp size='1.2em' /> : <BsChevronDown size='1.2em' />}
 				</span>
-				<span className='text-H2 sm:hidden'>
+				<span className='text-H2 lg:hidden'>
 					<BiUser />
 				</span>
 			</button>
@@ -74,7 +74,7 @@ export const AccountNavButton = () => {
 				>
 					{user ? (
 						<>
-							<p className='mx-auto my-5 text-H5 font-[600] text-primaryDark'>
+							<p className='mx-auto my-3 text-H5 font-[600] text-primaryDark'>
 								Hi <span className='capitalize text-primary'>{username}</span>
 							</p>
 							<LinkButton url={navigationPaths.account.path} title='Account' />

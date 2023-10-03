@@ -31,10 +31,10 @@ export const Desktop = ({ isScroll, setCart }: DesktopProps) => {
 					isScroll || !defaultPaths.includes(pathname) ? 'border-primaryDark py-4 ' : 'border-darkGray py-7 '
 				} opacity-0 md:flex lg:mx-7  `}
 			>
-				<span>
+				<span className='md:mr-10'>
 					<Logo />
 				</span>
-				<ul className='-ml-[5%] flex items-center gap-7 text-sm font-[500] uppercase tracking-widest lg:-ml-[15%] lg:gap-10 lg:text-base'>
+				<ul className='-ml-[5%] flex items-center gap-7 text-sm font-[500] uppercase tracking-widest lg:text-base xl:-ml-[15%] xl:gap-10'>
 					{desktopNav.map(([url, title]) => (
 						<li
 							className={`desktopLink transition-colors duration-300 hover:text-primary ${
@@ -48,7 +48,7 @@ export const Desktop = ({ isScroll, setCart }: DesktopProps) => {
 						</li>
 					))}
 				</ul>
-				<div className='flex items-center gap-5'>
+				<div className='flex items-center gap-7'>
 					<CartButton toggleCart={setCart} />
 					<AccountNavButton />
 				</div>
