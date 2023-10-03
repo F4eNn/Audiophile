@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import { BiUser } from 'react-icons/bi';
 import { useRouter } from 'next/navigation';
@@ -8,13 +8,13 @@ import { navigationPaths } from '@/constants/navigation';
 import HelloIcon from '../../../../public/assets/hello-rafiki.svg';
 import { useToggle } from '@/hooks/useToggle';
 import { useUser } from '@/context/AuthCtx';
-import { unsetToken } from '@/helpers/auth';
+import { getUserFromLocalCookie, unsetToken } from '@/helpers/auth';
 
 export const AccountNavButton = () => {
-	const [isVisible, setIsVisible] = useToggle();
+	const [isVisible, setIsVisible] = useToggle(true);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
-
+	const [username, setUsername] = useState('');
 	const { refresh } = useRouter();
 
 	const { user, setIsAuth } = useUser();
@@ -45,7 +45,13 @@ export const AccountNavButton = () => {
 		refresh();
 		setIsAuth(false);
 	};
-
+	useEffect(() => {
+		const getUsername = async () => {
+			const username = await getUserFromLocalCookie();
+			setUsername(username);
+		};
+		getUsername();
+	}, []);
 	return (
 		<div className=' relative '>
 			<button
@@ -68,7 +74,9 @@ export const AccountNavButton = () => {
 				>
 					{user ? (
 						<>
-							<p className='text-primaryDark'>zalogowany użytkownik</p>
+							<p className='mx-auto my-5 text-H5 font-[600] text-primaryDark'>
+								Hi <span className='capitalize text-primary'>{username}</span>
+							</p>
 							<LinkButton url={navigationPaths.account.path} title='Account' />
 							<button onClick={logout} className='colors-300  bg-error py-3 text-white hover:bg-error/75'>
 								Log out
