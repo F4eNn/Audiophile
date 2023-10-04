@@ -4,7 +4,7 @@ type ButtonAttributes = 'onClick' | 'type';
 
 type ButtonPrimaryProps = Pick<ButtonHTMLAttributes<HTMLButtonElement>, ButtonAttributes> & {
 	title: string;
-	classNames: string;
+	classNames?: string;
 };
 
 export const ButtonPrimary = ({ title, classNames, ...props }: ButtonPrimaryProps) => {
