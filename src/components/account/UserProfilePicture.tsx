@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
-import { AiOutlineUser } from 'react-icons/ai';
-import { FaPen } from 'react-icons/fa6';
-import Image from 'next/image';
+import React, { useState } from 'react'
+import { AiOutlineUser } from 'react-icons/ai'
+import { FaPen } from 'react-icons/fa6'
+import Image from 'next/image'
 
-import { useToggle } from '@/hooks/useToggle';
-import { UploadModal } from './UploadModal';
-import { UserInfoType } from './AccountProfile';
-import { DispatchAction } from '@/types/general';
-import { NGROK_URL } from '@/constants/url';
+import { useToggle } from '@/hooks/useToggle'
+import { UploadModal } from './UploadModal'
+import { UserInfoType } from './AccountProfile'
+import { DispatchAction } from '@/types/general'
+import { NGROK_URL } from '@/constants/url'
 
 type UserProfilePictureProps = Pick<UserInfoType, 'avatarID' | 'avatarUrl' | 'username' | 'id'> & {
-	setIsUpdate: DispatchAction<boolean>;
-};
+	setIsUpdate: DispatchAction<boolean>
+}
 
 export const UserProfilePicture = (props: UserProfilePictureProps) => {
-	const { avatarUrl, username } = props;
-	const [onAvatar, setOnAvatar] = useState(false);
-	const [isModal, toggleModal] = useToggle();
-
+	const { avatarUrl, username } = props
+	const [onAvatar, setOnAvatar] = useState(false)
+	const [isModal, toggleModal] = useToggle()
 	const handleMouseEnter = () => {
-		setOnAvatar(true);
-	};
+		setOnAvatar(true)
+	}
 	const handleMouseLeave = () => {
-		setOnAvatar(false);
-	};
+		setOnAvatar(false)
+	}
 
 	return (
 		<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className=' relative ml-auto mt-6 w-max '>
@@ -32,18 +31,22 @@ export const UserProfilePicture = (props: UserProfilePictureProps) => {
 					avatarUrl ? 'border-[3px] p-0' : 'border-[1px] p-3'
 				} border-primary  text-primary`}
 			>
-				{avatarUrl ? (
-					<div className='relative aspect-square  w-[200px] rounded-full'>
-						<Image
-							src={`${NGROK_URL}${avatarUrl}`}
-							alt={`${username} avatar`}
-							className=' rounded-full object-cover'
-							fill
-						/>
-					</div>
-				) : (
-					<AiOutlineUser size='9em' />
-				)}
+				<div role='contentinfo'>
+					{avatarUrl ? (
+						<div className='relative aspect-square  w-[200px] rounded-full'>
+							<Image
+								src={`${NGROK_URL}${avatarUrl}`}
+								alt={`${username} avatar`}
+								className=' rounded-full object-cover'
+								fill
+							/>
+						</div>
+					) : (
+						<div data-testId='defaultAvatar'>
+							<AiOutlineUser size='9em' />
+						</div>
+					)}
+				</div>
 				<div className='absolute right-5 top-1 text-gray'>
 					<FaPen size='1.5em' />
 				</div>
@@ -56,7 +59,7 @@ export const UserProfilePicture = (props: UserProfilePictureProps) => {
 					</button>
 				)}
 			</div>
-			{isModal && <UploadModal handleLeave={handleMouseLeave} toggle={toggleModal} {...props} />}
+			<UploadModal handleLeave={handleMouseLeave} toggle={toggleModal} {...props} isOpen={isModal} />
 		</div>
-	);
-};
+	)
+}

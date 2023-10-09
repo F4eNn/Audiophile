@@ -1,83 +1,83 @@
-'use client';
-import React, { useEffect, useState } from 'react';
+'use client'
+import React, { useEffect, useState } from 'react'
 
-import { getTokenFromLocalCookie } from '@/helpers/auth';
-import { LoadingSpinner } from '../ui/LoadingSpinner';
-import { useAccountCtx } from '@/context/AccountCtx';
-import { UserProfilePicture } from './UserProfilePicture';
-import { STRAPI_URL } from '@/constants/url';
+import { getTokenFromLocalCookie } from '@/helpers/auth'
+import { LoadingSpinner } from '../ui/LoadingSpinner'
+import { useAccountCtx } from '@/context/AccountCtx'
+import { UserProfilePicture } from './UserProfilePicture'
+import { STRAPI_URL } from '@/constants/url'
 
 export type UserInfoType = {
-	username: string;
-	email: string;
-	createdAt: string;
-	avatarID: number;
-	avatarUrl: string;
-	id: string;
-};
+	username: string
+	email: string
+	createdAt: string
+	avatarID: number
+	avatarUrl: string | null
+	id: string
+}
 type DurationType = {
-	years: number;
-	days: number;
-	months: number;
-};
+	years: number
+	days: number
+	months: number
+}
 
 export const AccountProfile = () => {
-	const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
-	const [isUserUpdated, setIsUserUpdated] = useState(false);
-	const [userDuration, setUserDuration] = useState<DurationType>({ days: 0, months: 0, years: 0 });
-	const { generalUserInfo } = useAccountCtx();
+	const [userInfo, setUserInfo] = useState<UserInfoType | null>(null)
+	const [isUserUpdated, setIsUserUpdated] = useState(false)
+	const [userDuration, setUserDuration] = useState<DurationType>({ days: 0, months: 0, years: 0 })
+	const { generalUserInfo } = useAccountCtx()
 
-	const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
+	const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate()
 
 	const countUserDurationTime = (createdAt: string) => {
-		const createdDateTime = new Date(createdAt);
-		const newDate = new Date();
-		const currentMonthDays = getDaysInMonth(newDate.getFullYear(), newDate.getMonth());
+		const createdDateTime = new Date(createdAt)
+		const newDate = new Date()
+		const currentMonthDays = getDaysInMonth(newDate.getFullYear(), newDate.getMonth())
 
-		const timeDifference = newDate.getTime() - createdDateTime.getTime();
-		const milisecondsInDay = 1000 * 60 * 60 * 24;
+		const timeDifference = newDate.getTime() - createdDateTime.getTime()
+		const milisecondsInDay = 1000 * 60 * 60 * 24
 
-		let totalDays = Math.floor(timeDifference / milisecondsInDay);
+		let totalDays = Math.floor(timeDifference / milisecondsInDay)
 
-		let months = 0;
-		let days = totalDays % currentMonthDays;
-		let years = 0;
+		let months = 0
+		let days = totalDays % currentMonthDays
+		let years = 0
 
 		while (totalDays >= currentMonthDays) {
-			totalDays -= currentMonthDays;
-			months++;
+			totalDays -= currentMonthDays
+			months++
 		}
 		while (months >= 12) {
-			months -= 12;
-			years++;
+			months -= 12
+			years++
 		}
-		setUserDuration({ days, months, years });
-	};
+		setUserDuration({ days, months, years })
+	}
 
 	useEffect(() => {
 		const getProfileData = async () => {
 			try {
-				const jwt = getTokenFromLocalCookie();
+				const jwt = getTokenFromLocalCookie()
 				const res = await fetch(`${STRAPI_URL}/users/me`, {
 					headers: {
 						Authorization: `Bearer ${jwt}`,
 					},
-				});
-				const resData: UserInfoType = await res.json();
-				const { createdAt, email, username, avatarID, avatarUrl, id: userID } = resData;
-				countUserDurationTime(createdAt);
+				})
+				const resData: UserInfoType = await res.json()
+				const { createdAt, email, username, avatarID, avatarUrl, id: userID } = resData
+				countUserDurationTime(createdAt)
 				setTimeout(() => {
-					setUserInfo({ username, email, createdAt, avatarID, avatarUrl, id: userID });
-				}, 500);
-				setIsUserUpdated(false);
+					setUserInfo({ username, email, createdAt, avatarID, avatarUrl, id: userID })
+				}, 500)
+				setIsUserUpdated(false)
 			} catch (error) {
-				console.error(error);
+				console.error(error)
 			}
-		};
+		}
 
-		getProfileData();
+		getProfileData()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isUserUpdated]);
+	}, [isUserUpdated])
 
 	return (
 		<div className='flex flex-col items-start justify-center rounded-md bg-white md:flex-row lg:gap-7 '>
@@ -135,5 +135,5 @@ export const AccountProfile = () => {
 				</div>
 			)}
 		</div>
-	);
-};
+	)
+}
