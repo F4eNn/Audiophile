@@ -17,6 +17,7 @@ export const UserProfilePicture = (props: UserProfilePictureProps) => {
 	const { avatarUrl, username } = props
 	const [onAvatar, setOnAvatar] = useState(false)
 	const [isModal, toggleModal] = useToggle()
+
 	const handleMouseEnter = () => {
 		setOnAvatar(true)
 	}
