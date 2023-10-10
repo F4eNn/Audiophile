@@ -1,60 +1,58 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { BsChevronDown, BsChevronUp } from 'react-icons/bs';
-import { BiUser } from 'react-icons/bi';
-import { useRouter } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react'
+import { BsChevronDown, BsChevronUp } from 'react-icons/bs'
+import { BiUser } from 'react-icons/bi'
+import { useRouter } from 'next/navigation'
 
-import { LinkButton } from '@/components/ui/LinkButton';
-import { navigationPaths } from '@/constants/navigation';
-import HelloIcon from '../../../../public/assets/hello-rafiki.svg';
-import { useToggle } from '@/hooks/useToggle';
-import { useUser } from '@/context/AuthCtx';
-import { getUserFromLocalCookie, unsetToken } from '@/helpers/auth';
+import { LinkButton } from '@/components/ui/LinkButton'
+import { navigationPaths } from '@/constants/navigation'
+import HelloIcon from '../../../../public/assets/hello-rafiki.svg'
+import { useToggle } from '@/hooks/useToggle'
+import { useUser } from '@/context/AuthCtx'
+import { getUserFromLocalCookie, unsetToken } from '@/helpers/auth'
 
 export const AccountNavButton = () => {
-	const [isVisible, toggleAccountPopup] = useToggle(false);
-	const dropdownRef = useRef<HTMLDivElement>(null);
-	const buttonRef = useRef<HTMLButtonElement>(null);
-	const [username, setUsername] = useState('');
-	const { refresh } = useRouter();
+	const [isVisible, toggleAccountPopup] = useToggle(false)
+	const dropdownRef = useRef<HTMLDivElement>(null)
+	const buttonRef = useRef<HTMLButtonElement>(null)
+	const [username, setUsername] = useState('')
+	const { refresh } = useRouter()
 
-	const { user, setIsAuth } = useUser();
+	const { user, setIsAuth } = useUser()
 
 	const handleShowSettings = () => {
-		toggleAccountPopup();
-	};
+		toggleAccountPopup()
+	}
 
 	const handleCloseDropdown = (e: any) => {
-		const target = e.target as HTMLElement;
+		const target = e.target as HTMLElement
 		if (
 			dropdownRef.current &&
 			isVisible &&
 			!dropdownRef.current.contains(target) &&
 			!buttonRef.current?.contains(target)
 		) {
-			toggleAccountPopup();
+			toggleAccountPopup()
 		}
-	};
+	}
+	const getUsername = async () => {
+		const username = await getUserFromLocalCookie()
+		setUsername(username)
+	}
 	useEffect(() => {
-		document.addEventListener('mousedown', handleCloseDropdown);
-		return () => document.removeEventListener('mousedown', handleCloseDropdown);
+		document.addEventListener('mousedown', handleCloseDropdown)
+		getUsername()
+		return () => document.removeEventListener('mousedown', handleCloseDropdown)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isVisible]);
+	}, [isVisible])
 
 	const logout = () => {
-		unsetToken();
-		refresh();
-		setIsAuth(false);
-		toggleAccountPopup();
-	};
-	useEffect(() => {
-		const getUsername = async () => {
-			const username = await getUserFromLocalCookie();
-			setUsername(username);
-		};
-		getUsername();
-	}, []);
+		unsetToken()
+		refresh()
+		setIsAuth(false)
+		toggleAccountPopup()
+	}
 
-	const closeAccountPopup = () => toggleAccountPopup();
+	const closeAccountPopup = () => toggleAccountPopup()
 
 	return (
 		<div className=' relative '>
@@ -110,5 +108,5 @@ export const AccountNavButton = () => {
 				</div>
 			)}
 		</div>
-	);
-};
+	)
+}

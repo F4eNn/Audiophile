@@ -1,24 +1,26 @@
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useRouter } from 'next/navigation'
 
-import { navigationPaths } from '@/constants/navigation';
-import { Label } from '../ui/Label';
-import { Input } from '../ui/Input';
-import { SubmitButton } from './SubmitButton';
-import { schemaRegister } from '@/utils/Validation';
-import { InputCard } from '../checkout/form/InputCard';
-import { ErrorMessage } from '../ui/ErrorMessage';
-import { STRAPI_URL } from '@/constants/url';
+import { navigationPaths } from '@/constants/navigation'
+import { Label } from '../ui/Label'
+import { Input } from '../ui/Input'
+import { SubmitButton } from './SubmitButton'
+import { schemaRegister } from '@/utils/Validation'
+import { InputCard } from '../checkout/form/InputCard'
+import { ErrorMessage } from '../ui/ErrorMessage'
+import { STRAPI_URL } from '@/constants/url'
+import { useUser } from '@/context/AuthCtx'
+import { setToken } from '@/helpers/auth'
 
-export type RegisterValues = yup.InferType<typeof schemaRegister>;
+export type RegisterValues = yup.InferType<typeof schemaRegister>
 
 export const SignUp = () => {
-	const [isUser, setIsUser] = useState({ accountExist: false, msg: '' });
-	const router = useRouter();
+	const [isUser, setIsUser] = useState({ accountExist: false, msg: '' })
+	const router = useRouter()
 	const {
 		formState: { errors, isSubmitting },
 		handleSubmit,
@@ -26,7 +28,8 @@ export const SignUp = () => {
 	} = useForm<RegisterValues>({
 		defaultValues: { confirmationPassword: '', email: '', name: '', password: '' },
 		resolver: yupResolver(schemaRegister),
-	});
+	})
+	const { setIsAuth } = useUser()
 
 	const handleRegisterUser = async (data: RegisterValues) => {
 		try {
@@ -40,25 +43,27 @@ export const SignUp = () => {
 					email: data.email,
 					password: data.password,
 				}),
-			});
-			const responseData = await response.json();
+			})
+			const responseData = await response.json()
 
 			if (responseData.error && responseData.error.status === 400) {
 				setIsUser({
 					accountExist: true,
 					msg: responseData.error.message,
-				});
+				})
 			} else {
 				setIsUser({
 					accountExist: false,
 					msg: '',
-				});
-				router.push(navigationPaths.home.path);
+				})
+				router.replace(navigationPaths.home.path)
+				setToken(responseData)
+				setIsAuth(true)
 			}
 		} catch (error) {
-			console.error(error);
+			console.error(error)
 		}
-	};
+	}
 	return (
 		<div className='mx-5 mt-[150px] max-w-[600px] rounded-md  bg-white  p-10 sm:mx-auto'>
 			<h2 className='text-H2 font-bold'>Register</h2>
@@ -102,5 +107,5 @@ export const SignUp = () => {
 				Have an account?
 			</Link>
 		</div>
-	);
-};
+	)
+}

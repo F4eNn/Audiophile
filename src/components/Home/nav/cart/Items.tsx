@@ -1,15 +1,15 @@
-import Image from 'next/image';
-import React from 'react';
-import Lottie from 'lottie-react';
+import Image from 'next/image'
+import React from 'react'
+import Lottie from 'lottie-react'
 
-import { QuantityInput } from '@/components/ui/QuantityInput';
-import { CartTypes } from '@/context/CartCtx';
-import emptyCartAnimation from '../../../../../public/animation_lmhnhdpl.json';
+import { QuantityInput } from '@/components/ui/QuantityInput'
+import { CartTypes } from '@/context/CartCtx'
+import emptyCartAnimation from '../../../../../public/animation_lmhnhdpl.json'
 
 type ItemsCart = {
-	cart: CartTypes[];
-	isSummary?: boolean;
-};
+	cart: CartTypes[]
+	isSummary?: boolean
+}
 
 export const Items = ({ cart, isSummary = false }: ItemsCart) => {
 	return (
@@ -43,7 +43,7 @@ export const Items = ({ cart, isSummary = false }: ItemsCart) => {
 									</div>
 								)}
 							</div>
-						);
+						)
 					})}
 				</>
 			) : isSummary ? (
@@ -52,5 +52,5 @@ export const Items = ({ cart, isSummary = false }: ItemsCart) => {
 				<Lottie animationData={emptyCartAnimation} style={{ height: '320px' }} />
 			)}
 		</>
-	);
-};
+	)
+}

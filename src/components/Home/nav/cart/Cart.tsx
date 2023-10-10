@@ -1,34 +1,34 @@
-import React from 'react';
-import { useRouter } from 'next/navigation';
+import React from 'react'
+import { useRouter } from 'next/navigation'
 
-import { useCartCtx } from '@/context/CartCtx';
-import { Wrapper } from '@/components/ui/Wrapper';
-import { OverlayCart } from './Overlay';
-import { Items } from './Items';
-import { navigationPaths } from '@/constants/navigation';
-import { errorNotifcation } from '@/constants/errorNotification';
+import { useCartCtx } from '@/context/CartCtx'
+import { Wrapper } from '@/components/ui/Wrapper'
+import { OverlayCart } from './Overlay'
+import { Items } from './Items'
+import { navigationPaths } from '@/constants/navigation'
+import { errorNotifcation } from '@/constants/errorNotification'
 type CartProps = {
-	isCartOpen: boolean;
-	setCart: () => void;
-};
+	isCartOpen: boolean
+	setCart: () => void
+}
 
 export const Cart = ({ isCartOpen, setCart }: CartProps) => {
-	const { cart, setCart: removeCartItems, totalPrice, setTotalPrice } = useCartCtx();
-	const { push } = useRouter();
+	const { cart, setCart: removeCartItems, totalPrice, setTotalPrice } = useCartCtx()
+	const { push } = useRouter()
 
 	const handleRemoveAll = () => {
-		localStorage.setItem('cart', JSON.stringify([]));
-		removeCartItems([]);
-		setTotalPrice(0);
-	};
+		localStorage.setItem('cart', JSON.stringify([]))
+		removeCartItems([])
+		setTotalPrice(0)
+	}
 
 	const goToCheckout = () => {
 		if (cart.length !== 0) {
-			push(navigationPaths.checkout.path);
+			push(navigationPaths.checkout.path)
 		} else {
-			errorNotifcation('Cart is empty');
+			errorNotifcation('Cart is empty')
 		}
-	};
+	}
 
 	return (
 		<Wrapper>
@@ -40,13 +40,13 @@ export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 						Remove all
 					</button>
 				</div>
-				<div
+				<ul
 					className={`cartScrollTrack cartScrollThumb cartScroll h-[425px] overflow-auto  ${
 						cart.length >= 4 ? 'pr-3' : ''
 					}`}
 				>
 					<Items cart={cart} />
-				</div>
+				</ul>
 				<div className='space-y-5'>
 					<p className='flex justify-between'>
 						<span className='uppercase text-brown'>Total</span>
@@ -63,5 +63,5 @@ export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 				</div>
 			</div>
 		</Wrapper>
-	);
-};
+	)
+}
