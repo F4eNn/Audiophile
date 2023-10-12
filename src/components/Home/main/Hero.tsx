@@ -1,22 +1,15 @@
-'use client';
-import React, { useRef } from 'react';
-import Image from 'next/image';
-import { BsChevronDoubleDown } from 'react-icons/bs';
+import React from 'react'
+import Image from 'next/image'
+import { BsChevronDoubleDown } from 'react-icons/bs'
 
-import { LinkButton } from '@/components/ui/LinkButton';
-import { Wrapper } from '@/components/ui/Wrapper';
-import { HeroSectionWrapper } from '@/components/ui/HeroSectionWrapper';
-import { navigationPaths } from '@/constants/navigation';
+import { LinkButton } from '@/components/ui/LinkButton'
+import { Wrapper } from '@/components/ui/Wrapper'
+import { HeroSectionWrapper } from '@/components/ui/HeroSectionWrapper'
+import { navigationPaths } from '@/constants/navigation'
 
 export const Hero = () => {
-	const heroRef = useRef<HTMLElement>(null);
-	const scrollToSection = () => {
-		const section = heroRef.current?.nextElementSibling as HTMLElement;
-		const test = section.offsetTop + section.offsetHeight - 650;
-		window.scrollTo({ top: test });
-	};
 	return (
-		<section ref={heroRef} className='overflow-hidden bg-lightDark'>
+		<section className='overflow-hidden bg-lightDark'>
 			<Wrapper>
 				<HeroSectionWrapper>
 					<div className={`relative  h-[100svh] w-full md:h-auto  md:min-h-[100vh]  `}>
@@ -47,10 +40,6 @@ export const Hero = () => {
 						</div>
 						<a
 							href='#category'
-							onClick={e => {
-								e.preventDefault();
-								scrollToSection();
-							}}
 							className='colors-300 absolute bottom-0 left-1/2 flex w-max -translate-y-1/2 animate-bounce  justify-center py-2 text-2xl text-gray hover:text-white md:bottom-5  md:text-4xl  lg:bottom-5'
 						>
 							<BsChevronDoubleDown />
@@ -59,5 +48,5 @@ export const Hero = () => {
 				</HeroSectionWrapper>
 			</Wrapper>
 		</section>
-	);
-};
+	)
+}
