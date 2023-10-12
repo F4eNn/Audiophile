@@ -43,7 +43,7 @@ export const UserProvider = ({ children }: ChildrenWithProps) => {
 	}, [isAuth])
 
 	useEffect(() => {
-		if (!userState && dataUser.user) {
+		if (!userState && dataUser) {
 			userState = dataUser.user
 			setIsAuth(true)
 		}

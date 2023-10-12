@@ -51,7 +51,6 @@ export const AccountNavButton = () => {
 		setIsAuth(false)
 		toggleAccountPopup()
 	}
-
 	const closeAccountPopup = () => toggleAccountPopup()
 
 	return (
