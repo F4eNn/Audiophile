@@ -46,3 +46,9 @@ React-Testing-Library | Helper for testing react components
 
 - husky, validator.js, cookie.js, react-spinners, react-toastify, eslint, and so on...
 
+<h2>What could I do better</h2>
+
+- Use clsx + twMerge for creating more reusable components
+- Use Zod for better typescript types incoming data from API, problably I would change zod instead yup
+
+<h2>What could I've learned</h2>
