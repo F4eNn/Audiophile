@@ -1,31 +1,32 @@
-'use client';
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+'use client'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
-import { BillingDetails } from './BillingDetails';
-import { ShippingInfo } from './ShippingInfo';
-import { PaymentDetails } from './PaymentDetails';
-import { schemaCheckout } from '@/utils/Validation';
-import { Summary } from '../Summary';
-import { ModalCheckout } from '../Modal';
-import { useUser } from '@/context/AuthCtx';
-import { getTokenFromLocalCookie, getUserFromLocalCookie } from '@/helpers/auth';
-import { useCartCtx } from '@/context/CartCtx';
-import { STRAPI_URL } from '@/constants/url';
+import { BillingDetails } from './BillingDetails'
+import { ShippingInfo } from './ShippingInfo'
+import { PaymentDetails } from './PaymentDetails'
+import { schemaCheckout } from '@/utils/Validation'
+import { Summary } from '../Summary'
+import { ModalCheckout } from '../Modal'
+import { useUser } from '@/context/AuthCtx'
+import { getTokenFromLocalCookie, getUserFromLocalCookie } from '@/helpers/auth'
+import { useCartCtx } from '@/context/CartCtx'
+import { STRAPI_URL } from '@/constants/url'
+import { errorNotifcation } from '@/constants/errorNotification'
 
-export type FormValues = yup.InferType<typeof schemaCheckout>;
+export type FormValues = yup.InferType<typeof schemaCheckout>
 
 export const CheckoutForm = () => {
-	const [isPayOnline, setIsPayOnline] = useState(true);
-	const { user } = useUser();
-	const { cart, grandTotal } = useCartCtx();
+	const [isPayOnline, setIsPayOnline] = useState(true)
+	const { user } = useUser()
+	const { cart, grandTotal } = useCartCtx()
 
 	const {
 		control,
 		handleSubmit,
-		formState: { errors, isSubmitSuccessful },
+		formState: { errors, isSubmitted },
 	} = useForm<FormValues>({
 		defaultValues: {
 			name: '',
@@ -40,11 +41,13 @@ export const CheckoutForm = () => {
 		},
 		resolver: yupResolver(schemaCheckout),
 		context: { isPayOnline },
-	});
-
+	})
 	const handleSentForm = async (_data: FormValues) => {
+		if (cart.length === 0) {
+			return errorNotifcation('Cart is empty')
+		}
 		if (user) {
-			const jwt = getTokenFromLocalCookie();
+			const jwt = getTokenFromLocalCookie()
 			await fetch(`${STRAPI_URL}/histories`, {
 				method: 'POST',
 				headers: {
@@ -58,9 +61,9 @@ export const CheckoutForm = () => {
 						username: await getUserFromLocalCookie(),
 					},
 				}),
-			});
+			})
 		}
-	};
+	}
 
 	return (
 		<form noValidate onSubmit={handleSubmit(handleSentForm)} className=' flex w-full flex-col gap-10 lg:flex-row'>
@@ -81,7 +84,7 @@ export const CheckoutForm = () => {
 					Continue & pay
 				</button>
 			</div>
-			{isSubmitSuccessful && <ModalCheckout />}
+			{isSubmitted && cart.length !== 0 && <ModalCheckout />}
 		</form>
-	);
-};
+	)
+}
