@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react'
 import { AiOutlineUser } from 'react-icons/ai'
 import { FaPen } from 'react-icons/fa6'
@@ -7,7 +8,6 @@ import { useToggle } from '@/hooks/useToggle'
 import { UploadModal } from './UploadModal'
 import { UserInfoType } from './AccountProfile'
 import { DispatchAction } from '@/types/general'
-import { STRAPI_URL_MEDIA } from '@/constants/url'
 
 type UserProfilePictureProps = Pick<UserInfoType, 'avatarID' | 'avatarUrl' | 'username' | 'id'> & {
 	setIsUpdate: DispatchAction<boolean>
@@ -24,7 +24,6 @@ export const UserProfilePicture = (props: UserProfilePictureProps) => {
 	const handleMouseLeave = () => {
 		setOnAvatar(false)
 	}
-
 	return (
 		<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className=' relative ml-auto mt-6 w-max '>
 			<div
@@ -35,12 +34,7 @@ export const UserProfilePicture = (props: UserProfilePictureProps) => {
 				<div role='contentinfo'>
 					{avatarUrl ? (
 						<div className='relative aspect-square  w-[200px] rounded-full'>
-							<Image
-								src={`${STRAPI_URL_MEDIA}${avatarUrl}`}
-								alt={`${username} avatar`}
-								className=' rounded-full object-cover'
-								fill
-							/>
+							<Image src={`${avatarUrl}`} alt={`${username} avatar`} className=' rounded-full object-cover' fill />
 						</div>
 					) : (
 						<div data-testId='defaultAvatar'>
