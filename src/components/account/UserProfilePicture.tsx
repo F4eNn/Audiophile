@@ -7,7 +7,7 @@ import { useToggle } from '@/hooks/useToggle'
 import { UploadModal } from './UploadModal'
 import { UserInfoType } from './AccountProfile'
 import { DispatchAction } from '@/types/general'
-import { STRAPI_URL } from '@/constants/url'
+import { STRAPI_URL_MEDIA } from '@/constants/url'
 
 type UserProfilePictureProps = Pick<UserInfoType, 'avatarID' | 'avatarUrl' | 'username' | 'id'> & {
 	setIsUpdate: DispatchAction<boolean>
@@ -36,7 +36,7 @@ export const UserProfilePicture = (props: UserProfilePictureProps) => {
 					{avatarUrl ? (
 						<div className='relative aspect-square  w-[200px] rounded-full'>
 							<Image
-								src={`https://1820-185-107-64-107.ngrok-free.app${avatarUrl}`}
+								src={`${STRAPI_URL_MEDIA}${avatarUrl}`}
 								alt={`${username} avatar`}
 								className=' rounded-full object-cover'
 								fill

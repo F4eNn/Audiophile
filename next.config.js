@@ -10,7 +10,8 @@ const nextConfig = {
 	},
 	images: {
 		remotePatterns: [
-			{ protocol: 'https', hostname: `${process.env.NEXT_PUBLIC_STRAPI_IMAGES}`, pathname: '/uploads/**' },
+			{ protocol: 'https', hostname: `${process.env.NEXT_PUBLIC_STRAPI_REMOTE_PATTERN}`, pathname: '/uploads/**' },
+			{ protocol: 'https', hostname: 'audiophile-p4dbpkm65-f4enn.vercel.app', pathname: '/uploads/**' },
 		],
 	},
 }

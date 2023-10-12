@@ -1,1 +1,2 @@
-export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL
+export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL_ENDPOINT
+export const STRAPI_URL_MEDIA = process.env.NEXT_PUBLIC_STRAPI_URL
