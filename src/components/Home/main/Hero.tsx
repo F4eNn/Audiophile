@@ -39,6 +39,7 @@ export const Hero = () => {
 							</div>
 						</div>
 						<a
+							aria-label='go to next section'
 							href='#category'
 							className='colors-300 absolute bottom-0 left-1/2 flex w-max -translate-y-1/2 animate-bounce  justify-center py-2 text-2xl text-gray hover:text-white md:bottom-5  md:text-4xl  lg:bottom-5'
 						>

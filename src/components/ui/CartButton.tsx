@@ -1,26 +1,27 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react'
 
-import Cart from '../../../public//assets/icon-cart.svg';
-import { useCartCtx } from '@/context/CartCtx';
-import { addToCartAnimation } from '@/animations/animation';
+import Cart from '../../../public//assets/icon-cart.svg'
+import { useCartCtx } from '@/context/CartCtx'
+import { addToCartAnimation } from '@/animations/animation'
 
 type CartButtonProps = {
-	toggleCart: () => void;
-};
+	toggleCart: () => void
+}
 
 export const CartButton = ({ toggleCart }: CartButtonProps) => {
-	const { cart, isAdd, itemsInCart } = useCartCtx();
-	const cartBtnRef = useRef<HTMLButtonElement>(null);
+	const { cart, isAdd, itemsInCart } = useCartCtx()
+	const cartBtnRef = useRef<HTMLButtonElement>(null)
 	const openCart = () => {
-		toggleCart();
-	};
+		toggleCart()
+	}
 	useEffect(() => {
 		if (isAdd) {
-			addToCartAnimation(cartBtnRef);
+			addToCartAnimation(cartBtnRef)
 		}
-	}, [isAdd]);
+	}, [isAdd])
 	return (
 		<button
+			aria-label='open cart'
 			ref={cartBtnRef}
 			onClick={openCart}
 			className='relative fill-white p-3 transition-colors duration-300 hover:fill-primary'
@@ -32,5 +33,5 @@ export const CartButton = ({ toggleCart }: CartButtonProps) => {
 			)}
 			<Cart />
 		</button>
-	);
-};
+	)
+}

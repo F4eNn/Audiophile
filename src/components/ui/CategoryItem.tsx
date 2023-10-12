@@ -1,14 +1,14 @@
-'use client';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import { usePathname } from 'next/navigation';
+'use client'
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+import { usePathname } from 'next/navigation'
 
-import ArrowRight from '../../../public/assets/icon-arrow-right.svg';
-import { ThumbnailProps } from '@/constants/thumbnails';
+import ArrowRight from '../../../public/assets/icon-arrow-right.svg'
+import { ThumbnailProps } from '@/constants/thumbnails'
 
 export const CategoryItem = ({ src, title, path }: ThumbnailProps) => {
-	const pathname = usePathname();
+	const pathname = usePathname()
 	return (
 		<Link
 			href={path}
@@ -16,13 +16,9 @@ export const CategoryItem = ({ src, title, path }: ThumbnailProps) => {
 				pathname === path ? 'scale-110 bg-secondary text-white' : 'bg-rose'
 			}  mx-auto h-40 w-full max-w-xs rounded-lg  pt-16 transition-all duration-300 hover:scale-110`}
 		>
-			<Image
-				src={src}
-				width={150}
-				height={150}
-				alt='product thumbnail'
-				className='absolute bottom-[75px] left-1/2 -translate-x-1/2'
-			/>
+			<div className='absolute bottom-[75px] left-1/2 aspect-square w-[150px] -translate-x-1/2'>
+				<Image src={src} fill alt='product thumbnail' />
+			</div>
 			<h3 className='mt-5 text-center text-H6 uppercase'>{title}</h3>
 			<span
 				className={`${
@@ -32,5 +28,5 @@ export const CategoryItem = ({ src, title, path }: ThumbnailProps) => {
 				shop <ArrowRight />
 			</span>
 		</Link>
-	);
-};
+	)
+}
