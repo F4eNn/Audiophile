@@ -61,7 +61,7 @@ export const SignUp = () => {
 				setIsAuth(true)
 			}
 		} catch (error) {
-			console.error(error)
+			console.error(`handle register user:`, error)
 		}
 	}
 	return (

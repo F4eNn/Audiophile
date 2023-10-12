@@ -20,6 +20,7 @@ export const UserProvider = ({ children }: ChildrenWithProps) => {
 	const registerPath = navigationPaths.register.path
 	const pathname = usePathname()
 	const router = useRouter()
+
 	useEffect(() => {
 		if (userState !== undefined) return
 
@@ -42,7 +43,7 @@ export const UserProvider = ({ children }: ChildrenWithProps) => {
 	}, [isAuth])
 
 	useEffect(() => {
-		if (!userState && dataUser) {
+		if (!userState && dataUser.user) {
 			userState = dataUser.user
 			setIsAuth(true)
 		}

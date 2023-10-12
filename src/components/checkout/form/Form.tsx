@@ -26,7 +26,7 @@ export const CheckoutForm = () => {
 	const {
 		control,
 		handleSubmit,
-		formState: { errors, isSubmitted },
+		formState: { errors, isSubmitSuccessful },
 	} = useForm<FormValues>({
 		defaultValues: {
 			name: '',
@@ -84,7 +84,7 @@ export const CheckoutForm = () => {
 					Continue & pay
 				</button>
 			</div>
-			{isSubmitted && cart.length !== 0 && <ModalCheckout />}
+			{isSubmitSuccessful && cart.length !== 0 && <ModalCheckout />}
 		</form>
 	)
 }
