@@ -36,7 +36,7 @@ export const UserProfilePicture = (props: UserProfilePictureProps) => {
 					{avatarUrl ? (
 						<div className='relative aspect-square  w-[200px] rounded-full'>
 							<Image
-								src={`${STRAPI_URL}${avatarUrl}`}
+								src={`https://1820-185-107-64-107.ngrok-free.app${avatarUrl}`}
 								alt={`${username} avatar`}
 								className=' rounded-full object-cover'
 								fill

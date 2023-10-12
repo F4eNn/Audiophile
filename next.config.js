@@ -5,12 +5,14 @@ const nextConfig = {
 		config.module.rules.push({
 			test: /\.svg$/,
 			use: ['@svgr/webpack'],
-		});
-		return config;
+		})
+		return config
 	},
 	images: {
-		remotePatterns: [{ protocol: 'https', hostname: '4a50-185-107-64-107.ngrok-free.app', pathname: '/uploads/**' }],
+		remotePatterns: [
+			{ protocol: 'https', hostname: `${process.env.NEXT_PUBLIC_STRAPI_IMAGES}`, pathname: '/uploads/**' },
+		],
 	},
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
