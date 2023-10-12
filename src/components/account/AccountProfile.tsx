@@ -115,7 +115,7 @@ export const AccountProfile = () => {
 						{userDuration.months !== 0 && (
 							<span>{userDuration.months <= 1 ? `${userDuration.months} month` : `${userDuration.months} months`}</span>
 						)}
-						{userDuration.days > 0 ? (
+						{userDuration.days <= 0 ? (
 							<span>{'This is your first day here :)'} </span>
 						) : (
 							<span>{userDuration.days <= 1 ? `${userDuration.days} day` : `${userDuration.days} days`}</span>
