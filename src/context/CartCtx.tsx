@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
 import { ChildrenWithProps, DispatchAction } from '@/types/general'
 
@@ -23,7 +23,7 @@ type CartContextTypes = {
 	setIncremenetQuantity: DispatchAction<{ isChange: boolean; idx: number }>
 	grandTotal: string
 	itemsInCart: number
-	removeItemFromCart: (id: number) => void
+	removeItemFromCart: (_id: number) => void
 }
 
 const defaultValue: CartContextTypes = {

@@ -10,7 +10,7 @@ import emptyCartAnimation from '../../../../../public/animation_lmhnhdpl.json'
 type ItemsCart = {
 	cart: CartTypes[]
 	isSummary?: boolean
-	handleRemoveItem: (_id: number) => void
+	handleRemoveItem?: (_id: number) => void
 }
 
 export const Items = ({ cart, isSummary = false, handleRemoveItem }: ItemsCart) => {
@@ -42,7 +42,7 @@ export const Items = ({ cart, isSummary = false, handleRemoveItem }: ItemsCart) 
 											isChangeQuantity={true}
 											idx={idx}
 										/>
-										<button onClick={() => handleRemoveItem(idx)} className='colors-300 w-max p-3 hover:text-error'>
+										<button onClick={() => handleRemoveItem!(idx)} className='colors-300 w-max p-3 hover:text-error'>
 											<MdDelete size='20px' />
 										</button>
 									</div>
