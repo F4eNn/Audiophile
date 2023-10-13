@@ -13,7 +13,7 @@ type CartProps = {
 }
 
 export const Cart = ({ isCartOpen, setCart }: CartProps) => {
-	const { cart, setCart: removeCartItems, totalPrice, setTotalPrice } = useCartCtx()
+	const { cart, setCart: removeCartItems, totalPrice, setTotalPrice, removeItemFromCart } = useCartCtx()
 	const { push } = useRouter()
 
 	const handleRemoveAll = () => {
@@ -45,7 +45,7 @@ export const Cart = ({ isCartOpen, setCart }: CartProps) => {
 						cart.length >= 4 ? 'pr-3' : ''
 					}`}
 				>
-					<Items cart={cart} />
+					<Items cart={cart} handleRemoveItem={removeItemFromCart} />
 				</ul>
 				<div className='space-y-5'>
 					<p className='flex justify-between'>

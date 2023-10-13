@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
 import { ChildrenWithProps, DispatchAction } from '@/types/general'
 
@@ -23,6 +23,7 @@ type CartContextTypes = {
 	setIncremenetQuantity: DispatchAction<{ isChange: boolean; idx: number }>
 	grandTotal: string
 	itemsInCart: number
+	removeItemFromCart: (id: number) => void
 }
 
 const defaultValue: CartContextTypes = {
@@ -38,6 +39,7 @@ const defaultValue: CartContextTypes = {
 	itemsInCart: 0,
 	setIncremenetQuantity: () => {},
 	setDecrementQuantity: () => {},
+	removeItemFromCart: (_id: number) => {},
 }
 
 const CartCtx = createContext(defaultValue)
@@ -48,6 +50,7 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 	const [cart, setCart] = useState<CartTypes[]>([])
 	const [cartItem, setCartItem] = useState<CartTypes | null>(null)
 	const [isAdd, setAddCart] = useState(false)
+	const [shouldUpdateCart, setShouldUpdateCart] = useState(false)
 	const [totalPrice, setTotalPrice] = useState(0)
 	const [grandTotal, setGrandTotal] = useState('')
 	const [itemsInCart, setTotalItemsCart] = useState(0)
@@ -125,6 +128,17 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 		}
 	}
 
+	const removeItemFromCart = (id: number) => {
+		const cartItems = localStorage.getItem('cart')
+		if (cartItems) {
+			const parseItems = JSON.parse(cartItems)
+			const updatedItems = [...parseItems]
+			updatedItems.splice(id, 1)
+			localStorage.setItem('cart', JSON.stringify(updatedItems))
+			setShouldUpdateCart(true)
+		}
+	}
+
 	useEffect(() => {
 		const cartString = localStorage.getItem('cart')
 		addUniqueItemsToCart(cartString)
@@ -138,9 +152,10 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 		checkCartData()
 		return () => {
 			setCartItem(null)
+			setShouldUpdateCart(false)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [cartItem, isDecrementQuantity, isIncremenetQuantity])
+	}, [cartItem, shouldUpdateCart, isDecrementQuantity, isIncremenetQuantity])
 
 	const value = {
 		addToCart,
@@ -155,6 +170,7 @@ export const CartCtxProvider = ({ children }: ChildrenWithProps) => {
 		itemsInCart,
 		setIncremenetQuantity,
 		setDecrementQuantity,
+		removeItemFromCart,
 	}
 	return <CartCtx.Provider value={value}>{children}</CartCtx.Provider>
 }
