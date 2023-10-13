@@ -42,7 +42,7 @@ export const Items = ({ cart, isSummary = false, handleRemoveItem }: ItemsCart) 
 											isChangeQuantity={true}
 											idx={idx}
 										/>
-										<button onClick={() => handleRemoveItem!(idx)} className='colors-300 w-max p-3 hover:text-error'>
+										<button onClick={() => handleRemoveItem!(idx)} className='colors-300 w-max pl-3 hover:text-error'>
 											<MdDelete size='20px' />
 										</button>
 									</div>
