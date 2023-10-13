@@ -41,6 +41,9 @@ Tailwind | Framework CSS |
 GSAP | Library for animation |
 Jest | Framework for testing Js
 React-Testing-Library | Helper for testing react components
+<h4>Here is <a href="https://github.com/F4eNn/Audiophile-strapi" target="_blank">Audiophile-backend</a></h4>
+
+
 
 <h3>And other minor tools like...</h3>
 
@@ -50,5 +53,12 @@ React-Testing-Library | Helper for testing react components
 
 - Use clsx + twMerge for creating more reusable components
 - Use Zod for better typescript types incoming data from API, problably I would change zod instead yup
+- Should write simpler and less complex function for easier unit testing
 
-<h2>What could I've learned</h2>
+<h2>What I've learned</h2>
+
+- Strapi Headless CMS and how to upload backend to the cloud
+- I've practice a lot of REST queries
+- how to write basic unit tests using RTL and Jest
+- Deepened my knowladge in the field of SSR and SSG
+- how to use .husky
