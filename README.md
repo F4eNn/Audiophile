@@ -67,4 +67,5 @@ React-Testing-Library | Helper for testing react components
 
 - In meantime I'll write more unit tests for this app
 
+<p>Part of design is from <a href="https://www.frontendmentor.io/challenges/audiophile-ecommerce-website-C8cuSd_wx" target="_blank">Frontend mentor</a></p>
 
