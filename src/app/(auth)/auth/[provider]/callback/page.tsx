@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 import { DataTokenResponse, setToken } from '@/helpers/auth';
-import { STRAPI_URL } from '@/constants/url';
 const AuthCallbackPage = () => {
 	const params = useSearchParams();
 	const pathname = usePathname();
@@ -20,7 +19,10 @@ const AuthCallbackPage = () => {
 		const fetchUser = async () => {
 			try {
 				setLoading(true);
-				const res = await fetch(`${STRAPI_URL}/auth/${authProvider}/callback?access_token=${token}`);
+				const res = await fetch(
+					`${process.env.NEXT_PUBLIC_PURE_STRAPI_URL}/auth/${authProvider}/callback?access_token=${token}`,
+				);
+				console.log(res);
 				if (!res.ok) {
 					throw new Error(`Could't login to strapi. Status ${res.status}`);
 				}
