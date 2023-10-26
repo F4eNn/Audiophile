@@ -3,7 +3,7 @@
 <p align='center'><a target='_blank' href='https://audiophile-ommae9kqt-f4enn.vercel.app' align='center' >✨🎵 Audiophile ✨🎶</a></p>
 
 
-https://github.com/F4eNn/Audiophile/assets/113229528/64ad798e-fa4c-4400-aaac-1224e2490b82
+https://github.com/F4eNn/Audiophile/assets/113229528/92031fb4-39b6-468c-a4b3-2980e77dd380
 
 <a href="https://www.youtube.com/watch?v=HcYmF-D7Ufk" target="_blank">Introduction on YouTube</a>
 
@@ -54,6 +54,7 @@ React-Testing-Library | Helper for testing react components
 - Use clsx + twMerge for creating more reusable components
 - Use Zod for better typescript types incoming data from API, problably I would change zod instead yup
 - Should write simpler and less complex function for easier unit testing
+- Use Redux or at least reducer in CartProvider. I did not expect it to grow so much
 
 <h2>What I've learned?</h2>
 
@@ -65,7 +66,7 @@ React-Testing-Library | Helper for testing react components
 
 <h2>What next?</h2>
 
-- In meantime I'll write more unit tests for this app
+- In meantime I'll write more unit tests for this app.
 
 <p>Part of design is from <a href="https://www.frontendmentor.io/challenges/audiophile-ecommerce-website-C8cuSd_wx" target="_blank">Frontend mentor</a></p>
 
