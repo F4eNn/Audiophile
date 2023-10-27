@@ -10,7 +10,7 @@ https://github.com/F4eNn/Audiophile/assets/113229528/92031fb4-39b6-468c-a4b3-298
 ### IMPORTANT!
 <p>
 If you want to check the registration, you have to wait approximately 1-2 minutes after sending a request
-   because I'm using a free plan for hosting the database. Other features work without issues :)
+because I'm using a free plan for hosting the database, and after inactivity, the database has to start again. Other features work without issues :)
 </p>
 
 <h2>Users should be able to:</h2>
