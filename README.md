@@ -8,10 +8,7 @@ https://github.com/F4eNn/Audiophile/assets/113229528/92031fb4-39b6-468c-a4b3-298
 <a href="https://www.youtube.com/watch?v=HcYmF-D7Ufk" target="_blank">Introduction on YouTube</a>
 
 ### IMPORTANT!
-<p>
-If you want to check the registration, you have to wait approximately 1-2 minutes after sending a request
-because I'm using a free plan for hosting the database, and after inactivity, the database has to start again. Other features work without issues :)
-</p>
+Migrating the database, so the temporary app isn't working, but you can see a video preview of how it looks like 🙂
 
 <h2>Users should be able to:</h2>
 
